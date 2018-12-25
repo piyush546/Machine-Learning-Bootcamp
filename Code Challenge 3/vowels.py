@@ -18,3 +18,5 @@ for i in range(0, len(state_name)):
 
 # printing the modified list
 print("Modified list:", state_name)
+
+# Output = Modified list: ['Lbm', 'Clfrn', 'Klhm', 'Flrd']
