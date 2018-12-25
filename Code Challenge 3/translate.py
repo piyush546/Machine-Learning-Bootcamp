@@ -6,7 +6,7 @@ vowels_list = list('aeiouAEIOU')
 String4 = input()
 String4 = list(String4)
 
-# a list for processing thw operation
+# a list for processing the operation
 repl_list = []
 
 # To translate the string
