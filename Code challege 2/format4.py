@@ -11,3 +11,6 @@ var1 = len(last_name)
 
 # to print the reversed string
 print(full_name[var:(var+var1)]+" "+full_name[0:var])
+
+# Input = piyush kumar
+# Output = kumar piyush
