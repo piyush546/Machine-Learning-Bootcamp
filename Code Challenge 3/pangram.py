@@ -31,3 +31,6 @@ if(c == len(alphabets)):
     print("PANAGRAM")
 else:
     print("NOT PANAGRAM")
+
+# Input = The quick brown fox jumps over the lazy dog.
+# Output = PANAGRAM
