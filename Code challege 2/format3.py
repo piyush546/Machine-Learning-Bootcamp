@@ -3,7 +3,7 @@
 String1 = input()
 
 # formatting the string
-String1  =  String1.replace('', '*')
+String1 = String1.replace('', '*')
 
 # printing the formatted string
 print(String1)
