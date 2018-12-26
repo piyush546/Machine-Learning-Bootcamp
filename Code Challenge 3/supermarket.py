@@ -60,4 +60,3 @@ candy 5"""
 apple juice 20
 candy 20
 potato chips 20"""
-
