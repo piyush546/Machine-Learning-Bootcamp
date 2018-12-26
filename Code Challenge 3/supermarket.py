@@ -31,9 +31,9 @@ for j in range(0, len(unique_list1)):
 # To remove the duplicated data
 unique_list2 = []
 for m in range(0, len(unique_list1)):
-    if unique_list1[m][:-1] not in unique_list2:
+    if unique_list1[m][0] not in unique_list2:
         print(unique_list1[m][0]+" "+str(unique_list1[m][-1]))
-        unique_list2.append(unique_list1[m][:-1])
+        unique_list2.append(unique_list1[m][0])
     else:
         continue
 """input:9
