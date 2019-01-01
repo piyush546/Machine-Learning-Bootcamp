@@ -3,7 +3,7 @@
 # Importing BeautifulSoup, requests, unicodedata, pandas
 from bs4 import BeautifulSoup
 import requests
-import unicodedata
+# import unicodedata
 import pandas as pd
 
 # url of the site which is to be scrapped
