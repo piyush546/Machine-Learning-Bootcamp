@@ -18,6 +18,6 @@ for i in range(0, n):
     details_list.append((name, age, height))
 
 # list after sorting
-details_list = details_list.sort()
+details_list.sort()
 
 print(details_list)
