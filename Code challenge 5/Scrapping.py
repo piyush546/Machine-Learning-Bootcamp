@@ -42,35 +42,38 @@ C = []
 D = []
 E = []
 F = []
-G = []
+#G = []
 
+leave = 0
+total_rows = required_table.findAll("tr")
 # Iterating over the required table
-for rows in required_table.findAll("tr"):
+for rows in total_rows:
     data = rows.findAll("td")
-    a = rows.findAll("a")
-    small = rows.findAll("small")
-    print(":", small)
     if len(data) == 7:
-        A.append(str(unicodedata.normalize('NFKD', a[0].find(text=True)).encode('ascii', 'ignore')))
-        B.append(str(data[1].find(text=True)))
-        C.append(str(data[2].find(text=True)))
-        D.append(str(data[3].find(text=True)))
-        E.append(str(data[4].find(text=True)))
-        if small == []:
-            F.append(str(small[0].find(text=True)))
-        else:
-            F.append(str(unicodedata.normalize('NFKD', small[0].find(text=True)).encode('ascii', 'ignore')))
-        G.append(str(a[1].find(text=True)))
+        #A.append(str(unicodedata.normalize('NFKD', a[0].find(text=True)).encode('ascii', 'ignore')))
+        A.append(data[0].text.strip())
+        B.append(data[1].text.strip())
+        C.append(data[2].text.strip())
+        D.append(data[3].text.strip())
+        E.append(data[4].text.strip())
+        F.append(data[5].text.strip())
+    if leave == len(total_rows)-1:
+        break
+    leave += 1
+#        if small == []:
+#            F.append(str(small[0].find(text=True)))
+#        else:
+#            F.append(str(unicodedata.normalize('NFKD', small[0].find(text=True)).encode('ascii', 'ignore')))
+#        G.append(str(a[1].find(text=True)))
 
-
+head = [i.text.strip() for i in total_rows[0].findAll('th')]
 # formimg the dataframe
 df = pd.DataFrame()
-df['India Labour'] = A
-df['Last'] = B
-df['Previous'] = C
-df['Highest'] = D
-df['Lowest'] = E
-df['Unit'] = F
-df['Op'] = G
-df.to_csv("former2.csv")
+df[head[0]] = A
+df[head[1]] = B
+df[head[2]] = C
+df[head[3]] = D
+df[head[4]] = E
+df[head[5]] = F
+df.to_csv("former2.csv", index=False)
 print(df)
