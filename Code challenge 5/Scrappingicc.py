@@ -45,7 +45,7 @@ for rows in required_table.findAll("tr"):
         print(D.append(data[3].text.strip()))
         print(E.append(data[4].text.strip()))
 
-# froming dataframe
+# forming dataframe
 head = [i.text.strip() for i in required_table.find_all("th")]
 df = pd.DataFrame()
 df[head[0]] = A
