@@ -42,7 +42,7 @@ C = []
 D = []
 E = []
 F = []
-#G = []
+# G = []
 
 leave = 0
 total_rows = required_table.findAll("tr")
@@ -50,7 +50,7 @@ total_rows = required_table.findAll("tr")
 for rows in total_rows:
     data = rows.findAll("td")
     if len(data) == 7:
-        #A.append(str(unicodedata.normalize('NFKD', a[0].find(text=True)).encode('ascii', 'ignore')))
+        # A.append(str(unicodedata.normalize('NFKD', a[0].find(text=True)).encode('ascii', 'ignore')))
         A.append(data[0].text.strip())
         B.append(data[1].text.strip())
         C.append(data[2].text.strip())
