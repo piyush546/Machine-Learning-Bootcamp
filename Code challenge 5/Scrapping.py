@@ -6,7 +6,7 @@
 
 from bs4 import BeautifulSoup
 import requests
-import unicodedata
+# import unicodedata
 
 # Using pandas to form dataframe from the stored data
 import pandas as pd
