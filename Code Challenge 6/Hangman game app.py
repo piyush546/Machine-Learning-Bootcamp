@@ -18,11 +18,11 @@ ran_word = random.choice(list1)
 secret_word = "-"*len(ran_word)
 
 
-print("--------HANGMAN LETTER GAME-------")
-print("Type quit to escape")
+print("--------HANGMAN LETTER GAME-------".center(20))
 chance = len(ran_word)
 print("Lifes:", chance)
 print("GUESS A FRUIT NAME:", secret_word)
+print("Type quit to escape")
 
 
 # craeting a function for performing the operation for the game
