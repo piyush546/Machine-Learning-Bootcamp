@@ -17,8 +17,8 @@ with open("words.txt", "r") as fileobj:
 ran_word = random.choice(list1)
 secret_word = "-"*len(ran_word)
 
-
-print("--------HANGMAN LETTER GAME-------".center(20))
+# To print the string in center/size is speciifed for spacing and it can also be filled with some others characters
+print("HANGMAN LETTER GAME".center(20,'-'))
 chance = len(ran_word)
 print("Lifes:", chance)
 print("GUESS A FRUIT NAME:", secret_word)
