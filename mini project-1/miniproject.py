@@ -2,7 +2,7 @@
 # .replace in str have count which specify how much occurence of particular character is to be replaced
 # str has function .find() to get the index position of a particular substring same as index but it give -1 if not found
 # whereas index give ValueError
-# .start() is used to get the index returned by serach in regex
+# .start() is used to get the index returned by search in regex
 # Mini project using sets, regex, File handling
 
 import re
