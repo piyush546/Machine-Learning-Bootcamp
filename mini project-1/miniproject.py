@@ -41,3 +41,5 @@ set7 = novel_filter("metamorphosis_kafka.txt")
 repl_set = [set2, set3, set4, set5, set6, set7]
 common_words = set(set.intersection(set1, *repl_set))
 unique_words = set1 - set(common_words)
+print("Words common in all novels:", len(common_words))
+print("Words unique in Ulysses novel:", len(unique_words))
