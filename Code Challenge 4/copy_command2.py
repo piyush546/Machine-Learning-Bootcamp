@@ -6,37 +6,21 @@ start_time = time.time()
 
 
 # To open a file for reading
-File = open("romeo.txt", "r")
+with open("romeo.txt","r") as fileobj:
+    list1 = fileobj.read().splitlines()
 
-# To read all the Lines of the file
-List1 = File.readlines()
+words_list = []
+for var in range(0, len(list1)):
+    words_list.extend(list1[var].split())
 
+dict1 = {}
+for var2 in range(0, len(words_list)):
+    if words_list[var2] in dict1:
+        dict1[words_list[var2]] += 1
+    else:
+        dict1[words_list[var2]] = 1
 
-# function to count occurence of each word
-def count1(String1):
-    String1 = str.lower(String1)
-    List2 = []
-    for var1 in range(0, len(String1)):
-        if String1[var1].isalpha() is True:
-            List2.append((String1[var1], 0))
-        else:
-            continue
-    Dict1 = dict(List2)
-    for k, v in Dict1.items():
-        for var2 in range(0, len(List2)):
-            if k == List2[var2][0]:
-                Dict1[k] += 1
-            else:
-                continue
-    print(Dict1)
-
-
-# To call the function
-for var3 in range(0, len(List1)):
-    count1(List1[var3])
-
-# To close the file
-File.close()
+print("Words in file:", dict1)
 
 # To check exeution time of the code
 print("--- %s seconds ---" % (time.time() - start_time))

@@ -10,7 +10,7 @@ unique_list1 = []
 
 # To take input
 for i in range(0, n):
-    list_item = input().split(" ")
+    list_item = input().split()
     # to hold the name of the item
     item_name = " ".join(list_item[:-1])
     # to hold item quantity
