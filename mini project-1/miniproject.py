@@ -4,8 +4,10 @@
 # whereas index give ValueError
 # .start() is used to get the index returned by search in regex
 # Mini project using sets, regex, File handling
-
+import time
 import re
+
+start_time = time.time()
 
 regex = re.compile("START OF")
 regex2 = re.compile("END OF")
@@ -43,3 +45,5 @@ common_words = set(set.intersection(set1, *repl_set))
 unique_words = set1 - set(common_words)
 print("Words common in all novels:", len(common_words))
 print("Words unique in Ulysses novel:", len(unique_words))
+
+print("execution time ------%s seconds-------" % (time.time() - start_time))

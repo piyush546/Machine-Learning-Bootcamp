@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+import time
+
+start_time = time.time()
 # To take inputs for a list
 Integer_list = list(map(int, input().split(",")))
 
@@ -62,6 +66,8 @@ def Print(list7):
 # Function call to print values
 Print(Integer_list)
 
+print("execution time-----%s seconds--------" % (time.time() - start_time))
+
 # input = 2,5,6,8,7,2,1,8
 """output:
 Sum =  39
@@ -69,4 +75,4 @@ Multiply =  53760
 Largest =  8
 Smallest =  1
 Sorted =  [1, 2, 2, 5, 6, 7, 8, 8]
-Withou Duplicates =  [1, 2, 5, 6, 7, 8]"""
+Without Duplicates =  [1, 2, 5, 6, 7, 8]"""
