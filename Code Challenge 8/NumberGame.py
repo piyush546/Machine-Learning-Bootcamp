@@ -9,10 +9,12 @@ secret_number = random.randint(1, 10)
 # Initializing the no. of chances given to user
 chances = 6
 
+print("******************* NUMBER GAME APP ***************************")
+print("Guess a number until you win")
+
 
 # Defining a format function for printing the guesses after player loose
-def Format(x, y):
-    print("Computer guess:", x)
+def Format(y):
     print("Player guess:", y)
 
 
@@ -25,13 +27,14 @@ def game_play(tries):
         else:
             if int(guess_number) == secret_number:
                 print("Player wins and Computer loose")
+                break
             elif int(guess_number) > 10:
                 print("Too high")
             elif int(guess_number) < 1:
                 print("Too low")
             else:
                 print("Computer wins and player looses")
-                Format(secret_number, guess_number)
+                Format(guess_number)
         tries = tries-1
         print("Chances left:", tries)
 
