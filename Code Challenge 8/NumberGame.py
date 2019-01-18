@@ -40,8 +40,9 @@ def game_play(tries):
 
 
 game_play(chances)
-option = input("Wanna play again Y/N?")
-if (option.upper()) == 'Y':
-    game_play(chances)
-else:
-    pass
+while True:
+    option = input("Wanna play again Y/N?")
+    if (option.upper()) == 'Y':
+        game_play(chances)
+    else:
+        break
