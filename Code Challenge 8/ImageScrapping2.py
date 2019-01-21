@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-
+# zlib is used to compress and decompress the file---
+# import zlib
+# zlib.compress, zlib.decompress
+# import urllib2 ,urllib2.open()
 # Importing requests, cv2, os
 import requests
 # import cv2
@@ -13,7 +16,7 @@ base_url = "https://api.cognitive.microsoft.com/bing/v7.0/images/search"
 
 # creating headers and parameters
 headers = {"Ocp-Apim-Subscription-key": Api_key}
-params = {"q": '', "offset": 2, "count": 4}
+params = {"q": '', "offset": 0, "count": 4}
 
 # Taking input for the fruits name
 fruits_name = input().split()
