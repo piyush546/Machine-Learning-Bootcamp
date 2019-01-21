@@ -15,6 +15,8 @@ Api_key = "06cba81960bf48ee8d32aee706a2894a"
 base_url = "https://api.cognitive.microsoft.com/bing/v7.0/images/search"
 
 # creating headers and parameters
+# offset used to skip that number of image from beginning in each search
+# offset should be less than count
 headers = {"Ocp-Apim-Subscription-key": Api_key}
 params = {"q": '', "offset": 0, "count": 4}
 
