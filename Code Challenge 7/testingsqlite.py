@@ -28,14 +28,17 @@ cursor = mydb.cursor()
                gender TEXT,
                password TEXT,
                status INTEGER)")"""
+
+
 # a function to insert values in table
 def input_take(string):
     string = string.strip().split(",")
     string[0] = int(string[0])
     string[-1] = int(string[-1])
-    for var_repl in range(1,len(string)-1):
+    for var_repl in range(1, len(string)-1):
         string[var_repl] = '\"'+string[var_repl]+'\"'
     return "INSERT INTO user_details VALUES(%d,%s,%s,%s,%s,%s,%d)"%(string[0],string[1],string[2],string[3],string[4],string[5],string[6])
+
 
 for var in range(1, len(list1)):
     var2 = input_take(list1[var])

@@ -3,7 +3,7 @@
 # importing time module for checking the execution time
 import time
 import mysql.connector
-from pandas import DataFrame as DF
+# from pandas import DataFrame as DF
 # initializing the start time
 start_time = time.time()
 
