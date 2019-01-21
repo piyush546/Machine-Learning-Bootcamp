@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # zlib is used to compress and decompress the file---
 # import zlib
-# zlib.compress, zlib.decompress
+# zlib.compress, zlib.decompress - it accept only byte object
 # import urllib2 ,urllib2.open()
 # Importing requests, cv2, os
 import requests
