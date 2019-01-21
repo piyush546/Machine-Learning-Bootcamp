@@ -11,9 +11,10 @@ items.remove(items[0])
 items.remove(items[-1])
 
 # to hold the sum of the array elements
-sum2 = 0
-for i in range(0, len(items)):
-    sum2 = sum2 + items[i]
+# sum is used to sum up the numeral list and guve the sum of all the numeral value
+sum2 = sum(items)
+"""for i in range(0, len(items)):
+    sum2 = sum2 + items[i]"""
 
 # Centered average value
 centered_average = sum2//len(items)
