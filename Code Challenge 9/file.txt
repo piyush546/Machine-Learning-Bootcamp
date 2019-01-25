@@ -1,0 +1,104 @@
+1. Quantifying Interpretability and Trust in Machine Learning Systems
+Authors:PhilippSchmidt,FelixBiessmann
+download_link: https://arxiv.org/pdf/1901.08558
+*****************
+2. When Machine Learning Meets Big Data: A Wireless Communication Perspective
+Authors:YuanweiLiu,SuzhiBi,ZhiyuanShi,LajosHanzo
+download_link: https://arxiv.org/pdf/1901.08329
+*****************
+3. Machine Learning and Deep Learning Algorithms for Bearing Fault Diagnostics - A Comprehensive Review
+Authors:ShenZhang,ShiboZhang,BingnanWang,ThomasG.Habetler
+download_link: https://arxiv.org/pdf/1901.08247
+*****************
+4. PD-ML-Lite: Private Distributed Machine Learning from Lighweight Cryptography
+Authors:MaksimTsikhanovich,MalikMagdon-Ismail,MuhammadIshaq,VassilisZikas
+download_link: https://arxiv.org/pdf/1901.07986
+*****************
+5. Machine Learning for Wireless Communications in the Internet of Things: A Comprehensive Survey
+Authors:JithinJagannath,NicholasPolosky,AnuJagannath,FrancescoRestuccia,TommasoMelodia
+download_link: https://arxiv.org/pdf/1901.07947
+*****************
+6. Characterization of photoexcited states in the half-filled one-dimensional extended Hubbard model assisted by machine learning
+Authors:KazuyaShinjo,ShigetoshiSota,SeijiYunoki,TakamiTohyama
+download_link: https://arxiv.org/pdf/1901.07900
+*****************
+7. Predicting the Results of LTL Model Checking using Multiple Machine Learning Algorithms
+Authors:WeijunZhu,MingliangXu
+download_link: https://arxiv.org/pdf/1901.07891
+*****************
+8. Micro-UAV Detection and Classification from RF Fingerprints Using Machine Learning Techniques
+Authors:MartinsEzuma,FatihErden,ChethanKumarAnjinappa,OzgurOzdemir,IsmailGuvenc
+download_link: https://arxiv.org/pdf/1901.07703
+*****************
+9. What Can Machine Learning Teach Us about Communications?
+Authors:MengkeLian,ChristianHäger,HenryD.Pfister
+download_link: https://arxiv.org/pdf/1901.07592
+*****************
+10. A GFML-based Robot Agent for Human and Machine Cooperative Learning on Game of Go
+Authors:Chang-ShingLee,Mei-HuiWang,Li-ChuangChen,YusukeNojima,Tzong-XiangHuang,JinseokWoo,NaoyukiKubota,EriSato-Shimokawara,ToruYamaguchi
+download_link: https://arxiv.org/pdf/1901.07191
+*****************
+11. Machine and Deep Learning Applied to Galaxy Morphology - A Complete Classification Catalog
+Authors:P.H.Barchi,R.R.deCarvalho,R.R.Rosa,R.Sautter,M.Soares-Santos,B.A.D.Marques,E.Clua
+download_link: https://arxiv.org/pdf/1901.07047
+*****************
+12. Predicting wind pressures around circular cylinders using machine learning techniques
+Authors:GangHu,K.C.S.Kwok
+download_link: https://arxiv.org/pdf/1901.06752
+*****************
+13. Mixed Formal Learning: A Path to Transparent Machine Learning
+Authors:SandraCarrico
+download_link: https://arxiv.org/pdf/1901.06622
+*****************
+14. Molecular Force Fields with Gradient-Domain Machine Learning: Construction and Application to Dynamics of Small Molecules with Coupled Cluster Forces
+Authors:HuzielE.Sauceda,StefanChmiela,IgorPoltavsky,Klaus-RobertMüller,AlexandreTkatchenko
+download_link: https://arxiv.org/pdf/1901.06594
+*****************
+15. Machine Learning with Clos Networks
+Authors:TimothyWhithing,ThiamKheanHah
+download_link: https://arxiv.org/pdf/1901.06433
+*****************
+16. Protein Classification using Machine Learning and Statistical Techniques: A Comparative Analysis
+Authors:ChhoteLalPrasadGupta,AnandBihari,SudhakarTripathi
+download_link: https://arxiv.org/pdf/1901.06152
+*****************
+17. Optimization Models for Machine Learning: A Survey
+Authors:ClaudioGambella,BissanGhaddar,JoeNaoum-Sawaya
+download_link: https://arxiv.org/pdf/1901.05331
+*****************
+18. Context Aware Machine Learning
+Authors:YunZeng
+download_link: https://arxiv.org/pdf/1901.03415
+*****************
+19. Machine learning assisted measurement of local topological invariants
+Authors:MarcelloD.Caio,MarcoCaccin,PaulBaireuther,TimoHyart,MichelFruchart
+download_link: https://arxiv.org/pdf/1901.03346
+*****************
+20. A New Perspective on Machine Learning: How to do Perfect Supervised Learning
+Authors:HuiJiang
+download_link: https://arxiv.org/pdf/1901.02046
+*****************
+21. Natively Interpretable Machine Learning and Artificial Intelligence: Preliminary Results and Future Directions
+Authors:ChristopherJ.Hazard,ChristopherFusting,MichaelResnick,MichaelAuerbach,MichaelMeehan,ValeriKorobov
+download_link: https://arxiv.org/pdf/1901.00246
+*****************
+22. Machine learning materials physics: Integrable deep neural networks enable scale bridging by learning free energy functions
+Authors:G.H.Teichert,A.R.Natarajan,A.VanderVen,K.Garikipati
+download_link: https://arxiv.org/pdf/1901.00081
+*****************
+23. Using Apple Machine Learning Algorithms to Detect and Subclassify Non-Small Cell Lung Cancer
+Authors:AndrewA.Borkowski,CatherineP.Wilson,StevenA.Borkowski,LaurenA.Deland,StephenM.Mastorides
+download_link: https://arxiv.org/pdf/1808.08230
+*****************
+24. Machine Learning Estimators for Lattice QCD Observables
+Authors:BoramYoon,TanmoyBhattacharya,RajanGupta
+download_link: https://arxiv.org/pdf/1807.05971
+*****************
+25. Stellar formation rates in galaxies using Machine Learning models
+Authors:MicheleDelliVeneri,StefanoCavuoti,MassimoBrescia,GiuseppeRiccio,GiuseppeLongo
+download_link: https://arxiv.org/pdf/1805.06338
+*****************
+26. Machine Learning Modeling of Wigner Intracule Functionals for Two Electrons in One Dimension
+Authors:RutvijVihangBhavsar,RaghunathanRamakrishnan
+download_link: https://arxiv.org/pdf/1802.00873
+*****************

@@ -16,7 +16,10 @@ print(colorama.Fore.BLACK+"Enter items you want to add to the list")
 def add_at():
     index_1 = int(input("Enter the index at which you want to add the item:"))
     item = input("Enter the item you want to add at the specified index:")
-    item_list.insert((index_1-1), item)
+    if item not in item_list:
+        item_list.insert((index_1-1), item)
+    else:
+        print("Item already exist")
 
 
 # To remove items

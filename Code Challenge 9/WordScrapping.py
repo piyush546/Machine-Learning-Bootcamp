@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# To check occurence of Api in a website scrapped
+# To check occurence of a particular pattern in a website scrapped
 # importing regular expression, requests,BeautifulSoup
+
 import re
 import requests
 from bs4 import BeautifulSoup as BS
@@ -27,3 +28,6 @@ body_data = body_data.strip()
 
 # To search the particular word from the collected data
 count = regex.findall(body_data)
+
+# To print the total number of occurence of particular patternn searched
+print("Total Occurence of APIs:", len(count))

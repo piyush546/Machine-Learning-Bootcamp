@@ -4,17 +4,21 @@
 from collections import OrderedDict
 
 # to take the input
-String_list = list(input())
+String_value = input()
 
-# values to contain the occurence of each character
-values = []
+# defining the dictionary to count the occurence of a character
+dict_value = {}
 
-for i in String_list:
-    count = String_list.count(i)
-    values.append(count)
+# Checking the frequency
+for var in String_value:
+    if var.isalpha() is True:
+        if var not in dict_value.keys():
+            dict_value[var] = 1
+        else:
+            dict_value[var] += 1
 
-# Required dictionary
-dictionary3 = dict(zip(String_list, values))
+# Sorting the dictionary
+dict_value = dict(OrderedDict(sorted(dict_value.items(), key=(lambda x: x[1]))))
 
-dictionary3 = dict(OrderedDict(sorted(dictionary3.items(), key=lambda x: x[1])))
-print(dictionary3)
+# printing the dictionary
+print("Frequency of the characters:", dict_value)
