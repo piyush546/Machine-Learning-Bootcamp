@@ -12,6 +12,9 @@ import re
 # Importing selenium  for automation
 from selenium import webdriver
 
+# Importing the Exception modules of the Selenium
+from selenium.common.exceptions import NoSuchElementException
+
 # importing sleep from time module for applying delay
 from time import sleep
 
@@ -76,26 +79,26 @@ search.click()
 journal_data = BS(driver.page_source, 'lxml')
 
 
-# Exception class - to be defined when using raise/ for user defined Exception
-class NoSuchElementException():
-    def message():
-        print("No pagination link exist")
-
-
+# Exception handling block
 # to get the pagination link
 try:
     pagination_link = driver.find_element_by_xpath('/html/body/content/section/div/div/content/nav[2]/a[2]')
-    raise NoSuchElementException
 
+# Base Eception class
 except NoSuchElementException as e:
-    e.message()
+    print(e)
+
+# If no exception then else part will be executed
 else:
     pagination_link.click()
-# applying sleep
-sleep(2)
 
-# closing the site
-driver.close()
+# Fianlly will exceute in any case whether exception arises or not
+finally:
+    # applying sleep
+    sleep(2)
+
+    # closing the site
+    driver.close()
 
 # ************************************************************************** #
 # Process for writing the collected data to a file according to requirements
