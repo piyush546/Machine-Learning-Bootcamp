@@ -14,6 +14,9 @@ import pandas as pd
 # To open a csv file without any haeders and storing it in a variable df
 df = pd.read_csv("testing.csv", header=None)
 
+# There are two types of data in dataframe
+# Numeral data - contains numeric data
+# Categorical data - contains text as well as mix. of text and numeric data
 # To describe about the datas fetched while reading the csv file
 df_describe = df.describe()
 
