@@ -26,6 +26,7 @@ remote_head = remote_df.head()
 # Defining the scope for enabled Api's of drive and spreadsheet
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 
+# Removed create_secret.json file from this folder for Google Security Reason
 # Getting the credentials for authenthication
 creds = ServiceAccountCredentials.from_json_keyfile_name('create_secret.json', scope)
 
