@@ -46,9 +46,11 @@ else:
     # axis - 0 or 1 ,0 for column-wise searching and 1 for row wise searching
     # axis should be 1 in such case as here to find all the details according to row wise and design a dataframe
     # 0 can be used in such cases df.isnull().any(axis=0) means no dataframe framing
+    # pandas.core. are used to handle exception
     try:
         df_null = df[df.isnull().any(axis=1)]
-    except Exception as e:
+
+    except pd.core.indexing.IndexingError as e:
         print(e)
 
     # Making a replica of the dataframe

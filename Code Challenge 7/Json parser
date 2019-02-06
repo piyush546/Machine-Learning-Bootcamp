@@ -1,0 +1,16 @@
+# json format
+{
+ "student":
+   {
+     "student1":{
+                  "name":"piyush",
+                  "roll": 546,
+                  "Email":["pk@gmail","pamaa@gmail"]
+                  },
+      "student2":{
+                  "name":"kaushik",
+                  "roll": 547,
+                  "Email":["kk@gmail","maapa@gmail"]
+                  }
+    }
+}

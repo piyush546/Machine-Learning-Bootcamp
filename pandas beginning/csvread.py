@@ -11,16 +11,21 @@ both easy and intuitive."""
 # For using pandas features importing pandas library
 import pandas as pd
 
-# To open a csv file without any haeders and storing it in a variable df
-df = pd.read_csv("testing.csv", header=None)
+# Exception handling in case file doesn't exist
+try:
+    # To open a csv file without any haeders and storing it in a variable df
+    df = pd.read_csv("testing.csv", header=None)
 
-# There are two types of data in dataframe
-# Numeral data - contains numeric data
-# Categorical data - contains text as well as mix. of text and numeric data
-# To describe about the datas fetched while reading the csv file
-df_describe = df.describe()
+    # There are two types of data in dataframe
+    # Numeral data - contains numeric data
+    # Categorical data - contains text as well as mix. of text and numeric data
+    # To describe about the datas fetched while reading the csv file
+    df_describe = df.describe()
 
-# To get the starting few datas in the dataframe
-# By default head reads only first 5 data of the dataframe'
-# We can spoecify the size of the head
-df_head = df.head()
+    # To get the starting few datas in the dataframe
+    # By default head reads only first 5 data of the dataframe'
+    # We can spoecify the size of the head
+    df_head = df.head()
+
+except FileNotFoundError:
+    print("File b'testing.csv' does not exist")

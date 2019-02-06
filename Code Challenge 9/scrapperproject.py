@@ -52,6 +52,7 @@ today_date = datetime.now().strftime("%Y-%m-%d")
 back_date = (datetime.now() - timedelta(7)).strftime("%Y-%m-%d")
 
 # Clicking on the Advanced search option for date setting and applying filters
+# XPath is a syntax for defining parts of an XML document. XPath uses path expressions to navigate in XML documents.
 Adv_search = driver.find_element_by_xpath('//*[@id="search-arxiv"]/div/div[2]/a[2]')
 Adv_search.click()
 

@@ -11,6 +11,7 @@ appid = "&appid=e9185b28e9969fb7a300801eb026de9c"
 full_url = website+query+appid
 
 # requesting to fetch data from the web page
+# .content gives byte form of fetched data
 fetched_data = requests.get(full_url).text
 
 # convertig the json data into python data
