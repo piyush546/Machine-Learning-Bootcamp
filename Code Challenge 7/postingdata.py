@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
+# Post contains body whereas get method doesn't have it.
 import requests
 import json
 
 # Formimg the base for POST operation
 Host = "http://httpbin.org/post"
 body = {'firstname':['charlie', 'charles', 'Chris'],'language':['English', 'Spanish', 'french']}
+
 # to convert python data to json data
 json_body = json.dumps(body)
+
 # headers are provided to distinguish the contents
 headers = {"Content-Type":"application/json","Content-Length":len(json_body),"data":json_body}
 
