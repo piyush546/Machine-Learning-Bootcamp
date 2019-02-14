@@ -12,12 +12,12 @@ body = {'firstname':['charlie', 'charles', 'Chris'],'language':['English', 'Span
 json_body = json.dumps(body)
 
 # headers are provided to distinguish the contents
-headers = {"Content-Type":"application/json","Content-Length":len(json_body),"data":json_body}
+headers = {"Content-Type":"application/json","Content-Length":len(json_body)}
 
 
 # POST operation function
 def client_api():
-    client_data = requests.post(Host, json_body, headers)
+    client_data = requests.post(Host, json_body)
     return client_data
 
 
@@ -26,7 +26,7 @@ print(client_api().text)
 
 # GET operation function
 def server_api():
-    server_data = requests.get("http://httpbin.org/get?firstname=charles&language=Spanish")
+    server_data = requests.get("http://httpbin.org/get")
     return server_data
 
 
