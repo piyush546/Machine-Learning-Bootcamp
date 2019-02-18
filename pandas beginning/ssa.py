@@ -1,12 +1,66 @@
 # -*- coding: utf-8 -*-
-""" A program"""
+""" A program to read the collections of text files, fetch data from them,
+frame csv for them according to particular year that is included in their
+names (Given year range - 1880 to 2010)  """
 
-import glob
+""" There are two modules to read the files present in a folder - they are
+os and glob. glob basically uses unix stylling but os have omnipresence means
+it has presence worldwide """
+
+# Importing os module for getting the list of files
+import os
+
+# Importing pandas for framing datasets
 import pandas as pd
-df = pd.DataFrame()
-list_of_files = glob.glob('./*.txt')
-for var in range(0, len(list_of_files)):
-    with open(list_of_files[var],"r") as fileobj:
-        words = fileobj.read().splitlines()
-    for var2 in range(1880, 2011):
-        df[var2] = pd.Series(words)
+
+# Importing regex for seraching contents from the string data in the dataframe
+import re
+from itertools import groupby
+# Exception handling for the Dataframe exceptions
+
+try:
+    # Initializing the parent dataframe
+    ssa_dataframe = pd.DataFrame()
+
+    # For specifying the column names with year to store data related to that
+    # year
+    count = 1880
+
+    # A list containing dataframes for different years data
+    dataframe_list = []
+
+    # To fetch list of text files from where the datas are to be fetched
+    # And applying the file handling techniques on them
+    for file_name in os.listdir("./textfiles"):
+
+        # As data is required till 2010
+        if count > 2010:
+            break
+
+        else:
+            with open("./textfiles/"+file_name, "r") as fileobj:
+
+                # Initializing the names of the dataframes
+                data_set = "data_frame"+str(count)
+
+                # Framing the dataframes according to specific year
+                # columns parameter specify the name of the coulumn in the dataframe
+                # column_name can be some kind of collections type not str or integer type
+                data_set = pd.DataFrame(fileobj.readlines(), columns=[[count],['name', 'gender', 'count']])
+
+                # Appending the dataframes in dataframe_list
+                dataframe_list.append(data_set)
+
+        count = count+1
+    ssa_dataframe = pd.concat(dataframe_list, axis=1)
+
+except TypeError as e:
+    print(e)
+
+# ************************************************* #
+# Fetching top 5 males and Females baby names
+
+# Initializing a list to hold the data of 2010 named column as the data is in
+# string format and we have to find the maximum count of males and female
+regex1 = re.compile(")
+for var in ssa_dataframe[2010]:

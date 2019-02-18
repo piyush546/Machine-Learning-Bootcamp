@@ -10,8 +10,8 @@ try:
     # Opening the csv file and storing it in the df
     df = pd.read_csv("Salaries.csv")
 
-except FileNotFoundError:
-    print("No file Salaries.csv exist")
+except FileNotFoundError as e:
+    print(e)
 
 else:
     # Applying groupby method and arranging the dataframe according to rank and discipline

@@ -12,12 +12,16 @@ full_url = website+query+appid
 
 # requesting to fetch data from the web page
 # .content gives byte form of fetched data
-fetched_data = requests.get(full_url).text
+fetched_data = requests.get(full_url)
 
 # convertig the json data into python data
 # json.loads(json_data) - converts json data to python data
 # json.dumps(python_data) - converts python data to json data
 py_data = json.loads(fetched_data)
+
+# fetched_data = requests.get(full_url).json() is the optimization of above
+# two lines. It will directly fetch data in json format and loads it to python
+# datatype
 
 print('Longitude:', py_data['coord']['lat'])
 print('Latitude:', py_data['coord']['lon'])

@@ -76,7 +76,8 @@ date_send(today_date.split('-'), to_date_field)
 search = driver.find_element_by_xpath('/html/body/content/section/div/div/content/div[2]/div[1]/div/form/section[3]/div[2]/div[2]/button')
 search.click()
 
-# Getting the page source
+# Getting the page source and explicitly defining the parser to lxml for speed
+# lxml is the best parser for parsing the data scrapped from web
 journal_data = BS(driver.page_source, 'lxml')
 
 

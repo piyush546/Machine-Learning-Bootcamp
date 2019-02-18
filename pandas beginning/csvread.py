@@ -27,5 +27,5 @@ try:
     # We can spoecify the size of the head
     df_head = df.head()
 
-except FileNotFoundError:
-    print("File b'testing.csv' does not exist")
+except FileNotFoundError as e:
+    print(e)
