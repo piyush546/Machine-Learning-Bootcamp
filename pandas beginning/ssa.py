@@ -13,11 +13,16 @@ import os
 # Importing pandas for framing datasets
 import pandas as pd
 
-# Importing regex for seraching contents from the string data in the dataframe
-import re
-from itertools import groupby
-# Exception handling for the Dataframe exceptions
 
+# A function to clean data and synchronize it in a structured way
+def data_cleansing(unst_lst):
+    st_lst = []
+    for var in unst_lst:
+        st_lst.append(var.split())
+    return st_lst
+
+
+# Exception handling for the Dataframe exceptions
 try:
     # Initializing the parent dataframe
     ssa_dataframe = pd.DataFrame()
@@ -46,7 +51,7 @@ try:
                 # Framing the dataframes according to specific year
                 # columns parameter specify the name of the coulumn in the dataframe
                 # column_name can be some kind of collections type not str or integer type
-                data_set = pd.DataFrame(fileobj.readlines(), columns=[[count],['name', 'gender', 'count']])
+                data_set = pd.DataFrame(fileobj.readlines(), columns=[count])
 
                 # Appending the dataframes in dataframe_list
                 dataframe_list.append(data_set)
@@ -57,10 +62,12 @@ try:
 except TypeError as e:
     print(e)
 
+except ValueError as e:
+    print(e)
+
 # ************************************************* #
 # Fetching top 5 males and Females baby names
 
 # Initializing a list to hold the data of 2010 named column as the data is in
 # string format and we have to find the maximum count of males and female
-regex1 = re.compile(")
-for var in ssa_dataframe[2010]:
+
