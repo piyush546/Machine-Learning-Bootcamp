@@ -12,16 +12,7 @@ import os
 
 # Importing pandas for framing datasets
 import pandas as pd
-
-
-# A function to clean data and synchronize it in a structured way
-def data_cleansing(unst_lst):
-    st_lst = []
-    for var in unst_lst:
-        st_lst.append(var.split())
-    return st_lst
-
-
+import numpy as np
 # Exception handling for the Dataframe exceptions
 try:
     # Initializing the parent dataframe
@@ -51,7 +42,7 @@ try:
                 # Framing the dataframes according to specific year
                 # columns parameter specify the name of the coulumn in the dataframe
                 # column_name can be some kind of collections type not str or integer type
-                data_set = pd.DataFrame(fileobj.readlines(), columns=[count])
+                data_set = pd.DataFrame(fileobj.read().splitlines(), columns=[count])
 
                 # Appending the dataframes in dataframe_list
                 dataframe_list.append(data_set)
@@ -68,6 +59,22 @@ except ValueError as e:
 # ************************************************* #
 # Fetching top 5 males and Females baby names
 
-# Initializing a list to hold the data of 2010 named column as the data is in
-# string format and we have to find the maximum count of males and female
+# Fetching 2010 records in a variable data_2010 with filtering it
+# and droping the null value containing rows
+# Series.str.split(delimeter,n,expand) - Split strings around given separator/delimiter.
+# .add_prefix(str) add labels to the dataframe. I used it to name the column by lable col_
+data_set = data_set[2010].str.split(",", expand=True).add_prefix('col_')
 
+# pandas.DataFrame.apply(funcn) - to apply function on dataframe
+# I used it here to apply int function on a column containing numeral values
+# but in str format. Using this I converted the type from str to int
+data_set.iloc[:, -1] = data_set.iloc[:, -1].apply(int)
+
+# Sorting the female data accprding to counts using sort_values() method
+# giving false to ascending parameter in sort_values sorts the data in descending order
+# .head() fetch 5 values from the start of the dataframe
+# Female_data the top 5 female baby names
+Female_data = data_set[data_set['col_1'] == 'F'].sort_values('col_2',ascending=False).head()
+
+# Top % male baby names
+Male_data = data_set[data_set['col_1'] == 'M'].sort_values('col_2',ascending=False).head()
