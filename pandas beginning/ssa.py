@@ -39,7 +39,7 @@ def frames_filter(dataframe_col,year_repl):
     # but in str format. Using this I converted the type from str to int
     dataframe_col_re.iloc[:, -1] = dataframe_col_re.iloc[:, -1].apply(int)
 
-    # Sorting the female data accprding to counts using sort_values() method
+    # Sorting the female data according to counts using sort_values() method
     # giving false to ascending parameter in sort_values sorts the data in descending order
     # .head() fetch 5 values from the start of the dataframe
     # Female_data the top 5 female baby names
