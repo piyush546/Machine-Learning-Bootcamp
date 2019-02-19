@@ -19,6 +19,18 @@ import numpy as np
 # Importing matplotlib for pictorial representation of data and records
 import matplotlib.pyplot as plt
 
+
+# Defining a function for performing various calculations on the dataframes column
+"""def frames_filter(dataframe_col[year]):
+    dataframe_col[year] = dataframe_col[year].str.split(",", expand=True).add_prefix("col_")
+    dataframe_col['col_2'] = datframe_col['col_2'].apply(int)
+    female_data = dataframe_col[dataframe_col['col_1']=="F"].sort_values('col_2', ascending=True).head()
+    male_data = dataframe_col[dataframe_col['col_1']=="M"].sort_values('col_2', ascending=True).head()
+    sum_year = dataframe_col['col_2'].sum()
+    gender_sum = pd.pivot_table(dataframe_col,values=['col_2'], columns=['col_1'], aggfunc=np.sum)
+    plt.pie([sum_year, gender_sum['F'], gender_sum['M']], explode=[0, 0, 0.1], labels=['total','female','male'], autopct="%1.1f%%")
+    plt.axis("equals")
+    return plt.show()"""
 # Exception handling for the Dataframe exceptions
 try:
     # Initializing the parent dataframe
