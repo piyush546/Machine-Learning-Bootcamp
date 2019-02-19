@@ -12,7 +12,13 @@ import os
 
 # Importing pandas for framing datasets
 import pandas as pd
+
+# Importing numpy for some mathematical calculations
 import numpy as np
+
+# Importing matplotlib for pictorial representation of data and records
+import matplotlib.pyplot as plt
+
 # Exception handling for the Dataframe exceptions
 try:
     # Initializing the parent dataframe
@@ -74,7 +80,22 @@ data_set.iloc[:, -1] = data_set.iloc[:, -1].apply(int)
 # giving false to ascending parameter in sort_values sorts the data in descending order
 # .head() fetch 5 values from the start of the dataframe
 # Female_data the top 5 female baby names
-Female_data = data_set[data_set['col_1'] == 'F'].sort_values('col_2',ascending=False).head()
+Female_data = data_set[data_set['col_1'] == 'F'].sort_values('col_2', ascending=False).head()
 
 # Top % male baby names
-Male_data = data_set[data_set['col_1'] == 'M'].sort_values('col_2',ascending=False).head()
+Male_data = data_set[data_set['col_1'] == 'M'].sort_values('col_2', ascending=False).head()
+
+# Sum accounting the total_numbers of babies
+sum_2010 = data_set['col_2'].sum()
+
+# Sum accounting to male and female babies counts
+gender_sum_2010 = pd.pivot_table(data_set, values='col_2', columns=['col_1'], aggfunc=np.sum)
+
+# Plotting the pictorial pie chart for the sum of counts for whole and accoridng to gender
+plt.pie([sum_2010, gender_sum_2010['F'], gender_sum_2010['M']], explode=[0, 0, 0.1], labels=['total', 'female', 'male'], autopct='%1.1f%%', shadow=True)
+
+# Equal aspect ratio ensures that pie is drawn as a circle.
+plt.axis('equal')
+
+# For displaying the plotted pie chart
+plt.show()
