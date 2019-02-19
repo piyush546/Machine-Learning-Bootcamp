@@ -24,7 +24,8 @@ import matplotlib.pyplot as plt
 def frames_filter(dataframe_col,year_repl):
 
     # Removing the null values from the DataFrames as null values will generate error while we use .apply(int) method
-    dataframe_col = ssa_dataframe[2010].dropna()
+    # Typecasting is required to convert the series to dataframe for applying the further operations
+    dataframe_col = pd.DataFrame(dataframe_col[year_repl].dropna())
 
     # Fetching top 5 males and Females baby names
 
