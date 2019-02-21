@@ -43,10 +43,10 @@ def frames_filter(dataframe_col,year_repl):
     # giving false to ascending parameter in sort_values sorts the data in descending order
     # .head() fetch 5 values from the start of the dataframe
     # Female_data the top 5 female baby names
-    female_data = dataframe_col_re[dataframe_col_re['col_1']=="F"].sort_values('col_2', ascending=True).head()
+    female_data = dataframe_col_re[dataframe_col_re['col_1']=="F"].sort_values('col_2', ascending=False).head()
 
     # Top 5 male baby names
-    male_data = dataframe_col_re[dataframe_col_re['col_1']=="M"].sort_values('col_2', ascending=True).head()
+    male_data = dataframe_col_re[dataframe_col_re['col_1']=="M"].sort_values('col_2', ascending=False).head()
 
     # Sum accounting the total_numbers of babies
     sum_year = dataframe_col_re['col_2'].sum()
@@ -110,4 +110,3 @@ except ValueError as e:
 
 except AttributeError as e:
     print(e)
-

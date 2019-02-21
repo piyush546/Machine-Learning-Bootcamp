@@ -15,7 +15,8 @@ full_url = website+query+appid
 fetched_data = requests.get(full_url)
 
 # convertig the json data into python data
-# json.loads(json_data) - converts json data to python data
+# json.loads(json_data) - converts json data to python data and used for string object
+# json.load(json_data) - used for file objects means for json file
 # json.dumps(python_data) - converts python data to json data
 py_data = json.loads(fetched_data)
 
@@ -29,3 +30,45 @@ print('Weather main:', py_data['weather'][0]['main'])
 print('Wind speed:', py_data['wind']['speed'])
 print('Sunrise:', py_data['sys']['sunrise'])
 print('Sunset:', py_data['sys']['sunset'])
+
+""" with open("Json parser.json") as f:
+   data = json.load(f)
+data = json.dumps(data) """
+
+# Basics of json initialization in python
+""" >>> import json
+>>> data = """[
+{
+"faculty 1":{
+"name":"vps",
+"age":42},
+"faculty 2":{
+"name":"ajay",
+"age":30
+}
+}
+]"""
+>>> type(data)
+<class 'str'>
+>>> data_new = json.loads(data)
+>>> data_new
+[{'faculty 1': {'name': 'vps', 'age': 42}, 'faculty 2': {'name': 'ajay', 'age': 30}}]
+>>> data = """{
+"faculty":[
+{
+"faculty 1":{
+"name":"vps",
+"age":42},
+"faculty 2":{
+"name":"ajay",
+"age":30
+}
+}
+]
+}"""
+>>> type(data)
+<class 'str'>
+>>> data_new = json.loads(data)
+>>> data_new
+{'faculty': [{'faculty 1': {'name': 'vps', 'age': 42}, 'faculty 2': {'name': 'ajay', 'age': 30}}]}
+"""

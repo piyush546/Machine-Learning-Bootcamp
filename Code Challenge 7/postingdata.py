@@ -39,7 +39,7 @@ headers = {"Content-Type": "application/json", "Content-Length": len(payload), "
 # POST operation function
 def client_api():
 
-    # SEnding the data using post data
+    # Sending the data using post data
     client_data = requests.post(Host, payload, headers)
     return client_data
 
