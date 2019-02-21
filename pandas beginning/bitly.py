@@ -9,6 +9,7 @@ import pandas as pd
 # For using np.nan I imported numpy module
 import numpy as np
 
+# The pandas series is being provided the functionality of plotting by matplotlib internally i.e matplotlib is working internally and we don't need to import matplotlib module
 # I imported collections.Counter to check the timezones frequency
 from collections import Counter
 
