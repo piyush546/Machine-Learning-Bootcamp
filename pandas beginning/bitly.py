@@ -12,6 +12,8 @@ import numpy as np
 # I imported collections.Counter to check the timezones frequency
 from collections import Counter
 
+# Importing regex module
+import re
 # Importing matplotlib.pyplot for pictorial representation of the stats
 # import matplotlib.pyplot as plt
 
@@ -52,5 +54,14 @@ tokens_frequency = tokens_df['Token_0'].value_counts()
 # Plotting bar graph for top 5 browser capability
 tokens_frequency.head().plot.bar()
 
-# Fetching the os info
-os_df = tokens_df['Token_1'].str.split(')',n=1,expand=True).add_prefix("os_info_")
+# Filling the missing values in the token parts with mising string
+tokens_df = tokens_df.replace(np.nan, 'Mising')
+
+# ******************************************** #
+# Classifying as windows os and non-windows os
+
+# Initializing the os column as Not windows
+tokens_df["os"] = 'Not Windows'
+
+# Applying the conditions to find the windows os user and initializing their os column as Windows
+tokens_df["os"][tokens_df["Token_1"].str.find("Windows") != -1] = "Windows"
