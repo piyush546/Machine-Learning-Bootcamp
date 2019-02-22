@@ -1,0 +1,240 @@
+COMM GA PROJECT NUMBER                                                 1168
+COMM FAS PROJECT NUMBER                                                1896
+COMM SURVEY COMPANY:                                 Fugro Airborne Surveys
+COMM CLIENT:                                           Geoscience Australia
+COMM SURVEY TYPE:                                       25Hz TEMPEST Survey
+COMM AREA NAME:                                              Paterson South
+COMM STATE:                                                              WA
+COMM COUNTRY:                                                     Australia
+COMM SURVEY FLOWN:                              September - November , 2007
+COMM LOCATED DATA CREATED:                                     January 2009
+COMM
+COMM DATUM:                                                           GDA94
+COMM PROJECTION:                                                        MGA
+COMM ZONE:                                                               51
+COMM
+COMM SURVEY SPECIFICATIONS
+COMM
+COMM TRAVERSE LINE SPACING:                                     1000-2000 m
+COMM TRAVERSE LINE DIRECTION:                                   045-225 deg
+COMM NOMINAL TERRAIN CLEARANCE:                                       120 m
+COMM TOTAL LINE KILOMETRES:                                      7892.12 km
+COMM
+COMM LINE NUMBERING
+COMM
+COMM COMPLETE SURVEY:                                         10020 - 11200
+COMM                                                          20010 - 20910
+COMM
+COMM
+COMM SURVEY EQUIPMENT
+COMM
+COMM AIRCRAFT:                                 CASA C212 Turbo Prop, VH-TEM
+COMM
+COMM MAGNETOMETER:                              Scintrex Cs-2 Cesium Vapour
+COMM INSTALLATION:                                            stinger mount
+COMM RESOLUTION:                                                   0.001 nT
+COMM RECORDING INTERVAL:                                              0.2 s
+COMM
+COMM ELECTROMAGNETIC SYSTEM:                                   25Hz TEMPEST
+COMM INSTALLATION:                 Transmitter loop mounted on the aircraft
+COMM                                         Receiver coils in a towed bird
+COMM COIL ORIENTATION:                                                  X,Z
+COMM RECORDING INTERVAL:                                              0.2 s
+COMM SYSTEM GEOMETRY:
+COMM RECEIVER DISTANCE BEHIND THE TRANSMITTER:                       -120 m
+COMM RECEIVER DISTANCE BELOW THE TRANSMITTER:                         -35 m
+COMM
+COMM RADAR ALTIMETER:                                         Sperry RT-220
+COMM RECORDING INTERVAL:                                              0.2 s
+COMM
+COMM LASER ALTIMETER:                                    Optech 501SB (TEM)
+COMM RECORDING INTERVAL:                                              0.2 s
+COMM
+COMM NAVIGATION:                                 real-time differential GPS
+COMM RECORDING INTERVAL:                                              1.0 s
+COMM
+COMM ACQUISITION SYSTEM:                                          PDAS-1000
+COMM
+COMM DATA PROCESSING
+COMM
+COMM MAGNETIC DATA
+COMM DIURNAL BASE VALUE APPLIED                                    53000 nT
+COMM PARALLAX CORRECTION APPLIED                                      0.6 s
+COMM IGRF BASE VALUE APPLIED                                       54024 nT
+COMM IGRF MODEL 2005 EXTRAPOLATED TO                                 2007.9
+COMM DATA HAVE BEEN MICROLEVELLED
+COMM
+COMM ELECTROMAGNETIC DATA
+COMM SYSTEM PARALLAX REMOVED, AS FOLLOWS
+COMM X-COMPONENT EM DATA                                              0.2 s
+COMM Z-COMPONENT EM DATA                                              1.4 s
+COMM DATA CORRECTED FOR TRANSMITTER HEIGHT, PITCH AND ROLL
+COMM DATA CORRECTED FOR TRANSMITTER-RECEIVER GEOMETRY VARIATIONS
+COMM DATA HAVE BEEN MICROLEVELLED
+COMM CONDUCTIVITY DEPTH INVERSION CALCULATED                   EMFlow V5.10
+COMM CONDUCTIVITIES CALCULATED USING HPRG CORRECTED EMX & EMZ DATA
+COMM
+COMM DIGITAL TERRAIN DATA
+COMM PARALLAX CORRECTION APPLIED TO LIDAR ALIMETER DATA               0.0 s
+COMM PARALLAX CORRECTION APPLIED TO GPS ALIMETER DATA                 0.0 s
+COMM DTM CALCULATED [DTM = GPS ALTITUDE - LIDAR ALTITUDE - GPS/LIDAR DIST]
+COMM N-VALUE APPLIED TO CORRECT DTM TO AUSTRALIAN HEIGHT DATUM (AHD)
+COMM DATA HAVE BEEN MICROLEVELLED
+COMM
+COMM ----------------------------------------------------------------------
+COMM DISCLAIMER
+COMM ----------------------------------------------------------------------
+COMM It is Fugro Airborne Survey’s understanding that the data provided to
+COMM the client is to be used for the purpose agreed between the parties.
+COMM That purpose was a significant factor in determining the scope and
+COMM level of the Services being offered to the Client. Should the purpose
+COMM for which the data is used change, the data may no longer be valid or
+COMM appropriate and any further use of, or reliance upon, the data in
+COMM those circumstances by the Client without Fugro Airborne Survey's
+COMM review and advice shall be at the Client's own or sole risk.
+COMM
+COMM The Services were performed by Fugro Airborne Survey exclusively for
+COMM the purposes of the Client. Should the data be made available in whole
+COMM or part to any third party, and such party relies thereon, that party
+COMM does so wholly at its own and sole risk and Fugro Airborne Survey
+COMM disclaims any liability to such party.
+COMM
+COMM Where the Services have involved Fugro Airborne Survey's use of any
+COMM information provided by the Client or third parties, upon which
+COMM Fugro Airborne Survey was reasonably entitled to rely, then the
+COMM Services are limited by the accuracy of such information. Fugro
+COMM Airborne Survey is not liable for any inaccuracies (including any
+COMM incompleteness) in the said information, save as otherwise provided
+COMM in the terms of the contract between the Client and Fugro Airborne
+COMM Survey.
+COMM
+COMM With regard to DIGITAL TERRAIN DATA, the accuracy of the elevation
+COMM calculation is directly dependent on the accuracy of the two input
+COMM parameters lidar altitude and GPS altitude. The radar altitude value may be
+COMM erroneous in areas of heavy tree cover, where the altimeter reflects the
+COMM distance to the tree canopy rather than the ground. The GPS altitude value
+COMM is primarily dependent on the number of available satellites. Although
+COMM post-processing of GPS data will yield X and Y accuracies in the
+COMM order of 1-2 metres, the accuracy of the altitude value is usually
+COMM much less, sometimes in the ±5 metre range.  Further inaccuracies
+COMM may be introduced during the interpolation and gridding process.
+COMM Because of the inherent inaccuracies of this method, no guarantee is
+COMM made or implied that the information displayed is a true
+COMM representation of the height above sea level.  Although this product
+COMM may be of some use as a general reference,
+COMM THIS PRODUCT MUST NOT BE USED FOR NAVIGATION PURPOSES.
+COMM ----------------------------------------------------------------------
+COMM
+COMM ELECTROMAGNETIC SYSTEM
+COMM
+COMM TEMPEST IS A TIME-DOMAIN SQUARE-WAVE SYSTEM,
+COMM TRANSMITTING AT A BASE FREQUENCY OF 25Hz,
+COMM WITH 2 ORTHOGONAL-AXIS RECEIVER COILS IN A TOWED BIRD.
+COMM FINAL EM OUTPUT IS RECORDED 5 TIMES PER SECOND.
+COMM THE TIMES (IN MILLISECONDS) FOR THE 15 WINDOWS ARE:
+COMM
+COMM WINDOW      START       END      CENTRE
+COMM    1        0.007      0.020      0.013
+COMM    2        0.033      0.047      0.040
+COMM    3        0.060      0.073      0.067
+COMM    4        0.087      0.127      0.107
+COMM    5        0.140      0.207      0.173
+COMM    6        0.220      0.340      0.280
+COMM    7        0.353      0.553      0.453
+COMM    8        0.567      0.873      0.720
+COMM    9        0.887      1.353      1.120
+COMM   10        1.367      2.100      1.733
+COMM   11        2.113      3.273      2.693
+COMM   12        3.287      5.113      4.200
+COMM   13        5.127      7.993      6.560
+COMM   14        8.007     12.393     10.200
+COMM   15       12.407     19.993     16.200
+COMM
+COMM PULSE WIDTH: 10 ms
+COMM
+COMM TEMPEST EM data are transformed to the response that would be
+COMM obtained with a B-field sensor for a 100% duty cycle square
+COMM waveform at the base frequency, involving a 1A change in
+COMM current (from -0.5A to +0.5A to -0.5A) in a 1sq.m transmitter.
+COMM It is this configuration, rather than the actual acquisition
+COMM configuration, which must be specified when modelling TEMPEST data.
+COMM
+COMM  
+COMM
+COMM LOCATED DATA FORMAT
+COMM
+COMM  Output field format : DOS  - Flat ascii 
+COMM  Number of fields    :  68
+COMM
+COMM Field  Channel         Description                       Units  Undefined Format
+COMM -----  -------         -----------                       -----  --------- ------
+COMM
+COMM     1  LINE            Line                                      -9999999  i6
+COMM     2  FLIGHT          Flight                                    -9999999  i4
+COMM     3  FID             Fiducial                            (s)   -9999999  f8.1
+COMM     4  PROJECT_FAS     FAS Project Number                        -9999999  i10
+COMM     5  PROJECT_GA      GA Project Number                         -9999999  i10
+COMM     6  AIRCRAFT        System Number                             -9999999  i4
+COMM     7  DATE            Date                           ddmmyyyy   -9999999  i10
+COMM     8  TIME            Time - local midnight               (s)   -9999999  f8.1
+COMM     9  BEARING         Line Bearing                      (deg)   -9999999  i8
+COMM    10  LATITUDE        Latitude  GDA94                   (deg)   -9999999  f13.6
+COMM    11  LONGITUDE       Longitude GDA94                   (deg)   -9999999  f13.6
+COMM    12  EASTING         Easting   MGA51                     (m)   -9999999  f11.2
+COMM    13  NORTHING        Northing  MGA51                     (m)   -9999999  f12.2
+COMM    14  LIDAR           Final Lidar altimeter               (m)   -9999999  f8.2
+COMM    15  RADALT          Final Radar altimeter               (m)   -9999999  f8.2
+COMM    16  TX_ELEVATION    Final Transmitter Elevation - AHD   (m)   -9999999  f8.2
+COMM    17  DTM             Final Ground Elevation - AHD        (m)   -9999999  f8.2
+COMM    18  MAG             Final TMI                          (nT)   -9999999  f10.2
+COMM    19  CND_DS01        CDI_depth_slice_01   0-    5 m   (mS/m)   -9999999  f10.3
+COMM    20  CND_DS02        CDI_depth_slice_02   5-   10 m   (mS/m)   -9999999  f10.3
+COMM    21  CND_DS03        CDI_depth_slice_03   10-  15 m   (mS/m)   -9999999  f10.3
+COMM    22  CND_DS04        CDI_depth_slice_04   15-  20 m   (mS/m)   -9999999  f10.3
+COMM    23  CND_DS05        CDI_depth_slice_05   20-  30 m   (mS/m)   -9999999  f10.3
+COMM    24  CND_DS06        CDI_depth_slice_06   30-  40 m   (mS/m)   -9999999  f10.3
+COMM    25  CND_DS07        CDI_depth_slice_07   40-  60 m   (mS/m)   -9999999  f10.3
+COMM    26  CND_DS08        CDI_depth_slice_08   60- 100 m   (mS/m)   -9999999  f10.3
+COMM    27  CND_DS09        CDI_depth_slice_09   100-150 m   (mS/m)   -9999999  f10.3
+COMM    28  CND_DS10        CDI_depth_slice_10   150-200 m   (mS/m)   -9999999  f10.3
+COMM    29  CND[1]          Conductivity_001       0-  5 m   (mS/m)   -9999999  f10.3
+COMM    30  CND[2]          Conductivity_002       5- 10 m   (mS/m)   -9999999  f10.3
+COMM    31  CND[3]          Conductivity_003      10- 15 m   (mS/m)   -9999999  f10.3
+COMM    32  CND[4]          Conductivity_004      15- 20 m   (mS/m)   -9999999  f10.3
+COMM    33  CND[5]          Conductivity_005      20- 25 m   (mS/m)   -9999999  f10.3
+COMM    34  CND[6]          Conductivity_006      25- 30 m   (mS/m)   -9999999  f10.3
+COMM    35  CND[7]          Conductivity_007      30- 35 m   (mS/m)   -9999999  f10.3
+COMM    36  CND[8]          Conductivity_008      35- 40 m   (mS/m)   -9999999  f10.3
+COMM    37  CND[9]          Conductivity_009      40- 45 m   (mS/m)   -9999999  f10.3
+COMM    38  CND[10]         Conductivity_010      45- 50 m   (mS/m)   -9999999  f10.3
+COMM    39  CND[11]         Conductivity_011      50- 55 m   (mS/m)   -9999999  f10.3
+COMM    40  CND[12]         Conductivity_012      55- 60 m   (mS/m)   -9999999  f10.3
+COMM    41  CND[13]         Conductivity_013      60- 65 m   (mS/m)   -9999999  f10.3
+COMM    42  CND[14]         Conductivity_014      65- 70 m   (mS/m)   -9999999  f10.3
+COMM    43  CND[15]         Conductivity_015      70- 75 m   (mS/m)   -9999999  f10.3
+COMM    44  CND[16]         Conductivity_016      75- 80 m   (mS/m)   -9999999  f10.3
+COMM    45  CND[17]         Conductivity_017      80- 85 m   (mS/m)   -9999999  f10.3
+COMM    46  CND[18]         Conductivity_018      85- 90 m   (mS/m)   -9999999  f10.3
+COMM    47  CND[19]         Conductivity_019      90- 95 m   (mS/m)   -9999999  f10.3
+COMM    48  CND[20]         Conductivity_020      95-100 m   (mS/m)   -9999999  f10.3
+COMM    49  CND[21]         Conductivity_021     100-105 m   (mS/m)   -9999999  f10.3
+COMM    50  CND[22]         Conductivity_022     105-110 m   (mS/m)   -9999999  f10.3
+COMM    51  CND[23]         Conductivity_023     110-115 m   (mS/m)   -9999999  f10.3
+COMM    52  CND[24]         Conductivity_024     115-120 m   (mS/m)   -9999999  f10.3
+COMM    53  CND[25]         Conductivity_025     120-125 m   (mS/m)   -9999999  f10.3
+COMM    54  CND[26]         Conductivity_026     125-130 m   (mS/m)   -9999999  f10.3
+COMM    55  CND[27]         Conductivity_027     130-135 m   (mS/m)   -9999999  f10.3
+COMM    56  CND[28]         Conductivity_028     135-140 m   (mS/m)   -9999999  f10.3
+COMM    57  CND[29]         Conductivity_029     140-145 m   (mS/m)   -9999999  f10.3
+COMM    58  CND[30]         Conductivity_030     145-150 m   (mS/m)   -9999999  f10.3
+COMM    59  CND[31]         Conductivity_031     150-155 m   (mS/m)   -9999999  f10.3
+COMM    60  CND[32]         Conductivity_032     155-160 m   (mS/m)   -9999999  f10.3
+COMM    61  CND[33]         Conductivity_033     160-165 m   (mS/m)   -9999999  f10.3
+COMM    62  CND[34]         Conductivity_034     165-170 m   (mS/m)   -9999999  f10.3
+COMM    63  CND[35]         Conductivity_035     170-175 m   (mS/m)   -9999999  f10.3
+COMM    64  CND[36]         Conductivity_036     175-180 m   (mS/m)   -9999999  f10.3
+COMM    65  CND[37]         Conductivity_037     180-185 m   (mS/m)   -9999999  f10.3
+COMM    66  CND[38]         Conductivity_038     185-190 m   (mS/m)   -9999999  f10.3
+COMM    67  CND[39]         Conductivity_039     190-195 m   (mS/m)   -9999999  f10.3
+COMM    68  CND[40]         Conductivity_040     195-200 m   (mS/m)   -9999999  f10.3
+COMM
