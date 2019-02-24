@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+""" A program to check functionaltiy of replace method of str datatype """
+
 # Variable to store the inputed string
 String1 = input()
 

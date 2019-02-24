@@ -19,13 +19,13 @@ base_url = "https://api.cognitive.microsoft.com/bing/v7.0/images/search"
 # offset should be less than count
 # Info is just for reference. For more info refer to the official document
 headers = {"Ocp-Apim-Subscription-key": Api_key}
-params = {"q": '', "offset": 0, "count": 4}
+params = {"q": 'banana', "offset": 0, "count": 4}
 
 # Taking input for the fruits name
 fruits_name = input().split()
 
 # Folder to store images
-Path = "C:/Users/pc/AnacondaProjects/Machine learning bootcamp/Code Challenge 8/Fruits/"
+Path = "C:/Users/pc/AnacondaProjects/Machine learning bootcamp/Scrapping programs/Bing api scrapping/Fruits/"
 
 # To create the folder if not present
 if os.path.isdir(Path) is not True:

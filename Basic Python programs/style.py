@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+
+""" A program to use some str methods """
+
 # variables to store strings to be styled
 First_string = input("Enter the  string:")
 

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+""" A program to calculate area and perimeter of a circle using math module """
+
 # importing math module
 from math import pi
 

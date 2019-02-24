@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*
+
+""" A program to check functionality of unicodes """
+
 # Variables to store the values-
 OS = "UNIX"
 Regst = "\u00AE"

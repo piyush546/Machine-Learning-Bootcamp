@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+""" A program to print user name in Hindi """
+
 # variables to store my name in hindi
 # devnagri Script for Piyush
 first_name = "\u092A"+"\u0940"+"\u092F"+"\u0942"+"\u0937"

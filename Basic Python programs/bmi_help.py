@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+""" A program to show how to use multiline functionality """
+
 # variables to store multiple line content
 doc = """World Health Organisation's BMI VALUES ( 8 Levels )
  Severe Thinness: less than 16

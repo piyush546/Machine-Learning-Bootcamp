@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+""" A program to build checker pattern """
+
 # variables to store asterisk unicode
 Star = "\u002A"
 
@@ -9,9 +12,9 @@ def main(input_char):
     rows = int(input("rows required:"))
     for i in range(0, rows):
             if (i % 2) == 0:
-                print((input_char+" ")*columns)
+                print((input_char+"_")*columns)
             else:
-                print(" "+(input_char+" ")*columns)
+                print("_"+(input_char+"_")*columns)
 
 
 # Function calling

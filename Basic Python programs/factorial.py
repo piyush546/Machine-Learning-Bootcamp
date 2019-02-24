@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+""" A program to calculate factorial of a number using math module """
+
 # importing math module
 from math import factorial
 
