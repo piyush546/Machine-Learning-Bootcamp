@@ -69,7 +69,7 @@ regressor.fit(features_train, labels_train)
 # Testing the model
 model_test = regressor.predict(features_test)
 
-# Plotting the regresssion model
+# Visualizing our regresssion model
 plt.scatter(features_test, labels_test)
 plt.plot(features_test, model_test)
 plt.show()
