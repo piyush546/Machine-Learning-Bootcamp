@@ -47,29 +47,40 @@ try:
     model_data = pd.read_csv("FoodTruck.csv")
 except FileNotFoundError:
     pass """
+
 with contextlib.suppress(FileNotFoundError):
     model_data = pd.read_csv("FoodTruck.csv")
 
-# Seperating the features and labels from model_data
-# Features - Population
-# Lables - Profit
-model_features = model_data.iloc[:, :-1].values
-model_labels = model_data.iloc[:, -1].values
+with contextlib.suppress(NameError):
 
-# Splitting the collected data in training sets and testing sets
-features_train, features_test, labels_train, labels_test = train_test_split(model_features, model_labels, test_size=0.15, random_state=0)
+    # Seperating the features and labels from model_data
+    # Features - Population
+    # Lables - Profit
+    model_features = model_data.iloc[:, :-1].values
+    model_labels = model_data.iloc[:, -1].values
 
-# Training our model using the training sets
-# Creating the object of LinearRegression class
-regressor = LinearRegression()
+    # Splitting the collected data in training sets and testing sets
+    features_train, features_test, labels_train, labels_test = train_test_split(model_features, model_labels, test_size=0.3, random_state=0)
 
-# Performing the training using fit method
-regressor.fit(features_train, labels_train)
+    # Training our model using the training sets
+    # Creating the object of LinearRegression class
+    regressor = LinearRegression()
 
-# Testing the model
-model_test = regressor.predict(features_test)
+    # Performing the training using fit method
+    regressor.fit(features_train, labels_train)
 
-# Visualizing our regresssion model
-plt.scatter(features_test, labels_test)
-plt.plot(features_test, model_test)
-plt.show()
+    # Testing the model
+    model_test = regressor.predict(features_test)
+
+    # Visualizing our regresssion model
+    plt.scatter(features_test, labels_test)
+    plt.plot(features_train, regressor.predict(features_train))
+    plt.xlabel('Population')
+    plt.ylabel('Profit')
+    plt.show()
+
+    # To predict profit In Jaipur with population 3.073 million
+    print("Profit in Jaipur:", regressor.predict(3.073))
+
+    # To check the accuracy of our model
+    print("Accuracy of our model:", regressor.score(features_test, labels_test))
