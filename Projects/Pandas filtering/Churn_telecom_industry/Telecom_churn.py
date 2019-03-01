@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
-""" """
-# Import pandas, numpy, matplotlib
+""" A program to perfrom analysis on the Telecom industry churn dataset """
+
+# Importing pandas, numpy, matplotlib
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Importing the scikit learn
-from sklearn.model_selection import train_test_split
-
-from sklearn.linear_model import LinearRegression
+# import numpy as np
+# import matplotlib.pyplot as plt
 
 # Importing contextlib to enhance with functionality
 import contextlib
@@ -23,19 +19,8 @@ with contextlib.suppress((NameError, ValueError, TypeError)):
     # To do churn analysis
     churn_analysis = churn_df['churn'].value_counts()
 
-    # Visualization of the churn analysis
-    plt.pie(churn_analysis,labels=['False','True'], autopct="%1.1f%%")
-    plt.axis("equal")
-    plt.show()
+    # To analyse the popularity of international plan scheme
+    intl_packs_anly = churn_df['international plan'].value_counts()
 
-# ******************************************** #
-with contextlib.suppress((NameError, ValueError, TypeError)):
-    features = churn_df['total day calls'].values.reshape(-1,1)
-    labels = churn_df['total day charge'].values.reshape(-1,1)
-    features_train,features_test,labels_train,labels_test = train_test_split(features,labels, test_size=0.2, random_state=0)
-    regressor = LinearRegression()
-    regressor.fit(features_train, labels_train)
-    test_data = regressor.predict(features_test)
-    plt.scatter(features_test, labels_test)
-    plt.plot(features_train, labels_train)
-    plt.show()
+    # To analyse the popularity of voice mail plan
+    voice_mail_anly = churn_df['voice mail plan'].value_counts()
