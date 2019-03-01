@@ -60,6 +60,7 @@ with contextlib.suppress(NameError):
     model_labels = model_data.iloc[:, -1].values
 
     # Splitting the collected data in training sets and testing sets
+    # random_state parameter set to some numerical value to hold the single test result everytime else the prediction will be different each time the code is executed
     features_train, features_test, labels_train, labels_test = train_test_split(model_features, model_labels, test_size=0.3, random_state=0)
 
     # Training our model using the training sets
