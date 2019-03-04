@@ -24,3 +24,11 @@ with contextlib.suppress((NameError, ValueError, TypeError)):
 
     # To analyse the popularity of voice mail plan
     voice_mail_anly = churn_df['voice mail plan'].value_counts()
+
+    # To fetch the records of those states where Churning is True
+    state_churn_anly = churn_df.iloc[:, :][churn_df['churn'] == True]
+
+    # Churn analysis based on area code
+    code_churn_anly = pd.DataFrame(state_churn_anly['area code'].value_counts())
+
+    code_churn_anly.columns = ['count']

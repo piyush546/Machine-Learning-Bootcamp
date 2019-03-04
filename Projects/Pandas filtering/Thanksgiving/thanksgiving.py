@@ -4,10 +4,27 @@
 # Importing the Data Analysis module
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 # Importing contextlib module to handle exception silently
 import contextlib
+
+
+# A function for analyzing the thanksgiver count on basis of various other info
+def analysis_fun(df, col_1, yes_col):
+    # Analytics part
+    total_counts = df[col_1].value_counts()
+
+    yes_counts = df[col_1][df[yes_col] == "Yes"].value_counts()
+
+    final_df = pd.concat([total_counts, yes_counts], axis=1)
+    final_df.columns = ['Total', 'Thanksgiver']
+
+    # Visualization part
+    visual = final_df.plot.bar(color=['SkyBlue', 'IndianRed'])
+
+    return visual
+
 
 with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError)):
     # Loading the thanksgiving dataset
@@ -16,19 +33,26 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError)):
     # Fetching the column names in a list
     columns_list = list(thanks_df.columns)
 
-    # Analysing how much celebrate thanksgiving
-    thanksgiving_anly = thanks_df[columns_list[1]].value_counts()
+    # Replacing the missing values with the keyword Mising
+    thanks_df = thanks_df.replace([np.nan], ['Mising'])
 
-    # Analysing the main dish for thanksgiving
-    dish_anly = thanks_df[columns_list[2]].value_counts()
+    # Renaming the columns with numerical values
+    thanks_df.columns = [x for x in range(0, 65)]
+
+    # Analysing how much celebrate thanksgiving
+    thanksgiving_anly = thanks_df[1].value_counts()
+
+    # Analysing the main dish for thanksgiving state wise
+    state_dish_anly = thanks_df.iloc[:,[64,2]][thanks_df[1]=="Yes"]
+
+    # Analysing the main dish for thanksgiving income wise
+    income_dish_anly = thanks_df.iloc[:,[63,2]][thanks_df[1]=="Yes"]
 
     # Analysing the salary range
-    salary_anly = thanks_df[columns_list[63]].value_counts()
+    salary_anly = thanks_df[63].value_counts()
 
-    # Analysing the regions
-    states_anly = thanks_df.iloc[:,-1].value_counts()
+    # Function call
+    state_vis = analysis_fun(thanks_df, 64, 1)
 
-    # getting states analysis for thanksgiving celebration
-    states_thanks_anly = thanks_df.groupby([columns_list[64], columns_list[63], columns_list[1]])
-
+    salary_vis = analysis_fun(thanks_df, 63, 1)
 
