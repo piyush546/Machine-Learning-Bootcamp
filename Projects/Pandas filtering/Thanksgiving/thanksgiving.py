@@ -9,6 +9,9 @@ import numpy as np
 # Importing contextlib module to handle exception silently
 import contextlib
 
+# Importing regex module
+import re
+
 
 # A function for analyzing the thanksgiver count on basis of various other info
 def analysis_fun(df, col_1, yes_col):
@@ -62,3 +65,12 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
     state_vis = analysis_fun(thanks_df, 64, 1)
 
     salary_vis = analysis_fun(thanks_df, 63, 1)
+
+    # To filter out the salary column
+    regex = re.compile("\$\d+\W*\d+")
+
+    def regex_fun(value):
+        mod_value = regex.findall(value)
+        return mod_value
+
+    thanks_df[63] = thanks_df[63].apply(regex_fun)
