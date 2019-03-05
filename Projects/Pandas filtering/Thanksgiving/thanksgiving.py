@@ -67,10 +67,14 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
     salary_vis = analysis_fun(thanks_df, 63, 1)
 
     # To filter out the salary column
+    # Regex pattern to filter out salary column
     regex = re.compile("\$\d+\W*\d+")
 
+    # A function to be passed in .apply() method for filtering out the salaries
     def regex_fun(value):
         mod_value = regex.findall(value)
         return mod_value
 
+    # Using the apply method to filter the income column
     thanks_df[63] = thanks_df[63].apply(regex_fun)
+
