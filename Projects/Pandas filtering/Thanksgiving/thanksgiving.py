@@ -51,7 +51,7 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
 
     dem = state_dish_anly.groupby([64, 2]).groups
     keys = list(dem.keys())
-    values = [len(x)  for x in list(dem.values())]
+    values = [len(x) for x in list(dem.values())]
     final_state_dish_anly = pd.DataFrame(keys, columns=['States', 'Dish'])
     final_state_dish_anly['Count'] = values
 
@@ -77,5 +77,3 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
 
     # Using the apply method to filter the income column
     thanks_df[63] = thanks_df[63].apply(regex_fun)
-
-
