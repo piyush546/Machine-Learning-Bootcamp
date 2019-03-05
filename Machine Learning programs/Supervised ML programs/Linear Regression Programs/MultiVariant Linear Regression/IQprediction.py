@@ -18,7 +18,7 @@ from sklearn.model_selection import train_test_split
 # Module to apply LinearRegression algorithm
 from sklearn.linear_model import LinearRegression
 
-# Importing statsmodel for applying the BackTracking Elimination
+# Importing statsmodel for applying the BackWard Elimination
 import statsmodels.formula.api as sm
 
 with contextlib.suppress((FileNotFoundError, ValueError)):
@@ -73,3 +73,17 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
 
     # To show the stats
     features_OLS.summary()
+
+    # Removing the 1st column
+    features_obj = features_obj[:, [1, 2]]
+
+    features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
+
+    # To show the stats
+    features_OLS.summary()
+
+    """ After this the third column is also removed thus indicating that
+    the brain size is the only important feature for predicting the IQ of a
+    person. Thus results from both .coef_ method and Backward elimination methd
+    is same.It is rarely possible that both the method gives different values
+    """

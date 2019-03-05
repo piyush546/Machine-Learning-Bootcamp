@@ -49,11 +49,11 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
     state_dish_anly = thanks_df.iloc[:, [64, 2]][thanks_df[1] == "Yes"]
     state_dish_anly = state_dish_anly.sort_values([64])
 
-    """ dem = state_dish_anly.groupby([64, 2]).groups
+    dem = state_dish_anly.groupby([64, 2]).groups
     keys = list(dem.keys())
     values = [len(x)  for x in list(dem.values())]
     final_state_dish_anly = pd.DataFrame(keys, columns=['States', 'Dish'])
-    final_state_dish_anly['Count'] = values """
+    final_state_dish_anly['Count'] = values
 
     # Analysing the main dish for thanksgiving income wise
     income_dish_anly = thanks_df.iloc[:, [63, 2]][thanks_df[1] == "Yes"]
@@ -77,3 +77,5 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
 
     # Using the apply method to filter the income column
     thanks_df[63] = thanks_df[63].apply(regex_fun)
+
+
