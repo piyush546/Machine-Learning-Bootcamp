@@ -77,4 +77,3 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
 
     # Using the apply method to filter the income column
     thanks_df[63] = thanks_df[63].apply(regex_fun)
-
