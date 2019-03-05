@@ -18,14 +18,15 @@ from sklearn.model_selection import train_test_split
 # Module to apply LinearRegression algorithm
 from sklearn.linear_model import LinearRegression
 
-#
+# Importing statsmodel for applying the BackTracking Elimination
+import statsmodels.formula.api as sm
 
-with contextlib.suppress(FileNotFoundError):
+with contextlib.suppress((FileNotFoundError, ValueError)):
     # Loading the person iq_size datasets
     iq_df = pd.read_csv("iq_size.csv")
 
     # Splitting the features and labels data
-    features = iq_df.iloc[:, 1:].values
+    features = iq_df.iloc[:, 1:].values.reshape(-1,3)
 
     labels = iq_df.iloc[:, 0].values.reshape(-1, 1)
 
@@ -52,4 +53,23 @@ with contextlib.suppress(FileNotFoundError):
     # To get the weights of the features that indicate which feature is most important for ouput prediction
     features_weights = regressor.coef_
 
-    # Finding the most important feature using Backtracking
+    # Finding the most important feature using Backtracking Elimination
+    features_obj = features
+
+    # Need to add a column containing contant value which remain constant throughout
+    features_obj = np.append(np.ones((38, 1)), features_obj, axis=1)
+
+    # To train the model
+    # OLS - Optimal least square
+    features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
+
+    # To show the stats
+    features_OLS.summary()
+
+    # Removing the 4th column as it's % is more than 5%
+    features_obj = features_obj[:, [0, 1, 2]]
+
+    features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
+
+    # To show the stats
+    features_OLS.summary()
