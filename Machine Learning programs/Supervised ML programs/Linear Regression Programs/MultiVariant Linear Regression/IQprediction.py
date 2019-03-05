@@ -66,7 +66,7 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
     # To show the stats
     features_OLS.summary()
 
-    # Removing the 4th column as it's % is more than 5%
+    # Removing the 4th column as it's P% is more than 5%
     features_obj = features_obj[:, [0, 1, 2]]
 
     features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
