@@ -24,6 +24,7 @@ Finding the mapping function helps in getting the design pattern for the
 particular training sets and then it can be used to predict values according
 to those mapping functions.
 """
+# Single Variant Linear Regression
 
 # Importing pandas, numpy, matplotlib libraries
 import pandas as pd
