@@ -5,7 +5,7 @@
 # Importing the Data Analysis module
 import pandas as pd
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 # Importing contextlib module to handle exception silently
 import contextlib
@@ -96,5 +96,16 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
 
     # Visualizatin of the sauce analysis data
     """ """
-    #
+    # Analysis on the dishes prefered by urban, rural etc. peoples
     area_dish_anly = thanks_df[60][(thanks_df[2]=="Tofurkey") & (thanks_df[1]=="Yes")].value_counts()
+    final_areadish_anly = groupby_filter(thanks_df, 60, 2)
+
+    # Analyis of homemade sauce used by various income grps people
+    income_hmsauce_anly = final_sauce_anly.iloc[:, :][final_sauce_anly['Col_2'] == 'Homemade']
+
+    # Analysis of the activity people do on Black Friday sales
+    blkfr_work_anly = thanks_df[59][thanks_df[1] == "Yes"].value_counts()
+    blkfr_sales_anly = thanks_df[57][thanks_df[1] == "Yes"].value_counts()
+
+    # Analysing relation between prayer for thanksgiving and income grps
+    inc_thks_anly = groupby_filter(thanks_df, 63,51)
