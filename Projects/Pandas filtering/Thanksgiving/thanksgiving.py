@@ -57,7 +57,7 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
     columns_list = list(thanks_df.columns)
 
     # Replacing the missing values with the keyword Mising
-    thanks_df = thanks_df.replace([np.nan], ['Mising'])
+    thanks_df = thanks_df.replace([np.nan], ['mising'])
 
     # Renaming the columns with numerical values
     thanks_df.columns = [x for x in range(0, 65)]
@@ -79,12 +79,15 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
 
     salary_vis = analysis_fun(thanks_df, 63, 1)
 
-    regex = re.compile("\d+\W*")
+    thanks_df[63] = thanks_df[63].replace(['Prefer not to answer', 'mising'],['0','0'])
+
+    regex = re.compile("\d+\W*\d+")
+
     # A function to be passed in .apply() method for filtering out the salaries
     def filter_func(value):
         value = regex.findall(value)
-        if len(value) is not 0:
-            return sum(value)/(len(value))
+        value = [int(x.replace(",", "")) for x in value]
+        return sum(value)/(len(value)+0.1)
 
     # Using the apply method to filter the income column
     thanks_df[63] = thanks_df[63].apply(filter_func)
