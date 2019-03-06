@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 """ A program to analyze the thanksgiving 2015 dataset """
 
@@ -10,7 +11,7 @@ import numpy as np
 import contextlib
 
 # Importing regex module
-import re
+# import re
 
 
 # A function for analyzing the thanksgiver count on basis of various other info
@@ -29,6 +30,25 @@ def analysis_fun(df, col_1, yes_col):
     return visual
 
 
+# Function to analyse the most popular dish for thankgiving w.r.t state, salary etc.
+def groupby_filter(df, col_1, col_2):
+
+    data = df.iloc[:, [col_1, col_2]][df[1] == "Yes"]
+    data = data.sort_values([col_1])
+
+    # .groups returns a dictionary containing the grouped data
+    data_repl = data.groupby([col_1, col_2]).groups
+
+    # For fetching the keys(i.e the datas given in the row)
+    keys = list(data_repl.keys())
+
+    # values are the position where those keys exist/found
+    values = [len(x) for x in list(data_repl.values())]
+
+    final_anly = pd.DataFrame(keys, columns=['Col_1', 'Col_2'])
+    final_anly['Count'] = values
+    return final_anly
+
 with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, AssertionError)):
     # Loading the thanksgiving dataset
     thanks_df = pd.read_csv("thanksgiving.csv", encoding="Windows 1252")
@@ -46,17 +66,10 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
     thanksgiving_anly = thanks_df[1].value_counts()
 
     # Analysing the main dish for thanksgiving state wise
-    state_dish_anly = thanks_df.iloc[:, [64, 2]][thanks_df[1] == "Yes"]
-    state_dish_anly = state_dish_anly.sort_values([64])
-
-    dem = state_dish_anly.groupby([64, 2]).groups
-    keys = list(dem.keys())
-    values = [len(x) for x in list(dem.values())]
-    final_state_dish_anly = pd.DataFrame(keys, columns=['States', 'Dish'])
-    final_state_dish_anly['Count'] = values
+    final_statedish_anly = groupby_filter(thanks_df, 64, 2)
 
     # Analysing the main dish for thanksgiving income wise
-    income_dish_anly = thanks_df.iloc[:, [63, 2]][thanks_df[1] == "Yes"]
+    final_incomedish_anly = groupby_filter(thanks_df, 63, 2)
 
     # Analysing the salary range
     salary_anly = thanks_df[63].value_counts()
@@ -66,9 +79,9 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
 
     salary_vis = analysis_fun(thanks_df, 63, 1)
 
-    # To filter out the salary column
+    """ # To filter out the salary column
     # Regex pattern to filter out salary column
-    regex = re.compile("\$\d+\W*\d+")
+    regex = re.compile("\\$\d+\\W*\d+")
 
     # A function to be passed in .apply() method for filtering out the salaries
     def regex_fun(value):
@@ -76,4 +89,12 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
         return mod_value
 
     # Using the apply method to filter the income column
-    thanks_df[63] = thanks_df[63].apply(regex_fun)
+    thanks_df[63] = thanks_df[63].apply(regex_fun) """
+
+    # Analysis of sauces used for thanksgiving based on various income grps
+    final_sauce_anly = groupby_filter(thanks_df, 63, 8)
+
+    # Visualizatin of the sauce analysis data
+    """ """
+    #
+    area_dish_anly = thanks_df[60][(thanks_df[2]=="Tofurkey") & (thanks_df[1]=="Yes")].value_counts()

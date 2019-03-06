@@ -74,8 +74,8 @@ try:
     # Function call for sending to which date
     date_send(today_date.split('-'), to_date_field)
 
-    # To click serach ml research paper within defined time
-    search = driver.find_element_by_xpath('/html/body/main/content/div[2]/div[1]/div/form/section[3]/div[2]/div[2]/button')
+    # To find the search button and click it to get the journal list
+    search = driver.find_element_by_css_selector('body > main > div.content > div.columns.is-desktop > div.column.is-three-fifths-desktop > div > form > section:nth-child(4) > div.level > div.level-right > button')
     search.click()
 
     # Getting the page source and explicitly defining the parser to lxml for speed
