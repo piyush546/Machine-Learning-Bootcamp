@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import contextlib
 
 # Importing regex module
-# import re
+import re
 
 
 # A function for analyzing the thanksgiver count on basis of various other info
@@ -79,17 +79,15 @@ with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, Asse
 
     salary_vis = analysis_fun(thanks_df, 63, 1)
 
-    """ # To filter out the salary column
-    # Regex pattern to filter out salary column
-    regex = re.compile("\\$\d+\\W*\d+")
-
+    regex = re.compile("\d+\W*")
     # A function to be passed in .apply() method for filtering out the salaries
-    def regex_fun(value):
-        mod_value = regex.findall(value)
-        return mod_value
+    def filter_func(value):
+        value = regex.findall(value)
+        if len(value) is not 0:
+            return sum(value)/(len(value))
 
     # Using the apply method to filter the income column
-    thanks_df[63] = thanks_df[63].apply(regex_fun) """
+    thanks_df[63] = thanks_df[63].apply(filter_func)
 
     # Analysis of sauces used for thanksgiving based on various income grps
     final_sauce_anly = groupby_filter(thanks_df, 63, 8)

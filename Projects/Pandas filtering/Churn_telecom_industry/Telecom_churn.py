@@ -32,3 +32,4 @@ with contextlib.suppress((NameError, ValueError, TypeError)):
     code_churn_anly = pd.DataFrame(state_churn_anly['area code'].value_counts())
 
     code_churn_anly.columns = ['count']
+

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+""" A program to handle Nosql database locally and remotely """
 # NoSQL -for working with large sets of distributed data
 # Mongodb is a type of NoSQL and its format is similar to json
 # importing Mongodb for performimg nosql operations
@@ -51,8 +51,8 @@ def fetch_All():
                 continue
             else:
                 data_dict[k] = v
-        """response = requests.post(url, json=data_dict)
-        print(response) """
+        response = requests.post(url, json=data_dict)
+        print(response)
         print(var)
 
 
@@ -71,4 +71,3 @@ add_data(10, 'Harsh', 455)
 
 # to fetch all data
 fetch_All()
-""" ServerSelectionTimeoutError: localhost:27017: [WinError 10061] No connection could be made because the target machine actively refused it"""
