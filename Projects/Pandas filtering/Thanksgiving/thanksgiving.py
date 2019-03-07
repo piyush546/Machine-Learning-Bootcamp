@@ -5,7 +5,7 @@
 # Importing the required modules for data preprocessing and visualizing
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 # Importing re module for using it i filtering out the income column
 import re
@@ -14,7 +14,7 @@ import re
 from contextlib import suppress
 
 # Loading the datasets and starting the required preprocessing
-with suppress((FileNotFoundError)):
+with suppress((FileNotFoundError, TypeError, AttributeError, ValueError)):
     # Encoding of the dataset is in Windows 1252 so it should be specified while loading it
     datath_df = pd.read_csv("thanksgiving.csv", encoding="Windows 1252")
 
