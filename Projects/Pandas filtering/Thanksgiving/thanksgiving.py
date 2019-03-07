@@ -80,8 +80,7 @@ with suppress((FileNotFoundError)):
     sauces_inc_visual = sauce_inc.plot.bar()
 
     # Comparing the incomes of canned and homemade sauces
-
-    craneberry_compr = sauce_inc.iloc[[0,1]]
+    craneberry_compr = sauce_inc.iloc[[0, 1]]
 
     # Visualizing the incomes of various craneberry sauces
     craneberry_compr_visual = craneberry_compr.plot.pie(autopct="%1.1f%%")
