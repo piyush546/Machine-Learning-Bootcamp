@@ -18,9 +18,9 @@ img = [[1, 1, 0, 0, 0, 0, 1, 1],
        [1, 0, 1, 1, 1, 1, 0, 1],
        [1, 1, 0, 0, 0, 0, 1, 1]]
 
-plt.imshow(img, "gray")
+plt.imshow(np.array(img), "gray")
 
 
-img_file = Image.fromarray(img, "I")
+img_file = Image.fromarray(np.array(img), "I")
 img_file.save("Smile.png")
 img_file.show()

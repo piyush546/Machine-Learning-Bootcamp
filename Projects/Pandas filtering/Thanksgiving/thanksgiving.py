@@ -2,111 +2,111 @@
 # -*- coding: utf-8 -*-
 """ A program to analyze the thanksgiving 2015 dataset """
 
-# Importing the Data Analysis module
+# Importing the required modules for data preprocessing and visualizing
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Importing contextlib module to handle exception silently
-import contextlib
-
-# Importing regex module
+# Importing re module for using it i filtering out the income column
 import re
 
+# Importing suppress from contextlib module to handle exceptions
+from contextlib import suppress
 
-# A function for analyzing the thanksgiver count on basis of various other info
-def analysis_fun(df, col_1, yes_col):
-    # Analytics part
-    total_counts = df[col_1].value_counts()
+# Loading the datasets and starting the required preprocessing
+with suppress((FileNotFoundError)):
+    # Encoding of the dataset is in Windows 1252 so it should be specified while loading it
+    datath_df = pd.read_csv("thanksgiving.csv", encoding="Windows 1252")
 
-    yes_counts = df[col_1][df[yes_col] == "Yes"].value_counts()
+    # Fetching the columns name for further reference
+    columns_name = list(datath_df.columns)
 
-    final_df = pd.concat([total_counts, yes_counts], axis=1)
-    final_df.columns = ['Total', 'Thanksgiver']
+    # Initializing a code number for each column name
+    code_col = [x for x in range(0, 65)]
 
-    # Visualization part
-    visual = final_df.plot.bar(color=['SkyBlue', 'IndianRed'])
+    # Storing the column name with their codes for further reference
+    columns_ref = dict(zip(code_col, columns_name))
 
-    return visual
+    # Initializing the dataframe with the codes of the column
+    datath_df.columns = code_col
 
+    # Fetching the data that perform thanksgiving for further processing
+    datath_df = datath_df[datath_df[1] == "Yes"]
 
-# Function to analyse the most popular dish for thankgiving w.r.t state, salary etc.
-def groupby_filter(df, col_1, col_2):
+    # Filling out the empty values with 'Mising' keyword
+    datath_df = datath_df.replace(np.nan, 'Mising')
 
-    data = df.iloc[:, [col_1, col_2]][df[1] == "Yes"]
-    data = data.sort_values([col_1])
+    # Analysing for the state, area  and income based what is consumed in thankgiving dinner
+    state_based = datath_df.groupby(64)[2].value_counts().unstack().fillna(0)
 
-    # .groups returns a dictionary containing the grouped data
-    data_repl = data.groupby([col_1, col_2]).groups
+    income_based = datath_df.groupby(63)[2].value_counts().unstack().fillna(0)
 
-    # For fetching the keys(i.e the datas given in the row)
-    keys = list(data_repl.keys())
+    area_based = datath_df.groupby(60)[2].value_counts().unstack().fillna(0)
 
-    # values are the position where those keys exist/found
-    values = [len(x) for x in list(data_repl.values())]
+    # Analysis of the sauces prefered by each incomes group people
+    sauce_incgrp = datath_df.groupby(8)[63].value_counts().unstack().fillna(0)
 
-    final_anly = pd.DataFrame(keys, columns=['Col_1', 'Col_2'])
-    final_anly['Count'] = values
-    return final_anly
+    # Filtering the gender and income columns using .apply method
+    def gender_filter(value):
+        if value == "Male":
+            value = 'M'
+        elif value == "Female":
+            value = 'F'
+        else:
+            pass
+        return value
 
-with contextlib.suppress((FileNotFoundError, UnicodeDecodeError, NameError, AssertionError)):
-    # Loading the thanksgiving dataset
-    thanks_df = pd.read_csv("thanksgiving.csv", encoding="Windows 1252")
-
-    # Fetching the column names in a list
-    columns_list = list(thanks_df.columns)
-
-    # Replacing the missing values with the keyword Mising
-    thanks_df = thanks_df.replace([np.nan], ['mising'])
-
-    # Renaming the columns with numerical values
-    thanks_df.columns = [x for x in range(0, 65)]
-
-    # Analysing how much celebrate thanksgiving
-    thanksgiving_anly = thanks_df[1].value_counts()
-
-    # Analysing the main dish for thanksgiving state wise
-    final_statedish_anly = groupby_filter(thanks_df, 64, 2)
-
-    # Analysing the main dish for thanksgiving income wise
-    final_incomedish_anly = groupby_filter(thanks_df, 63, 2)
-
-    # Analysing the salary range
-    salary_anly = thanks_df[63].value_counts()
-
-    # Function call
-    state_vis = analysis_fun(thanks_df, 64, 1)
-
-    salary_vis = analysis_fun(thanks_df, 63, 1)
-
-    thanks_df[63] = thanks_df[63].replace(['Prefer not to answer', 'mising'],['0','0'])
+    datath_df[62] = datath_df[62].apply(gender_filter)
+    datath_df[63] = datath_df[63].replace(['Prefer not to answer', 'mising'],['0','0'])
 
     regex = re.compile("\d+\W*\d+")
 
     # A function to be passed in .apply() method for filtering out the salaries
-    def filter_func(value):
+    def income_filter(value):
         value = regex.findall(value)
         value = [int(x.replace(",", "")) for x in value]
         return sum(value)/(len(value)+0.1)
 
     # Using the apply method to filter the income column
-    thanks_df[63] = thanks_df[63].apply(filter_func)
+    datath_df[63] = datath_df[63].apply(income_filter)
 
-    # Analysis of sauces used for thanksgiving based on various income grps
-    final_sauce_anly = groupby_filter(thanks_df, 63, 8)
+    # Fetching the average incomes for each type sauces
 
-    # Visualizatin of the sauce analysis data
-    """ """
-    # Analysis on the dishes prefered by urban, rural etc. peoples
-    area_dish_anly = thanks_df[60][(thanks_df[2]=="Tofurkey") & (thanks_df[1]=="Yes")].value_counts()
-    final_areadish_anly = groupby_filter(thanks_df, 60, 2)
+    sauce_compr = datath_df.groupby(8)[63]
 
-    # Analyis of homemade sauce used by various income grps people
-    income_hmsauce_anly = final_sauce_anly.iloc[:, :][final_sauce_anly['Col_2'] == 'Homemade']
+    sauce_inc = sauce_compr.mean()
 
-    # Analysis of the activity people do on Black Friday sales
-    blkfr_work_anly = thanks_df[59][thanks_df[1] == "Yes"].value_counts()
-    blkfr_sales_anly = thanks_df[57][thanks_df[1] == "Yes"].value_counts()
+    # Visualizing the average income of the various sauces
+    sauces_inc_visual = sauce_inc.plot.bar()
 
-    # Analysing relation between prayer for thanksgiving and income grps
-    inc_thks_anly = groupby_filter(thanks_df, 63,51)
+    # Comparing the incomes of canned and homemade sauces
+
+    craneberry_compr = sauce_inc.iloc[[0,1]]
+
+    # Visualizing the incomes of various craneberry sauces
+    craneberry_compr_visual = craneberry_compr.plot.pie(autopct="%1.1f%%")
+
+    # Comparing the toufourkey eaten in Suburban and Rural areas
+    toufurkey_compr = area_based.iloc[[1, 2], [-3]]
+
+    # Visualizing the toufurkey eaten by suburban and rural people
+    toufurkey_compr.plot.bar(color=["green"])  # yes suburban eat more toufurkey than rural people
+
+    # Checking for a correlation between thankgiving prayer seeker and their income
+    prayer_inc = datath_df.groupby(51)[63].value_counts().unstack().fillna(0)
+
+    # Visualizing the relation between prayer seeker and their income
+    prayer_inc_visual = prayer_inc.plot.bar()
+
+    # Analyzing the Blackfriday sales activity
+    blackfri_sales = datath_df[57].value_counts()
+
+    """
+        Verifying a pattern:
+        People who have Turducken and Homemade cranberry sauce seem to have
+        high household incomes.
+        People who eat Canned cranberry sauce tend to have lower incomes,
+        but those who also have Roast Beef have the lowest incomes
+    """
+
+    pattern_income = datath_df.groupby([2, 8])[63].value_counts().unstack().fillna(0)
