@@ -32,7 +32,6 @@ with suppress((FileNotFoundError)):
 
     # Grouping on JobTitle and sorting it and displaying the data
     job_grp = Balitmore_df.groupby('JobTitle')['AnnualSalary'].value_counts()
-    job_grp = job_grp.reset_index()
     print(job_grp)
 
     # Finding employess for each JobRoles and Graphing it using pie chart
@@ -46,6 +45,4 @@ with suppress((FileNotFoundError)):
     agency_grp_req = agency_grp.iloc[:, :-1].sort_values('Agency')
 
     # Finding all missing Gross data in the Balitmore_df
-    Balitmore_df['GrossPay'] = Balitmore_df['GrossPay'][9].replace([np.nan], [0])
-    missing_gross = Balitmore_df[Balitmore_df['GrossPay'] == 0].index.tolist()
-
+    missing_gross = Balitmore_df[Balitmore_df['GrossPay'].isnull() == True].index.tolist()
