@@ -31,8 +31,8 @@ with suppress((FileNotFoundError, TypeError, ValueError)):
 
 
     """ Initializing an object for PolynomialFeatures class with a degree 3
-     which means the feature of the model it to be divided into 4 columns
-     and its values get raised to power 3 i.e y = x**3 + x**2 + x**1 + x**0 """
+     which means the feature of the model it to be divided into 3 columns
+     and its values get raised to power 2 i.e y =  x**2 + x**1 + x**0 """
     poly_obj = PolynomialFeatures(degree=2)
 
     # Splitting the training data and testing data
