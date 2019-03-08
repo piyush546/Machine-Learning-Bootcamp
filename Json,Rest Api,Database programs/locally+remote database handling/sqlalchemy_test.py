@@ -90,9 +90,9 @@ for var2 in empl:
 session.close()
 
 
+######################################################################
 
-
-"""" Alternative-
+""" Alternative-
 
 from sqlalcheny import create_engine
 
