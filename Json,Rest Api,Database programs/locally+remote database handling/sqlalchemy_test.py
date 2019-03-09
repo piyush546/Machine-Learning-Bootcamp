@@ -89,42 +89,17 @@ for var2 in empl:
     print(var2.empid, var2.first, var2.last, var2.pay)
 session.close()
 
+# To update salary in the database of employee having empid==2
+Session = sessionmaker(bind=engine)
+session = Session()
+emp_upd = session.query(Employee_details).filter(Employee_details.empid==2).update({'pay':100000})
+session.commit()
+session.close()
 
-######################################################################
+# To delete the data from database having empid == 2
+Session = sessionmaker(bind=engine)
+session = Session()
+emp_del = session.query(Employee_details).filter(Employee_details.empid==2).delete()
+session.commit()
+session.close()
 
-""" Alternative-
-
-from sqlalcheny import create_engine
-
-
-# Creating  an common interface to database from Sqlalchemy
-# sqlalchemy supports many dialects like mysql, sqlite etconn.
-# sqlite:/// - dialect+driver
-# employee.sqlite - filename
-engine = create_engine('sqlite:///employee.sqlite')
-
-# Connecting to a database
-conn = engine.connect()
-
-# Step 1
- conn.execute ("""CREATE TABLE employees(
-          id INTEGER,
-          first  TEXT,
-          last TEXT,
-          pay INTEGER
-         )""")
-
-# STEP 2
-conn.execute("INSERT INTO employees VALUES (01,'Sylvester', 'Fernandes', 50000)")
-conn.execute("INSERT INTO employees VALUES (02,'Yogendra', 'Singh', 70000)")
-conn.execute("INSERT INTO employees VALUES (03,'Rohit', 'Mishra', 30000)")
-conn.execute("INSERT INTO employees VALUES (04,'Kunal', 'Vaid', 30000)")
-conn.execute("INSERT INTO employees VALUES (05,'Devendra', 'Shekhawat', 30000)")
-
-#
-conn.execute("SELECT * FROM employees").fetchone()
-
-
-#
-conn.close()
-"""
