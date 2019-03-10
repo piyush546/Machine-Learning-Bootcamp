@@ -45,8 +45,8 @@ final_data = list(zip(ids,first_names,last_names,salary))
 
 
 
-
-
+# CRUD operation - Create, read, update, delete
+# Step-1
 # Creating a function for adding data to the table
 def add_data(c, var_0, var_1, var_2, var_3):
 
@@ -70,9 +70,38 @@ def add_data(c, var_0, var_1, var_2, var_3):
     # closing the sesssion
     session_c.close()
 
+# Step- 2
+# Function to read data from employee database
+def read_data():
+    # To view our data stored in the table
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    empl = session.query(Employee_details)
+    for var2 in empl:
+        print(var2.empid, var2.first, var2.last, var2.pay)
+    session.close()
+
+# Step-3
+# Function to update data in the employee database
+def update_data(row_value, value):
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    emp_upd = session.query(Employee_details).filter(Employee_details.empid == row_value).update(value)
+    session.commit()
+    session.close()
+
+# Step-4
+# Function to delete data in the employee database
+def delete_data(row_value):
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    emp_del = session.query(Employee_details).filter(Employee_details.empid == row_value).delete()
+    session.commit()
+    session.close()
 
 # Initializing the count to create different session for adding multiple data
 count = 0
+# Function Call to add data
 for var in final_data:
     # Function call for adding data
     add_data(count, var[0], var[1], var[2], var[3])
@@ -80,26 +109,15 @@ for var in final_data:
     # Increasing count after adding the data to the table
     count += 1
 
-
-# To view our data stored in the table
-Session = sessionmaker(bind=engine)
-session = Session()
-empl = session.query(Employee_details)
-for var2 in empl:
-    print(var2.empid, var2.first, var2.last, var2.pay)
-session.close()
+# Function call to read data
+read_data()
 
 # To update salary in the database of employee having empid==2
-Session = sessionmaker(bind=engine)
-session = Session()
-emp_upd = session.query(Employee_details).filter(Employee_details.empid==2).update({'pay':100000})
-session.commit()
-session.close()
+# 1.Initializing the column to be updated for that particular row with the new value.
+col_upd = {'pay':100000}
 
-# To delete the data from database having empid == 2
-Session = sessionmaker(bind=engine)
-session = Session()
-emp_del = session.query(Employee_details).filter(Employee_details.empid==2).delete()
-session.commit()
-session.close()
+# Function call to update data in the employee database
+update_data(2, col_upd)
 
+# Function call to delete the data from database having empid == 2
+delete_data(2)
