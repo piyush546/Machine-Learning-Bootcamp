@@ -20,7 +20,7 @@ with suppress((FileNotFoundError)):
     sum, mean, etc.
     2.Sorting the data and displaying to show who get the highest salary
     """
-    job_salary_grp = Balitmore_df.groupby('JobTitle')['AnnualSalary']
+    job_salary_grp = Balitmore_df.groupby('JobTitle')['AnnualSalary'].value_counts()
 
 
     job_salary_sum = job_salary_grp.sum()
@@ -31,11 +31,14 @@ with suppress((FileNotFoundError)):
     print("Maximum salary:", job_salary_mean.max(), "is earned by:", job_salary_mean.idxmax())
 
     # Grouping on JobTitle and sorting it and displaying the data
-    job_grp = Balitmore_df.groupby('JobTitle')['AnnualSalary'].value_counts()
-    print(job_grp)
+    job_grp = Balitmore_df['AnnualSalary'].value_counts()
+    job_grp = pd.DataFrame(list(job_grp))
+    print(job_grp.)
 
     # Finding employess for each JobRoles and Graphing it using pie chart
     job_counts_grp = Balitmore_df['JobTitle'].value_counts()
+    job_counts_grp = job_counts_grp.reset_index()
+    job_counts_grp.columns = ['job_title', 'count']
 
     job_counts_grp_visual = job_counts_grp.plot.pie(radius=10, autopct="%1.1f%%")
 
