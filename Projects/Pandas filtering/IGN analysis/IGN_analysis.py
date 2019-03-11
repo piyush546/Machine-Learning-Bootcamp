@@ -22,7 +22,6 @@ with suppress((FileNotFoundError)):
     # Finding the games for Xbox one platform and PlayStation 4
     allgames_platform = ign_df.groupby('platform')['score_phrase'].value_counts().unstack().fillna(0)
 
-    xboxps4_data = allgames_platform.loc[['Xbox One','PlayStation 4'],:]
-    """ xboxps4_data = xboxps4_data.reset_index()
-    xboxps4_data = pd.melt(xboxps4_data, id_vars=["platform"],
-                  var_name="Score", value_name="count").sort_values('platform') """
+    # To perfrom visualization by histogram
+    xbox_visual = ign_df['score'][ign_df['platform']=="Xbox One"].plot.hist()
+    ps4_visual = ign_df['score'][ign_df['platform']=="PlayStation 4"].plot.hist()
