@@ -109,3 +109,66 @@ with suppress((FileNotFoundError, TypeError, AttributeError, ValueError)):
     """
 
     pattern_income = datath_df.groupby([2, 8])[63].value_counts().unstack().fillna(0)
+"""
+import pandas as pd
+
+data = pd.read_csv("thanksgiving.csv", encoding="Latin-1")
+data.head()
+
+data["gender"] = data["What is your gender?"].apply(gender_code)
+data["gender"].value_counts(dropna=False)
+
+data["How much total combined money did all members of your HOUSEHOLD earn last year?"].value_counts(dropna=False)
+
+import numpy as np
+import math
+
+def clean_income(value):
+    if value == "$200,000 and up":
+        return 200000
+    elif value == "Prefer not to answer":
+        return np.nan
+    elif isinstance(value, float) and math.isnan(value):
+        return np.nan
+    value = value.replace(",", "").replace("$", "")
+    income_high, income_low = value.split(" to ")
+    return (int(income_high) + int(income_low)) / 2
+
+data["income"] = data["How much total combined money did all members of your HOUSEHOLD earn last year?"].apply(clean_income)
+data["income"].head()
+
+
+
+data["What type of cranberry saucedo you typically have?"].value_counts()
+
+homemade = data[data["What type of cranberry saucedo you typically have?"] == "Homemade"]
+canned = data[data["What type of cranberry saucedo you typically have?"] == "Canned"]
+
+print(homemade["income"].mean())
+print(canned["income"].mean())
+
+
+grouped = data.groupby("What type of cranberry saucedo you typically have?")
+grouped
+grouped.groups
+grouped.size()
+
+for name, group in grouped:
+    print(name)
+    print(group.shape)
+    print(type(group))
+
+grouped["income"]
+grouped["income"].size()
+
+
+grouped["income"].agg(np.mean)
+grouped.agg(np.mean)
+
+grouped = data.groupby(["What type of cranberry saucedo you typically have?", "What is typically the main dish at your Thanksgiving dinner?"])
+grouped.agg(np.mean)
+
+grouped = data.groupby("How would you describe where you live?")["What is typically the main dish at your Thanksgiving dinner?"]
+grouped.apply(lambda x:x.value_counts())
+
+"""
