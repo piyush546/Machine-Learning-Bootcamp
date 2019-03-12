@@ -26,8 +26,8 @@ with suppress(FileNotFoundError):
 
 
 # Defining a function for training models for various labels
-def model_train(obj, x, y, test_in):
-    obj.fit(x, y)
+def model_train(obj, x, *y, test_in):
+    obj.fit(x, *y)
     return obj.predict(test_in)
 
 
@@ -41,6 +41,10 @@ with suppress((NameError, TypeError, ValueError, NotFittedError)):
     # Training our model
     # Creating an object for LinearRegression class
     regressor = LinearRegression()
+
+    """ Bahubali 10th day collection
+     Bahu_coll = model_train(regressor, features, [label_1,label_2], 10)
+     ValueError: Found array with dim 3. Estimator expected <= 2. """
 
     # Bahubali 10th day collection
     Bahu_coll = model_train(regressor, features, label_1, 10)
