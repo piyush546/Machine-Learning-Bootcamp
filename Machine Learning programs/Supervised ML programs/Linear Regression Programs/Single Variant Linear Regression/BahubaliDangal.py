@@ -42,9 +42,31 @@ with suppress((NameError, TypeError, ValueError, NotFittedError)):
     # Creating an object for LinearRegression class
     regressor = LinearRegression()
 
-    """ Bahubali 10th day collection
+    """ A wrong approcah - For Multiple label
+     Bahubali 10th day collection
      Bahu_coll = model_train(regressor, features, [label_1,label_2], 10)
-     ValueError: Found array with dim 3. Estimator expected <= 2. """
+     ValueError: Found array with dim 3. Estimator expected <= 2.
+     """
+
+    """ A correct approach - For multiple label
+     import pandas as pd
+
+    dataset = pd.read_csv("Bahubali2_vs_Dangal.csv")
+
+    feature = dataset.iloc[:,0:1].values
+    labels = dataset.iloc[:,1:].values
+
+    from sklearn.linear_model import LinearRegression
+
+    box = LinearRegression()
+
+    box.fit(feature, labels)
+
+    box.predict(10)
+
+    import matplotlib.pyplot as plt
+    plt.plot(feature, box.predict(feature))
+    """
 
     # Bahubali 10th day collection
     Bahu_coll = model_train(regressor, features, label_1, 10)

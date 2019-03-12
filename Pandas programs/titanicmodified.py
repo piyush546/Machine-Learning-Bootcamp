@@ -17,3 +17,19 @@ df_mod = df_mod.fillna(df_mod.mean())
 
 # Filling child column with 1 where age is greater than 18
 df_mod['Child'][df_mod['Age'] > 18] = 1
+
+# to use .apply method on a dataframe
+# To create a dataframe where we have to fill 1 for age less than 18 and 0 for more than 18
+a = df_mod.loc[:, ['Age']]
+a['Child'] = 'mising'
+
+
+# A function to be passed in apply method for performing the above operation
+def filter_data(value):
+    if 0 <= value <= 18:
+        return 1
+    else:
+        return 0
+
+
+a['Child'] = a['Age'].apply(filter_data)

@@ -33,16 +33,3 @@ else:
 
     # Female survival frequency
     Female_survival_frequency = (titanic_df['Survived'])[titanic_df['Sex']=='female'].value_counts(normalize=True)
-
-    # to use .apply method on a dataframe
-    # To create a dataframe where we have to fill 1 for age less than 18 and 0 for more than 18
-    a = titanic_df.loc[:,['Age']]
-    a['Child'] = 'mising'
-    def filter_data(value):
-        if 0<= value <=18:
-            return 1
-        else:
-            return 0
-
-
-    a['Child'] = a['Age'].apply(filter_data)
