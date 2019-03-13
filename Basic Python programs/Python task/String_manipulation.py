@@ -24,6 +24,12 @@ try:
             pass
         else:
             sentence.remove(var)
+    # Variable to store the entered sentence after reading it from backward
+    sen_repl = " ".join(sentence)
+    sen_repl = sen_repl[::-1]
+
+    # To print the sentence after reading it from backward and the number of words in the sentence
+    print("sentence from backward:", sen_repl)
     print("No. of words in the sentence:", len(sentence))
 
 
