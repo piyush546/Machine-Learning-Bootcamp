@@ -56,6 +56,11 @@ with suppress((FileNotFoundError, TypeError, AttributeError, ValueError)):
             pass
         return value
 
+    """ def fil(value):
+        value = value.replace(",", "")
+        value = value.replace("$","")
+        return value
+    datath_df[63] = datath_df[63].apply(fil) """
     datath_df[62] = datath_df[62].apply(gender_filter)
     datath_df[63] = datath_df[63].replace(['Prefer not to answer', 'mising'],['0','0'])
 
