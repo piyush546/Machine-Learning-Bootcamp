@@ -8,7 +8,7 @@ import numpy as np
 # import matplotlib.pyplot as plt
 
 # Importing re module for using it i filtering out the income column
-import re
+# import re
 
 # Importing suppress from contextlib module to handle exceptions
 from contextlib import suppress
@@ -62,18 +62,29 @@ with suppress((FileNotFoundError, TypeError, AttributeError, ValueError)):
         return value
     datath_df[63] = datath_df[63].apply(fil) """
     datath_df[62] = datath_df[62].apply(gender_filter)
-    datath_df[63] = datath_df[63].replace(['Prefer not to answer', 'mising'],['0','0'])
+    datath_df[63] = datath_df[63].replace(np.nan, 'mising')
+    """datath_df[63] = datath_df[63].replace(['Prefer not to answer', 'mising'],['0','0'])
 
-    regex = re.compile("\d+\W*\d+")
+     regex = re.compile("\d+\W*\d+")
 
     # A function to be passed in .apply() method for filtering out the salaries
     def income_filter(value):
         value = regex.findall(value)
         value = [int(x.replace(",", "")) for x in value]
-        return sum(value)/(len(value)+0.1)
+        return sum(value)/(len(value)+0.1) """
+
+    def clean_income(value):
+        if value == "$200,000 and up":
+            return 200000
+        elif value == "Prefer not to answer" or value == 'Mising':
+            return np.nan
+        else:
+            value = value.replace(",", "").replace("$", "")
+            income= value.split(" to ")
+            return (int(income[0]) + int(income[-1])) / 2
 
     # Using the apply method to filter the income column
-    datath_df[63] = datath_df[63].apply(income_filter)
+    datath_df[63] = datath_df[63].apply(clean_income)
 
     # Fetching the average incomes for each type sauces
 
@@ -177,3 +188,17 @@ grouped = data.groupby("How would you describe where you live?")["What is typica
 grouped.apply(lambda x:x.value_counts())
 
 """
+
+""" a = datath_df[63].reset_index()
+
+a[63] = a[63].replace(np.nan, 'mising')
+def clean_income(value):
+    if value == "$200,000 and up":
+        return 200000
+    elif value == "Prefer not to answer" or value == 'mising':
+        return np.nan
+    else:
+        value = value.replace(",", "").replace("$", "")
+        income= value.split(" to ")
+        return (int(income[0]) + int(income[-1])) / 2
+a[63] = a[63].apply(clean_income) """
