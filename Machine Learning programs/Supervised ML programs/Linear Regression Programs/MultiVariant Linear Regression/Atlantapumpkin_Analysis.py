@@ -12,18 +12,19 @@ with suppress((FileNotFoundError)):
     pumpkin_df = pd.read_csv("atlanta_pumpkin.csv")
     col = list(pumpkin_df.columns)
     dataset = pumpkin_df.loc[:,[col[10],col[11],col[14]]]
-    dataset['Item Size'] = dataset['Item Size'].fillna(method='ffill')
+    pumpkin_df = pumpkin_df.fillna(method='ffill')
+    pumpkin_df = pumpkin_df.dropna(axis=1)
 
-    features = dataset.iloc[:,:-1].values
+    """ features = dataset.iloc[:,:-1].values
 
-    """d = list(set(dataset.iloc[:,-1].values))
+    d = list(set(dataset.iloc[:,-1].values))
     m = [x for x in range(0,6)]
     d_m = dict(zip(d,m))
     dataset.iloc[:,-1] = dataset.iloc[:,-1].replace(d_m)
-    labels = dataset.iloc[:,-1].values.reshape(-1,1) """
+    labels = dataset.iloc[:,-1].values.reshape(-1,1)
 
     regressor = LinearRegression()
-    regressor.fit(features, labels)
+    regressor.fit(features, labels) """
 
     """ d = pumpkin_df.loc[:,['Origin']].value_counts()
     d = d['Origin'].value_counts()
