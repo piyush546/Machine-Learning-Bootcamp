@@ -59,12 +59,14 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
     # Need to add a column containing contant value which remain constant throughout
     features_obj = np.append(np.ones((38, 1)), features_obj, axis=1)
 
-    # To train the model
+    """ # To train the model
     # OLS - Optimal least square
     features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
 
     # To show the stats
     features_OLS.summary()
+
+    # P-value is related to hypothesis testing in statistics. It help in predicting the significane of our results.
 
     # Removing the 4th column as it's P% is more than 5%
     features_obj = features_obj[:, [0, 1, 2]]
@@ -81,10 +83,28 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
 
 
     # To show the stats
-    features_OLS.summary()
+    features_OLS.summary() """
 
     """ After this the third column is also removed thus indicating that
     the brain size is the only important feature for predicting the IQ of a
     person. Thus results from both .coef_ method and Backward elimination methd
     is same.It is rarely possible that both the method gives different values
     """
+
+    # Alternative of above method using looping
+    # .pvalues give an array of the P%-values from the summary table
+
+    # loping through column size
+    for var in range(0,(features_obj.shape)[-1]):
+        features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
+        d = features_OLS.pvalues.max()
+        if len([x for x in features_OLS.pvalues if x>0.05]):
+
+            # .where gives the index of the value passed as parameter in the given array
+            a = np.where(features_OLS.pvalues == d)
+
+            # .delete delete the particular element from an array which index is passed as argument
+            features_obj = np.delete(features_obj, a, 1)
+        else:
+            break
+
