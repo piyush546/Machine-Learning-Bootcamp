@@ -95,10 +95,10 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
     # .pvalues give an array of the P%-values from the summary table
 
     # loping through column size
-    for var in range(0,(features_obj.shape)[-1]):
+    for var in range(0, (features_obj.shape)[-1]):
         features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
         d = features_OLS.pvalues.max()
-        if len([x for x in features_OLS.pvalues if x>0.05]):
+        if len([x for x in features_OLS.pvalues if x > 0.05]):
 
             # .where gives the index of the value passed as parameter in the given array
             a = np.where(features_OLS.pvalues == d)
@@ -107,4 +107,3 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
             features_obj = np.delete(features_obj, a, 1)
         else:
             break
-
