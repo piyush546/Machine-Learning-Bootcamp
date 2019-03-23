@@ -64,7 +64,7 @@ class Game_play():
 
         print("Starting number:", self.numbers[0])
         self.count = 1
-        while (self.loose < 2) or (self.win == self.size - 1) or (self.count == self.size):
+        while (self.loose < 2) or (self.win == self.size - 1) or (self.count == self.size-1):
 
             # Function calls
             self.response = self.players_choice()
