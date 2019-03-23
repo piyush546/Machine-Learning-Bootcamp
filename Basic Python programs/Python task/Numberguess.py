@@ -26,7 +26,7 @@ Make sure only H or L can
 be entered
 """
 
-# Importing random module to generate 10 random number
+# Importing random module to generate 'n' random number
 import random
 
 print("****************Welcome To Number Guess Game*************************")
