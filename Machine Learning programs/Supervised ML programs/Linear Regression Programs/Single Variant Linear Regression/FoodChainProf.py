@@ -32,7 +32,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # scikitlearn module as it contain all machine learning algorithms
-# Importing train_test_split for splitting the faetures and labels for training data and testing data
+# Importing train_test_split for splitting the features and labels for training data and testing data
 from sklearn.model_selection import train_test_split
 
 # Importing LinearRegression class for training our ML model
@@ -58,7 +58,7 @@ with contextlib.suppress(NameError):
     # Features - Population
     # Lables - Profit
     model_features = model_data.iloc[:, :-1].values
-    model_labels = model_data.iloc[:, -1].values
+    model_labels = model_data.iloc[:, -1].values.reshape(-1,1)
 
     # Splitting the collected data in training sets and testing sets
     # random_state parameter set to some numerical value to hold the single test result everytime else the prediction will be different each time the code is executed
@@ -73,6 +73,8 @@ with contextlib.suppress(NameError):
 
     # Testing the model
     model_test = regressor.predict(features_test)
+    # Training score
+    regressor.score(features_train, labels_train)
 
     # Visualizing our regresssion model
     plt.scatter(features_test, labels_test)
