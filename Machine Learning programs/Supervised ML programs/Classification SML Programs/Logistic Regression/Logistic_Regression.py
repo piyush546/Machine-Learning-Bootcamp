@@ -27,52 +27,58 @@ Build an optimum model, observe all the coefficients.
 # Importing the data processing module
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
-# Loading the affairs.csv datasets
-affairs_data = pd.read_csv("affairs.csv")
-
-# Splitting the datasets in features and labels
-features = affairs_data.iloc[:, :-1].values
-labels = affairs_data.iloc[:, -1].values
-
-
-# Preprocessing stage
-from sklearn.preprocessing import OneHotEncoder
-
-onehotencoder = OneHotEncoder(categorical_features = [6,7])
-features = onehotencoder.fit_transform(features).toarray()
-
-# splitting the training data and test data
+# Modules of scikit learn
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
-
-features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.30, random_state=0)
-
-# standard scaling
-from sklearn.preprocessing import StandardScaler
-
-sc = StandardScaler()
-
-features_train = sc.fit_transform(features_train)
-
-features_test = sc.transform(features_test)
-
-# Training the model
 from sklearn.linear_model import LogisticRegression
-classifier = LogisticRegression()
-classifier.fit(features_train, labels_train)
-
-# Testing the model
-labels_pred = classifier.predict(features_test)
-
-# Confusion matrix
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(labels_test, labels_pred)
 
-classifier.score(features_test, labels_test)
+# Module for exception handling
+import contextlib as clb
 
-# To predict the affair classification for given values
-values = np.array([3,25,3,1,4,16,4,2]).reshape(1,-1)
-values = onehotencoder.transform(values).toarray()
-values = sc.transform(values)
-classifier.predict(values)
+with clb.suppress((TypeError, ValueError, NameError)):
+    # Loading the affairs.csv datasets
+    affairs_data = pd.read_csv("affairs.csv")
+    
+    # Splitting the datasets in features and labels
+    features = affairs_data.iloc[:, :-1].values
+    labels = affairs_data.iloc[:, -1].values
+    
+    
+    # Preprocessing stage
+    onehotencoder = OneHotEncoder(categorical_features = [6,7])
+    features = onehotencoder.fit_transform(features).toarray()
+    
+    
+    # splitting the training data and test data
+    features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.30, random_state=0)
+    
+    # standard scaling
+    
+    
+    sc = StandardScaler()
+    
+    features_train = sc.fit_transform(features_train)
+    
+    features_test = sc.transform(features_test)
+    
+    # Training the model
+    
+    classifier = LogisticRegression()
+    classifier.fit(features_train, labels_train)
+    
+    # Testing the model
+    labels_pred = classifier.predict(features_test)
+    
+    # Confusion matrix
+    cm = confusion_matrix(labels_test, labels_pred)
+    
+    classifier.score(features_test, labels_test)
+    
+    # To predict the affair classification for given values
+    values = np.array([3,25,3,1,4,16,4,2]).reshape(1,-1)
+    values = onehotencoder.transform(values).toarray()
+    values = sc.transform(values)
+    classifier.predict(values)
