@@ -48,9 +48,15 @@ with clb.suppress((TypeError, ValueError, NameError)):
     
     
     # Preprocessing stage
-    onehotencoder = OneHotEncoder(categorical_features = [6,7])
-    features = onehotencoder.fit_transform(features).toarray()
+    # Initializing the sparse equals False creates an array of encoded value instead of sparse matrix
+    # if sparse is true then we have to use .toarray method to convert the sparse matrix into array
+    onehotencoder1 = OneHotEncoder(categorical_features = [6],sparse=False)
+    features = onehotencoder1.fit_transform(features)
+    features = features[:, 1:]
     
+    onehotencoder2 = OneHotEncoder(categorical_features = [11])
+    features = onehotencoder2.fit_transform(features).toarray()
+    features = features[:, 1:]
     
     # splitting the training data and test data
     features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.30, random_state=0)
@@ -78,7 +84,6 @@ with clb.suppress((TypeError, ValueError, NameError)):
     classifier.score(features_test, labels_test)
     
     # To predict the affair classification for given values
-    values = np.array([3,25,3,1,4,16,4,2]).reshape(1,-1)
-    values = onehotencoder.transform(values).toarray()
+    values = np.array([1,0,0,0,0,0,0,1,0,0,3,25,3,1,4,16]).reshape(1,-1)
     values = sc.transform(values)
     classifier.predict(values)
