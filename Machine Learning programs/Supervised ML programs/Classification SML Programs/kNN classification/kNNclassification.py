@@ -124,5 +124,18 @@ classifier.score(features_train, labels_train)
 
 # confusion matrix
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(labels_test, labels_pred) # labels_test
+cm = confusion_matrix(labels_test, labels_pred) # labels_test, labels_pred
 
+"""  confusion matrix -      predicted
+                            no        yes
+                           __________________
+                          !       !         !
+                     no   !     x ! o       !
+ actual                   !_______!________ !
+                          !       !         !
+                     yes  !     0'!  x'     !
+                          !_______!_________!
+                    
+total = x+x'+o+0'
+score = (x+x')/total
+"""
