@@ -128,7 +128,7 @@ cm = confusion_matrix(labels_test, labels_pred) # labels_test, labels_pred
 
 """  confusion matrix -      predicted
                             no        yes
-                           __________________
+                           _________________
                           !       !         !
                      no   !     x ! o       !
  actual                   !_______!________ !
