@@ -24,6 +24,10 @@ Optional:
 Build an optimum model, observe all the coefficients.
 """
 
+
+# SparseMatrix - A matrix whose most of the elements are zero
+# DenseMatrix - A matrix whose most of the elements are non-zero
+
 # Importing the data processing module
 import pandas as pd
 import numpy as np
