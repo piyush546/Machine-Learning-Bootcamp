@@ -64,12 +64,13 @@ Perform Classification on the given dataset to predict if the mushroom is edible
 Check accuracy of the model.
 
 """
-
+import time
+start = time.time()
 # kNN Algorithm - k nearest neighbour algorithm
 # Importing the preprocessing modules
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+# import numpy as np
+# import matplotlib.pyplot as plt
 
 
 # Loading the dataset
@@ -113,19 +114,25 @@ from sklearn.model_selection import train_test_split
 features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.2, random_state=0)
 
 # training phase
+#from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-classifier = KNeighborsClassifier(n_neighbors = 5, p = 1)
+#log_classifier = LogisticRegression()
+#log_classifier.fit(features_train, labels_train)
+classifier = KNeighborsClassifier(n_neighbors = 5, p = 2)
 classifier.fit(features_train, labels_train)
 
 # Testing phase
 labels_pred = classifier.predict(features_test)
+
+#labels_pred2 = log_classifier.predict(features_test)
 classifier.score(features_test, labels_test)
 classifier.score(features_train, labels_train)
 
 # confusion matrix
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(labels_test, labels_pred) # labels_test, labels_pred
-
+cm = confusion_matrix(labels_test, labels_pred)
+#cm2 = confusion_matrix(labels_test, labels_pred2) # labels_test, labels_pred
+print(time.time() - start)
 """  confusion matrix -      predicted
                             no        yes
                            _________________
