@@ -29,6 +29,7 @@ try:
     plt.hist(arr,normed=True,color='black',bins=7)
     plt.xlim((min(arr), max(arr)))
     
+    # For the Gaussian Curve
     x = np.linspace(min(arr), max(arr), 100)
     plt.plot(x, mlab.normpdf(x, mean, sigma),color="red")
     plt.show()
