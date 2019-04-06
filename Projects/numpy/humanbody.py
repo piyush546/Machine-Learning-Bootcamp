@@ -109,6 +109,3 @@ def histograms_plot():
     return
 histograms_plot() 
 """
-
-
-
