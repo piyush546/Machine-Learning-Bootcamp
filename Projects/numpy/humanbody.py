@@ -26,7 +26,7 @@ try:
     
     # To Plot a histogram and a Gaussian Curve To visualize the Normal Distribution
     plt.figure(1)
-    plt.hist(arr,normed=True,color='black')
+    plt.hist(arr,normed=True,color='black',bins=7)
     plt.xlim((min(arr), max(arr)))
     
     x = np.linspace(min(arr), max(arr), 100)
@@ -45,9 +45,6 @@ try:
     else
     not
     """
-
-except ModuleNotFoundError as e:
-    print(e)
 except RuntimeError as e:
     print(e)
 except ValueError as e:
