@@ -20,6 +20,7 @@ try:
     prof_data['salary'] = prof_data['salary'].fillna(np.mean(prof_data['salary']))
     max_salary = max(prof_data['salary'])
     min_salary = min(prof_data['salary'])
+
     
     """ Alternative - 
     1.prof_data = data[data['rank']=='Prof']
@@ -34,10 +35,26 @@ try:
     min_salary = np.min(prof_data['salary'])"""
     
     # 3. Missing Salaries - should be mean of the matching salaries of those whose service is the same
-    data['salary'] = data.groupby('service')['salary'].apply(lambda x: x.fillna(x.mean()))
+    """data['salary'] = data.groupby('discipline')['salary'].apply(lambda x: x.fillna(x.mean()))"""
+    
+    # First Finding the mean of the salries according to the different discipline 
+    a = data['salary'][data['discipline'] == 'A'].mean()
+    b = data['salary'][data['discipline'] == 'B'].mean()
+    
+    # Filling the mean salaries for the different categories of discipline
+    data['salary'][data['discipline'] == 'A'] = data['salary'].fillna(a)
+    data['salary'][data['discipline'] == 'B'] = data['salary'].fillna(b)
     
     # 4. Missing phd - should be mean of the matching service 
-    data['phd'] = data.groupby('service')['phd'].apply(lambda x: x.fillna(x.mean()))
+    """data['phd'] = data.groupby('discipline')['phd'].apply(lambda x: x.fillna(x.mean()))"""
+    
+    # First Finding the mean of the phd according to the different discipline 
+    a1 = data['phd'][data['discipline'] == 'A'].mean()
+    b1 = data['phd'][data['discipline'] == 'B'].mean()
+    
+    # Filling the mean phd by rounding its value for the different categories of discipline
+    data['phd'][data['discipline'] == 'A'] = data['phd'].fillna(round(a1))
+    data['phd'][data['discipline'] == 'B'] = data['phd'].fillna(round(b1))
     
     # 5. How many are Male Staff and How many are Female Staff. Show both in numbers and Graphically using Pie Chart.  Show both numbers and in percentage
     data_gender = data['sex'].value_counts().reset_index()
@@ -50,6 +67,7 @@ try:
     data_gender_ref['Female'] = [data_gender['sex'][1]]
     
     vis1 = plt.pie([data_gender_ref['Male'], data_gender_ref['Female']], explode=[0, 0], labels=['male','female'], autopct="%1.1f%%")
+    plt.axis('equal')
     plt.show(vis1)
     
     # Function to show the actual values in pie chart
@@ -57,6 +75,7 @@ try:
         a  = np.round(val/100.*(np.array([39,39])).sum(), 0)
         return a
     vis2 = plt.pie([data_gender_ref['Male'], data_gender_ref['Female']], explode=[0, 0], labels=['male','female'], autopct=absolute_value)
+    plt.axis('equal')
     plt.show(vis2)
     
     # 6. How many are Prof, AssocProf and AsstProf. Show both in numbers adn Graphically using a Pie Chart
@@ -67,11 +86,13 @@ try:
     data_rank_ref['AsscProf'] = [data_rank['rank'][2]]
     
     vis3 =  plt.pie([data_rank_ref['Prof'], data_rank_ref['AsstProf'],data_rank_ref['AsscProf'] ], explode=[0, 0,0], labels=['Prof','AsstProf', 'AsscProf'], autopct="%1.1f%%")
+    plt.axis('equal')
     plt.show(vis3)
     def absolute_value(val):
         a  = np.round(val/100.*(np.array([46,19,13])).sum(), 0)
         return a
     vis4 = plt.pie([data_rank_ref['Prof'], data_rank_ref['AsstProf'],data_rank_ref['AsscProf'] ], explode=[0, 0,0], labels=['Prof','AsstProf', 'AsscProf'], autopct=absolute_value)
+    plt.axis('equal')
     plt.show(vis4)
     
     # 7. Who are the senior and junior most employees in the organization.
