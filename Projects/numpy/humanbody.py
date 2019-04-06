@@ -54,9 +54,6 @@ except ValueError as e:
     print(e)
 except TypeError as e:
     print(e)
-
-
-
 """ 
 
 
@@ -84,12 +81,12 @@ sigma = np.sqrt(variance)
 x = np.linspace(min(arr), max(arr), 100)
 plt.plot(x, mlab.mesh(x, mean, sigma))
 
-plt.show() """
+plt.show() 
 
 def histograms_plot():
-    """
+    
     histograms plot
-    """
+    
     # ??????
     mu, sigma = 100, 15
     x = mu + sigma * np.random.randn(10000)
@@ -111,4 +108,7 @@ def histograms_plot():
     plt.show()
     return
 histograms_plot() 
+"""
+
+
 
