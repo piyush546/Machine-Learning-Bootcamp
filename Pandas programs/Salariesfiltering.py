@@ -20,7 +20,8 @@ try:
     prof_data['salary'] = prof_data['salary'].fillna(np.mean(prof_data['salary']))
     max_salary = max(prof_data['salary'])
     min_salary = min(prof_data['salary'])
-
+    
+    
     
     """ Alternative - 
     1.prof_data = data[data['rank']=='Prof']
@@ -33,28 +34,35 @@ try:
     salary_data = salary_data[~np.isnan(salary_data)]
     max_salary = np.max(salary_data)
     min_salary = np.min(prof_data['salary'])"""
+
+    """
+    Visit this site sites to know about thw working of the tranfrom
     
+    https://stackoverflow.com/questions/19966018/pandas-filling-missing-values-by-mean-in-each-group?rq=1
+    
+     https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html
+    
+    """
     # 3. Missing Salaries - should be mean of the matching salaries of those whose service is the same
-    """data['salary'] = data.groupby('discipline')['salary'].apply(lambda x: x.fillna(x.mean()))"""
-    
-    # First Finding the mean of the salries according to the different discipline 
-    a = data['salary'][data['discipline'] == 'A'].mean()
-    b = data['salary'][data['discipline'] == 'B'].mean()
-    
-    # Filling the mean salaries for the different categories of discipline
-    data['salary'][data['discipline'] == 'A'] = data['salary'].fillna(a)
-    data['salary'][data['discipline'] == 'B'] = data['salary'].fillna(b)
-    
     # 4. Missing phd - should be mean of the matching service 
-    """data['phd'] = data.groupby('discipline')['phd'].apply(lambda x: x.fillna(x.mean()))"""
     
-    # First Finding the mean of the phd according to the different discipline 
-    a1 = data['phd'][data['discipline'] == 'A'].mean()
-    b1 = data['phd'][data['discipline'] == 'B'].mean()
+    # Grouping the salary and phd according to the services group
+    a = data.groupby('service')['salary']
+    b = data.groupby('service')['phd']
     
-    # Filling the mean phd by rounding its value for the different categories of discipline
-    data['phd'][data['discipline'] == 'A'] = data['phd'].fillna(round(a1))
-    data['phd'][data['discipline'] == 'B'] = data['phd'].fillna(round(b1))
+    # Now printing the data a and b for more visualization of groupby objects
+    print("Description of salary grouping:",a)
+    print("Description of phd grouping:",b)
+    
+    # using tranform method and fiilna as well as mean
+    """ transform will apply the fillna and mean on the column that has 
+    been specified at the rightmost of the groupby like ['salary'] and ['phd'] """
+    
+    """ x and y will iterate over each row and the result will be applied to the 
+    ['salary'] and ['phd'] """
+    data['salary'] = a.transform(lambda x: x.fillna(x.mean()))
+    data['phd'] = b.transform(lambda y:y.fillna(y.mean()))     
+
     
     # 5. How many are Male Staff and How many are Female Staff. Show both in numbers and Graphically using Pie Chart.  Show both numbers and in percentage
     data_gender = data['sex'].value_counts().reset_index()
@@ -112,3 +120,30 @@ except TypeError as e:
     print(e)
 except AttributeError as e:
     print(e)
+
+"""data['salary'] = data.groupby('discipline')['salary'].apply(lambda x: x.fillna(x.mean()))
+
+a = data.groupby('service')['salary','phd']
+
+print(a.describe())
+
+data[['salary','phd']] = a.transform(lambda x:x.fillna(x.mean()))
+
+First Finding the mean of the salries according to the different services
+a = data['salary'][data['discipline'] == 'A'].mean()
+b = data['salary'][data['discipline'] == 'B'].mean()
+
+# Filling the mean salaries for the different categories of discipline
+data['salary'][data['discipline'] == 'A'] = data['salary'].fillna(a)
+data['salary'][data['discipline'] == 'B'] = data['salary'].fillna(b)
+
+# 4. Missing phd - should be mean of the matching service 
+data['phd'] = data.groupby('discipline')['phd'].apply(lambda x: x.fillna(x.mean()))
+
+# First Finding the mean of the phd according to the different discipline 
+a1 = data['phd'][data['discipline'] == 'A'].mean()
+b1 = data['phd'][data['discipline'] == 'B'].mean()
+
+# Filling the mean phd by rounding its value for the different categories of discipline
+data['phd'][data['discipline'] == 'A'] = data['phd'].fillna(round(a1))
+data['phd'][data['discipline'] == 'B'] = data['phd'].fillna(round(b1))"""
