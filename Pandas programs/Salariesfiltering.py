@@ -51,8 +51,8 @@ try:
     b = data.groupby('service')['phd']
     
     # Now printing the data a and b for more visualization of groupby objects
-    print("Description of salary grouping:",a)
-    print("Description of phd grouping:",b)
+    print("Description of salary grouping:",a.describe())
+    print("Description of phd grouping:",b.describe())
     
     # using tranform method and fiilna as well as mean
     """ transform will apply the fillna and mean on the column that has 
