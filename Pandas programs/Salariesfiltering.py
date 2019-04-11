@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Data Preeprocessing modules
+# applymap is a method that apply fuinction to dataframe elementwise
+# Data Preprocessing modules
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
