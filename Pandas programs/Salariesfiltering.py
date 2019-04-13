@@ -41,8 +41,8 @@ try:
     
     https://stackoverflow.com/questions/19966018/pandas-filling-missing-values-by-mean-in-each-group?rq=1
     
-     https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html
-    
+    https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html
+
     """
     # 3. Missing Salaries - should be mean of the matching salaries of those whose service is the same
     # 4. Missing phd - should be mean of the matching service 
@@ -50,6 +50,7 @@ try:
     # Grouping the salary and phd according to the services group
     a = data.groupby('service')['salary']
     b = data.groupby('service')['phd']
+    
     
     # Now printing the data a and b for more visualization of groupby objects
     print("Description of salary grouping:",a.describe())
@@ -61,9 +62,10 @@ try:
     
     """ x and y will iterate over each row and the result will be applied to the 
     ['salary'] and ['phd'] """
+    
     data['salary'] = a.transform(lambda x: x.fillna(x.mean()))
     data['phd'] = b.transform(lambda y:y.fillna(y.mean()))     
-
+    
     
     # 5. How many are Male Staff and How many are Female Staff. Show both in numbers and Graphically using Pie Chart.  Show both numbers and in percentage
     data_gender = data['sex'].value_counts().reset_index()
@@ -121,6 +123,8 @@ except TypeError as e:
     print(e)
 except AttributeError as e:
     print(e)
+    
+    
 
 """data['salary'] = data.groupby('discipline')['salary'].apply(lambda x: x.fillna(x.mean()))
 

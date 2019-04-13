@@ -58,9 +58,12 @@ with suppress((FileNotFoundError, TypeError, ValueError)):
     ploy_result = regressor.predict(poly_obj.fit_transform(5))
 
     # To visualize the Best fit line
-    features_grid = np.arange(min(features), max(features), 0.1).reshape(-1, 1)
+    features_grid = np.arange(min(features), max(features), 0.01).reshape(-1, 1)
     plt.scatter(features_test, labels_test)
     plt.plot(features_grid, regressor.predict(poly_obj.fit_transform(features_grid)))
+    plt.title('Fish age and Height relationship')
+    plt.xlabel('age')
+    plt.ylabel('height')
 
     # Predicting the model training and testing score
     ploy_model_train_score = regressor.score(poly_obj.fit_transform(features_train), labels_train)
