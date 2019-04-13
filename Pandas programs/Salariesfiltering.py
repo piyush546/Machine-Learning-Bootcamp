@@ -110,7 +110,9 @@ try:
     data_service = data.sort_values(['service'])
     
     # 8. Draw a histogram of the salaries divided into bin starting from 50K and increment of 15K
-    plt.hist(data['salary'], bins=range(50000, 190000, 15000), facecolor='g')
+    """"a = data.groupby(pd.cut(data['salary'], bins=[x for x in range(50000, 210000, 15000)])).salary.count()
+    a.plot('bar')"""
+    plt.hist(data['salary'],bins=[x for x in range(50000, 210000, 15000)],facecolor='g')
     plt.xlabel('Salary')
     plt.ylabel('Frequency')
     plt.title('Salary distribution')
