@@ -73,7 +73,6 @@ predicts """
 
 """ Importing time module to check the exceution time of both KNN and Logistic 
 Regression on this code challenge """
-
 import time
 start = time.time()
 
@@ -93,9 +92,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 
 # Importing the contextlib for exception handling
-import contextlib.suppress as supp
+import contextlib
 
-with supp((AttributeError, TypeError)):
+with contextlib.suppress((AttributeError, TypeError)):
     # Loading the dataset
     mushroom_data = pd.read_csv("mushrooms.csv")
     
@@ -106,7 +105,8 @@ with supp((AttributeError, TypeError)):
     features = mushroom_data.iloc[:, [22,21,5]].values
     labels = mushroom_data.iloc[:, 0].values
     
-    # Preprocessing stage - applying Label Encoding and Onehot Encoding on categorical features
+    # Preprocessing stage - applying Label Encoding and Onehot Encoding on 
+    # categorical features and avoiding dummy variable trap
     labelencoder1 = LabelEncoder()
     features[:, 0] = labelencoder1.fit_transform(features[:, 0])
     
