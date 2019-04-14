@@ -64,8 +64,20 @@ Perform Classification on the given dataset to predict if the mushroom is edible
 Check accuracy of the model.
 
 """
+
+
+""" KNN is a type of Classification Supervised ML Algo. It predict as per the 
+according the surrounding data points where no. of data points is referred by
+k. It is lazy execution meaning that at the time of execution, it fits and 
+predicts """
+
+""" Importing time module to check the exceution time of both KNN and Logistic 
+Regression on this code challenge """
+
 import time
 start = time.time()
+
+
 # kNN Algorithm - k nearest neighbour algorithm
 # Importing the preprocessing modules
 import pandas as pd
@@ -73,66 +85,80 @@ import pandas as pd
 # import matplotlib.pyplot as plt
 
 
-# Loading the dataset
-mushroom_data = pd.read_csv("mushrooms.csv")
-
-mushroom_data['class'] = mushroom_data['class'].replace(['p','e'],[0,1])
-
-# Splitting the features and labels
-features = mushroom_data.iloc[:, [22,21,5]].values
-labels = mushroom_data.iloc[:, 0].values
-
-# Preprocessing stage
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-labelencoder1 = LabelEncoder()
-features[:, 0] = labelencoder1.fit_transform(features[:, 0])
-
-labelencoder2 = LabelEncoder()
-features[:, 1] = labelencoder1.fit_transform(features[:, 1])
-
-labelencoder3 = LabelEncoder()
-features[:, 2] = labelencoder1.fit_transform(features[:, 2])
-
-onehotencoder1 = OneHotEncoder(categorical_features= [0], sparse= False)
-features = onehotencoder1.fit_transform(features)
-features = features[:, 1:]
-
-onehotencoder2 = OneHotEncoder(categorical_features= [6], sparse= False)
-features = onehotencoder2.fit_transform(features)
-features = features[:, 1:]
-
-
-onehotencoder3 = OneHotEncoder(categorical_features= [11], sparse= False)
-features = onehotencoder3.fit_transform(features)
-features = features[:, 1:]
-
-"""labelencoder = LabelEncoder()
-labels = labelencoder.fit_transform(labels)"""
-
-# Splitting the training and testing data
+# Sklearn modules
 from sklearn.model_selection import train_test_split
-features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.2, random_state=0)
-
-# training phase
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 #from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-#log_classifier = LogisticRegression()
-#log_classifier.fit(features_train, labels_train)
-classifier = KNeighborsClassifier(n_neighbors = 5, p = 2)
-classifier.fit(features_train, labels_train)
-
-# Testing phase
-labels_pred = classifier.predict(features_test)
-
-#labels_pred2 = log_classifier.predict(features_test)
-classifier.score(features_test, labels_test)
-classifier.score(features_train, labels_train)
-
-# confusion matrix
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(labels_test, labels_pred)
-#cm2 = confusion_matrix(labels_test, labels_pred2) # labels_test, labels_pred
+
+# Importing the contextlib for exception handling
+import contextlib.suppress as supp
+
+with supp((AttributeError, TypeError)):
+    # Loading the dataset
+    mushroom_data = pd.read_csv("mushrooms.csv")
+    
+    # Replacing the label data with 0 and 1 means Binary classification
+    mushroom_data['class'] = mushroom_data['class'].replace(['p','e'],[0,1])
+    
+    # Splitting the features and labels
+    features = mushroom_data.iloc[:, [22,21,5]].values
+    labels = mushroom_data.iloc[:, 0].values
+    
+    # Preprocessing stage - applying Label Encoding and Onehot Encoding on categorical features
+    labelencoder1 = LabelEncoder()
+    features[:, 0] = labelencoder1.fit_transform(features[:, 0])
+    
+    labelencoder2 = LabelEncoder()
+    features[:, 1] = labelencoder1.fit_transform(features[:, 1])
+    
+    labelencoder3 = LabelEncoder()
+    features[:, 2] = labelencoder1.fit_transform(features[:, 2])
+    
+    onehotencoder1 = OneHotEncoder(categorical_features= [0], sparse= False)
+    features = onehotencoder1.fit_transform(features)
+    features = features[:, 1:]
+    
+    onehotencoder2 = OneHotEncoder(categorical_features= [6], sparse= False)
+    features = onehotencoder2.fit_transform(features)
+    features = features[:, 1:]
+    
+    
+    onehotencoder3 = OneHotEncoder(categorical_features= [11], sparse= False)
+    features = onehotencoder3.fit_transform(features)
+    features = features[:, 1:]
+    
+    """labelencoder = LabelEncoder()
+    labels = labelencoder.fit_transform(labels)"""
+    
+    # Splitting the training and testing data
+    
+    features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.2, random_state=0)
+    
+    # training phase
+    #log_classifier = LogisticRegression()
+    #log_classifier.fit(features_train, labels_train)
+    classifier = KNeighborsClassifier(n_neighbors = 5, p = 2)
+    classifier.fit(features_train, labels_train)
+    
+    # Testing phase
+    labels_pred = classifier.predict(features_test)
+    
+    #labels_pred2 = log_classifier.predict(features_test)
+    print("Train score:", classifier.score(features_test, labels_test))
+    print("Test Score:", classifier.score(features_train, labels_train))
+    
+    # confusion matrix
+    cm = confusion_matrix(labels_test, labels_pred)
+    print("confusion matrix:", cm)
+
+    #cm2 = confusion_matrix(labels_test, labels_pred2) # labels_test, labels_pred
+
+# Checking the Exceution time
 print(time.time() - start)
+
+
 """  confusion matrix -      predicted
                             no        yes
                            _________________

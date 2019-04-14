@@ -25,13 +25,26 @@ Build an optimum model, observe all the coefficients.
 """
 
 
+
+""" Classification is a type Supervised ML where the ouputs are not a 
+continuous values rather they are discrete values like 0 and 1.
+Bascially we try to classify whether according to feature
+does this lie in this class or not.For e.g with the scores and overs we predict 
+whether the team will win the match or not"""
+
+""" Classification have many methods like Logistic Regression , KNN etc."""
+
+""" Logistic Regression is a classification algorithm based on logit function
+(odd logs). Ti might produce a less accurate answer in compare to KNN algo but
+it is time efficient in compare to KNN """
+
 # SparseMatrix - A matrix whose most of the elements are zero
 # DenseMatrix - A matrix whose most of the elements are non-zero
 
 # Importing the data processing module
 import pandas as pd
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 # Modules of scikit learn
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -66,8 +79,6 @@ with clb.suppress((TypeError, ValueError, NameError)):
     features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.30, random_state=0)
     
     # standard scaling
-    
-    
     sc = StandardScaler()
     
     features_train = sc.fit_transform(features_train)
@@ -82,12 +93,21 @@ with clb.suppress((TypeError, ValueError, NameError)):
     # Testing the model
     labels_pred = classifier.predict(features_test)
     
+    """
+    # Coefficient weightage
+    classifier.coef_
+    
+    # Intercept
+    classifier.intercept_
+    """
     # Confusion matrix
     cm = confusion_matrix(labels_test, labels_pred)
     
-    classifier.score(features_test, labels_test)
+    print("Training score:", classifier.score(features_train, labels_train))
+    print("Testing score:", classifier.score(features_test, labels_test))
     
     # To predict the affair classification for given values
     values = np.array([1,0,0,0,0,0,0,1,0,0,3,25,3,1,4,16]).reshape(1,-1)
     values = sc.transform(values)
-    classifier.predict(values)
+    print("Result:", classifier.predict(values))
+    
