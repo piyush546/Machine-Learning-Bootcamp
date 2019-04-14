@@ -7,6 +7,7 @@ provided """
 # Importing the data analytics modules
 import pandas as pd
 import numpy as np
+# import matplotlib.pyplot as plt
 
 # Importing the contextlib module
 import contextlib
@@ -27,6 +28,20 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
 
     # Splitting the features and labels data
     features = iq_df.iloc[:, 1:].values.reshape(-1,3)
+    
+    """ 
+    # trained ,tested and visualized on all features seperately
+    
+    features = iq_df.iloc[:, 1].values.reshape(-1,1)
+    
+    features = iq_df.iloc[:, 2].values.reshape(-1,1)
+    
+    features = iq_df.iloc[:, 3].values.reshape(-1,1)
+    
+    plt.scatter(features_test, labels_test)
+    plt.plot(features_train, regressor.predict(features_train))
+    plt.show()
+    """
 
     labels = iq_df.iloc[:, 0].values.reshape(-1, 1)
 
@@ -52,6 +67,10 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
 
     # To get the weights of the features that indicate which feature is most important for ouput prediction
     features_weights = regressor.coef_
+    
+    
+    """ # To find the intercept value
+    regressor.intercept_ """
 
     # Finding the most important feature using Backtracking Elimination
     features_obj = features
@@ -83,7 +102,14 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
 
 
     # To show the stats
-    features_OLS.summary() """
+    features_OLS.summary()
+    
+    
+    features_obj = features_obj[:,[0]]
+    
+    features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
+    
+    features_OLS.summary()"""
 
     """ After this the third column is also removed thus indicating that
     the brain size is the only important feature for predicting the IQ of a
@@ -107,3 +133,12 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
             features_obj = np.delete(features_obj, a, 1)
         else:
             break
+    
+    """# Visualization of the most important feature
+    features_train_1, features_test_2, labels_train_1, labels_test_2 = train_test_split(features_obj, labels, test_size=0.2, random_state=15)
+    obj = regressor.fit(features_train_1,labels_train_1)
+    
+    #features_grid = np.arange(min(features_obj), max(features_obj),0.01).reshape(-1,1)
+    plt.scatter(features_test_2, labels_test_2)
+    plt.plot(features_train_1, obj.predict(features_train_1))
+    plt.show()"""

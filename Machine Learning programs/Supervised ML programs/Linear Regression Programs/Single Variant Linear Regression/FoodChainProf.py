@@ -73,18 +73,39 @@ with contextlib.suppress(NameError):
 
     # Testing the model
     model_test = regressor.predict(features_test)
-    # Training score
-    regressor.score(features_train, labels_train)
-
-    # Visualizing our regresssion model
-    plt.scatter(features_test, labels_test)
-    plt.plot(features_train, regressor.predict(features_train))
+    
+    
+    # Visualizing the training results of our model
+    #features_grid = np.arange(min(features_train), max(features_train), 0.1).reshape(-1, 1)
+    plt.scatter(features_train, labels_train,c='r')
+    plt.plot(features_train, regressor.predict(features_train), c='g')
+    plt.title('Population density relationship with profit(Train set)')
     plt.xlabel('Population')
     plt.ylabel('Profit')
+    plt.grid(True)
+    plt.show()
+    
+    
+    # Visualizing test sets results of our model
+    plt.scatter(features_test, labels_test,c='b')
+    plt.plot(features_train, regressor.predict(features_train), c='g')
+    plt.title('Population density relationship with profit(Test set)')
+    plt.xlabel('Population')
+    plt.ylabel('Profit')
+    plt.grid(True)
     plt.show()
 
     # To predict profit In Jaipur with population 3.073 million
     print("Profit in Jaipur:", regressor.predict(3.073))
 
     # To check the accuracy of our model
-    print("Accuracy of our model:", regressor.score(features_test, labels_test))
+    # Training score and Testing score
+    print("Training score:",regressor.score(features_train, labels_train))
+    print("Testing Score: ",regressor.score(features_test, labels_test))
+    
+    # Checking whether model is underfitting or overfitting
+    if regressor.score(features_train, labels_train) > regressor.score(features_test, labels_test):
+        print("Overfitting ocuuring in our model")
+        
+    elif regressor.score(features_train, labels_train) < 0.75 and regressor.score(features_test, labels_test) < 0.75:
+        print("Underfitting ocuuring in our model")
