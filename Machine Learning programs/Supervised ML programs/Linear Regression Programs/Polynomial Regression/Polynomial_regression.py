@@ -33,7 +33,7 @@ with suppress((FileNotFoundError, TypeError, ValueError)):
     labels = bluegill_df.iloc[:, -1].values
 
 
-    """ Initializing an object for PolynomialFeatures class with a degree 3
+    """ Initializing an object for PolynomialFeatures class with a degree 2
      which means the feature of the model it to be divided into 3 columns
      and its values get raised to power 2 i.e y =  x**2 + x**1 + x**0 """
     poly_obj = PolynomialFeatures(degree=2)
