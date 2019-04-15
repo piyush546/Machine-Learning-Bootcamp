@@ -12,6 +12,7 @@ import numpy as np
 dataset = pd.read_csv('cars.csv')
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values.reshape(-1,1)
+
 # Importing the dataset
 
 # Splitting the dataset into the Training set and Test set
@@ -44,5 +45,5 @@ print("test_data:", test_df)
 
 # Arranging all the features in one dataframe and all the labels in one dataframe
 features_df = dataset.iloc[:,:11]
-labels_df = pd.DataFrame(dataset['Leather'])
+labels_df = dataset['Leather'])
 
