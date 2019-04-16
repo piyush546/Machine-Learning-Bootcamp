@@ -64,7 +64,6 @@ for var in range(0,dataset.shape[0]):
 
 # Inintializing the required conditions for fetching the associations using apriori algo
 rules = list(apriori(transactions, min_support = 0.003, min_confidence = 0.25, min_lift = 4))
-
 # Fetching the base items and their supported items uisng for loop
 """
 m = []
@@ -83,12 +82,14 @@ for item in rules:
     # first index of the inner list
     # Contains base item and add item
     
-    pair = item[0] 
+    """pair = item[0] 
     items = [x for x in pair]
     if len(items) > 2:
         print("Rule: " + items[0] + " -> ", items[1:])
     else:
-        print("Rule: " + items[0] + " -> " + items[1])
+        print("Rule: " + items[0] + " -> " + items[1])"""
+    
+    print("Rule: ", list(item[2][0][0]) ," -> ",list(item[2][0][1]))
 
     #second index of the inner list
     print("Support: " + str(item[1]))
