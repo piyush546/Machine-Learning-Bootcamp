@@ -37,16 +37,17 @@ corpus = []
 from nltk.stem.porter import PorterStemmer
 ps = PorterStemmer() 
 for var in count(0):
+    if var == 2000:
+        break
     review = re.sub('[^a-zA-Z]',' ', dataset['text'][var])
     review = review.lower()
     review = review.split()
     review = [word for word in review
               if word not in set(stopwords.words('english'))]
-    review = [ps.stem(words) for words in review]    
+    review = [ps.stem(words) for words in review]
     review = " ".join(review)
     corpus.append(review)
-    if var == 2000:
-        break
+
 # Formimg bag of words model
 from sklearn.feature_extraction.text import CountVectorizer
 cv = CountVectorizer(max_features = 1500)
