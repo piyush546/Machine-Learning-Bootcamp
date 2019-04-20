@@ -22,8 +22,11 @@ rules = list(apriori(transactions, min_support = 0.003, min_confidence= 0.20,
                      min_lift = 2))
 
 for var in rules:
-    print("Rule:",list(var[2][0][0]), "->", list(var[2][0][1]))
-    print("Support:"+ str(var[1]))
-    print("Confidence:"+ str(var[2][0][2]))
-    print("Lift:"+ str(var[2][0][3]))
-    print("################################################################")
+    if list(var[2][0][1]) == ['NONE']:
+        pass
+    else:
+        print("Rule:",list(var[2][0][0]), "->", list(var[2][0][1]))
+        print("Support:"+ str(var[1]))
+        print("Confidence:"+ str(var[2][0][2]))
+        print("Lift:"+ str(var[2][0][3]))
+        print("============================================================")
