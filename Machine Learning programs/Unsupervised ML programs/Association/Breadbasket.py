@@ -9,6 +9,9 @@ from apyori import apriori
 dataset = pd.read_csv("BreadBasket_DMS.csv")
 
 transactions = []
+
+# Writing the groupby like this groups according to Transaction and takes Item for aggregation
+# Else if both are wriiten in list then grouped according to both the columns
 dataset.groupby(['Transaction'])['Item'].apply(lambda x:transactions.append(list(set(x))))
 
 """
