@@ -9,7 +9,7 @@ from apyori import apriori
 dataset = pd.read_csv("BreadBasket_DMS.csv")
 
 transactions = []
-dataset.groupby('Transaction')['Item'].aqpply(lambda x: transactions.append(list(set(x))))
+dataset.groupby('Transaction')['Item'].apply(lambda x: transactions.append(list(set(x))))
 
 """
 import re
