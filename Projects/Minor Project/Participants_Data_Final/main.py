@@ -44,4 +44,19 @@ test_data = pd.read_excel("Data_Test.xlsx")
 
 # Extracting the features and labels from training data
 features = train_data.iloc[:,:-1]
-labels = train_data.iloc[:,-1].values
+labels = train_data.iloc[:,-1].values.reshape(-1,1)
+
+# Fetching the datatypes of each column
+column_df = test_data.dtypes.reset_index()
+# Renaming the columns
+column_df.columns = ['features', 'datatypes']
+from sklearn.feature_extraction import FeatureHasher
+h = FeatureHasher(n_features=8, input_type="string")
+features = h.transform(features).toarray()
+test_data = h.transform(test_data).toarray()
+labels = h.transform(labels).toarray()
+from sklearn.linear_model import LinearRegression
+lin  = LinearRegression()
+lin.fit(features, labels)
+features.iloc[:,2].nunique()
+

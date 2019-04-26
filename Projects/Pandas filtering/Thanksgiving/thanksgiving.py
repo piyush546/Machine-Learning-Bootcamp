@@ -1,11 +1,80 @@
 
 # -*- coding: utf-8 -*-
-""" A program to analyze the thanksgiving 2015 dataset """
+""" Minor Project-
+Here’s What Your Part of America Eats On Thanksgiving.
+
+Using a SurveyMonkey poll, we asked 1,058 respondents on Nov. 17, 2015 the following questions about their Thanksgiving:
+
+Do you celebrate Thanksgiving?
+What is typically the main dish at your Thanksgiving dinner?
+Other (please specify)
+How is the main dish typically cooked?
+Other (please specify)
+What kind of stuffing/dressing do you typically have?
+Other (please specify)
+What type of cranberry sauce do you typically have? 
+Other (please specify)
+Do you typically have gravy?
+Which of these side dishes are typically served at your Thanksgiving dinner? Please select all that apply.
+Brussel sprouts
+Carrots
+Cauliflower
+Corn
+Cornbread
+Fruit salad
+Green beans/green bean casserole
+Macaroni and cheese
+Mashed potatoes
+Rolls/biscuits
+Vegetable salad
+Yams/sweet potato casserole
+Other (please specify)
+Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. 
+Apple
+Buttermilk
+Cherry
+Chocolate
+Coconut cream
+Key lime
+Peach
+Pecan
+Pumpkin
+Sweet Potato
+None 
+Other (please specify)
+Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.
+Apple cobbler
+Blondies
+Brownies
+Carrot cake
+Cheesecake
+Cookies
+Fudge
+Ice cream
+Peach cobbler
+None
+Other (please specify)
+Do you typically pray before or after the Thanksgiving meal?
+How far will you travel for Thanksgiving?
+Will you watch any of the following programs on Thanksgiving? Please select all that apply. 
+Macy's Parade
+What's the age cutoff at your "kids' table" at Thanksgiving?
+Have you ever tried to meet up with hometown friends on Thanksgiving night?
+Have you ever attended a "Friendsgiving?"
+Will you shop any Black Friday sales on Thanksgiving Day?
+Do you work in retail?
+Will you employer make you work on Black Friday?
+How would you describe where you live? 
+Age
+What is your gender?
+How much total combined money did all members of your HOUSEHOLD earn last year?
+US Region
+""""
 
 # Importing the required modules for data preprocessing and visualizing
 import pandas as pd
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 # Importing re module for using it i filtering out the income column
 # import re
@@ -17,6 +86,8 @@ from contextlib import suppress
 with suppress((FileNotFoundError, TypeError, AttributeError, ValueError)):
     # Encoding of the dataset is in Windows 1252 so it should be specified while loading it
     datath_df = pd.read_csv("thanksgiving.csv", encoding="Windows 1252")
+    
+    datath_df.head(10)
 
     # Fetching the columns name for further reference
     columns_name = list(datath_df.columns)
@@ -94,24 +165,27 @@ with suppress((FileNotFoundError, TypeError, AttributeError, ValueError)):
 
     # Visualizing the average income of the various sauces
     sauces_inc_visual = sauce_inc.plot.bar()
+    plt.show()
 
     # Comparing the incomes of canned and homemade sauces
     craneberry_compr = sauce_inc.iloc[[0, 1]]
 
     # Visualizing the incomes of various craneberry sauces
     craneberry_compr_visual = craneberry_compr.plot.pie(autopct="%1.1f%%")
+    plt.show()
 
     # Comparing the toufourkey eaten in Suburban and Rural areas
     toufurkey_compr = area_based.iloc[[1, 2], [-3]]
 
     # Visualizing the toufurkey eaten by suburban and rural people
     toufurkey_compr.plot.bar(color=["green"])  # yes suburban eat more toufurkey than rural people
-
+    plt.show()
     # Checking for a correlation between thankgiving prayer seeker and their income
     prayer_inc = datath_df.groupby(51)[63].value_counts().unstack().fillna(0)
 
     # Visualizing the relation between prayer seeker and their income
     prayer_inc_visual = prayer_inc.plot.bar()
+    plt.show()
 
     # Analyzing the Blackfriday sales activity
     blackfri_sales = datath_df[57].value_counts()
