@@ -48,6 +48,8 @@ import matplotlib.pyplot as plt
 
 # Loading the data
 dataset = pd.read_csv("breast_cancer.csv")
+
+# Imputing the most frequent values of the respective column inplace of missing values
 dataset = dataset.fillna(dataset.max())
 
 # Splitting the features and lables
@@ -62,3 +64,19 @@ feature_train, feature_test, label_train, label_test = train_test_split(features
 from sklearn.svm import SVC
 classifier = SVC(kernel = 'rbf', random_state=0)
 classifier.fit(feature_train, label_train)
+
+# Model testing and checking its accuracy
+labels_pred = classifier.predict(feature_test)
+result = classifier.predict(np.array([6,2,5,3,2,7,9,2,4]).reshape(1,-1))
+if 4 in result:
+    print("Patient is having cancerous tumor")
+else:
+    print("Patient doesn't have cancerous tumor")
+train_score = classifier.score(feature_train, label_train)
+test_score  = classifier.score(feature_test, label_test)
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(label_test, labels_pred)
+
+print("Training accuracy of model:", train_score*100,"%")
+print("Testing accuracy of model:", test_score*100,"%")
