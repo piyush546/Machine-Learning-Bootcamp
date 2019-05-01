@@ -48,6 +48,7 @@ import matplotlib.pyplot as plt
 
 # Loading the data
 dataset = pd.read_csv("breast_cancer.csv")
+dataset = dataset.fillna(dataset.max())
 
 # Splitting the features and lables
 features = dataset.iloc[:, 1:-1].values
@@ -56,3 +57,8 @@ labels = dataset.iloc[:, -1].values
 # Splitting into testing and training sets
 from sklearn.model_selection import train_test_split
 feature_train, feature_test, label_train, label_test = train_test_split(features, labels, test_size=0.2, random_state=0)
+
+# Applying SVM algorithm
+from sklearn.svm import SVC
+classifier = SVC(kernel = 'rbf', random_state=0)
+classifier.fit(feature_train, label_train)
