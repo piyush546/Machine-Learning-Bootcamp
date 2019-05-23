@@ -1,74 +1,44 @@
 
 # -*- coding: utf-8 -*-
 """ Minor Project-
-Here’s What Your Part of America Eats On Thanksgiving.
+  Name: 
+    Thanks giving Analysis
+  Filename: 
+    Thanksgiving.py
+  Problem Statement:
+    Read the thanksgiving-2015-poll-data.csv file and 
+    perform the following task :
 
-Using a SurveyMonkey poll, we asked 1,058 respondents on Nov. 17, 2015 the following questions about their Thanksgiving:
+    Discover regional and income-based patterns in what Americans eat for 
+    Thanksgiving dinner
 
-Do you celebrate Thanksgiving?
-What is typically the main dish at your Thanksgiving dinner?
-Other (please specify)
-How is the main dish typically cooked?
-Other (please specify)
-What kind of stuffing/dressing do you typically have?
-Other (please specify)
-What type of cranberry sauce do you typically have? 
-Other (please specify)
-Do you typically have gravy?
-Which of these side dishes are typically served at your Thanksgiving dinner? Please select all that apply.
-Brussel sprouts
-Carrots
-Cauliflower
-Corn
-Cornbread
-Fruit salad
-Green beans/green bean casserole
-Macaroni and cheese
-Mashed potatoes
-Rolls/biscuits
-Vegetable salad
-Yams/sweet potato casserole
-Other (please specify)
-Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. 
-Apple
-Buttermilk
-Cherry
-Chocolate
-Coconut cream
-Key lime
-Peach
-Pecan
-Pumpkin
-Sweet Potato
-None 
-Other (please specify)
-Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.
-Apple cobbler
-Blondies
-Brownies
-Carrot cake
-Cheesecake
-Cookies
-Fudge
-Ice cream
-Peach cobbler
-None
-Other (please specify)
-Do you typically pray before or after the Thanksgiving meal?
-How far will you travel for Thanksgiving?
-Will you watch any of the following programs on Thanksgiving? Please select all that apply. 
-Macy's Parade
-What's the age cutoff at your "kids' table" at Thanksgiving?
-Have you ever tried to meet up with hometown friends on Thanksgiving night?
-Have you ever attended a "Friendsgiving?"
-Will you shop any Black Friday sales on Thanksgiving Day?
-Do you work in retail?
-Will you employer make you work on Black Friday?
-How would you describe where you live? 
-Age
-What is your gender?
-How much total combined money did all members of your HOUSEHOLD earn last year?
-US Region
+    Convert the column name to single word names
+    
+    Using the apply method to Gender column to convert Male & Female
+    Using the apply method to clean up income
+    (Range to a average number, X and up to X, Prefer not to answer to NaN)
+    
+    compare income between people who tend to eat homemade cranberry sauce for
+    Thanksgiving vs people who eat canned cranberry sauce?
+    
+    find the average income for people who served each type of cranberry sauce
+    for Thanksgiving (Canned, Homemade, None, etc).
+    
+    Plotting the results of aggregation
+    
+    Do people in Suburban areas eat more Tofurkey than people in Rural areas?
+    Where do people go to Black Friday sales most often?
+    Is there a correlation between praying on Thanksgiving and income?
+    What income groups are most likely to have homemade cranberry sauce?
+
+    Verify a pattern:
+        People who have Turducken and Homemade cranberry sauce seem to have 
+        high household incomes.
+        People who eat Canned cranberry sauce tend to have lower incomes, 
+        but those who also have Roast Beef have the lowest incomes
+        
+    Find the number of people who live in each area type (Rural, Suburban, etc)
+    who eat different kinds of main dishes for Thanksgiving:
 """"
 
 # Importing the required modules for data preprocessing and visualizing
@@ -199,6 +169,75 @@ with suppress((FileNotFoundError, TypeError, AttributeError, ValueError)):
     """
 
     pattern_income = datath_df.groupby([2, 8])[63].value_counts().unstack().fillna(0)
+    
+"""
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+dataset = pd.read_csv("thanksgiving.csv", encoding="Windows 1252")
+
+col_names = list(dataset.columns)
+refrence_number = [x for x in range(0,65)]  
+refrence = dict(zip(refrence_number, col_names))   
+dataset.columns = refrence_number
+
+regions = list(dataset[64].unique())
+income = list(dataset[63].unique())
+regional_dish = pd.DataFrame()
+income_dish = pd.DataFrame()
+for var in regions:
+    regional_dish[var] = dataset[2][dataset[64]==var].value_counts()
+for var1 in income:
+    income_dish[var1] = dataset[2][dataset[63]==var1].value_counts()
+del(var)
+del(var1)
+
+def income_filter(value):
+    if value is np.nan:
+        return np.NaN
+    else:
+        value = value.replace("$","")
+        value = value.replace(",","")
+        value = value.split(" ")
+        value = [int(x) for x in value if x.isdigit()]
+        if len(value)!=0:
+            return sum(value)/len(value)
+        else:
+            return np.NaN
+
+dataset[63] = dataset[63].apply(income_filter)
+
+homemade_data = dataset[63][(dataset[8]=="Homemade")].value_counts()
+canned_data = dataset[63][(dataset[8] == "Canned")].value_counts()
+saucido_compr = pd.DataFrame(columns=["homemade","canned"])
+saucido_compr["homemade"] = homemade_data
+saucido_compr["canned"] = canned_data
+
+sauce_compr = dataset.groupby(8)[63]
+sauce_inc = sauce_compr.mean()
+sauce_inc.plot.bar(grid=True)
+
+
+area_data = dataset[60][dataset[2]=="Tofurkey"].value_counts()
+bf_data1 = dataset[57].value_counts()
+bf_data2 = dataset[59].value_counts()
+
+
+income_data = dataset.groupby(51)[63].value_counts()
+#income_data = dataset.groupby(51)[63].count()
+
+max_grp = list(saucido_compr['homemade'][saucido_compr["homemade"] == saucido_compr["homemade"].max()].index)
+
+inc_dis_data = dataset.groupby(60)[2].value_counts()
+
+pattern = dataset.groupby([2,8])[63].value_counts()
+
+"""    
+    
+    
+    
+    
 """
 import pandas as pd
 

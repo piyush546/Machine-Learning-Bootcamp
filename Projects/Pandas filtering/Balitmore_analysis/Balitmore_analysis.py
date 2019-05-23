@@ -71,7 +71,7 @@ with open("text.csv","w+") as fileobj:
 
 dataframe = pd.read_csv('text.csv')
 
-dataframe['AnnualSalary'] = dataframe['AnnualSalary'].str.lstrip('$')
+#dataframe['AnnualSalary'] = dataframe['AnnualSalary'].str.lstrip('$')
 dataframe['AnnualSalary'] = dataframe['AnnualSalary'].astype(float)
 
 # group the data
