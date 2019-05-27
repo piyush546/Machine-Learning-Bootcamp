@@ -63,6 +63,49 @@ interquartile range - difference from quartile 1 to quartile 3
 extreme values - smallest and the largest value in the dataset
 ouliers - q1<1.5(IQR)<q3
 
+Returns a dictionary mapping each component of the boxplot 
+to a list of the matplotlib.lines.Line2D instances created. 
+That dictionary has the following keys (assuming vertical boxplots):
+
+boxes: the main body of the boxplot showing the quartiles and 
+the median’s confidence intervals if enabled.
+
+medians: horizonal lines at the median of each box.
+
+whiskers: the vertical lines extending to the most extreme, 
+n-outlier data points.
+
+caps: the horizontal lines at the ends of the whiskers.
+
+fliers: points representing data that extend beyone the whiskers (outliers).
+
+import numpy as np
+
+incomes = np.random.normal(27000, 15000, 10000)
+
+incomes = np.append(incomes,10000000)
+
+q1,q2,q3 = np.percentile(incomes,[25,50, 75])
+
+IQR = (1.5*q2)
+formula_1 = q1 - IQR
+formula_2 = q3 + IQR
+
+outliers = []
+incomes_mod = []
+for var in incomes:
+    if var<formula_1 or var> formula_2:
+        outliers.append(var)
+    else:
+        incomes_mod.append(var)
+#incomes = np.delete(incomes, outliers)
+incomes = np.array(incomes_mod)
+del(incomes_mod)
+
+
+
+
+
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.mlab as mlab
