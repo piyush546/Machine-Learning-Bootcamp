@@ -22,6 +22,12 @@ def sample():
         age = request.json.get('age')
         return "<h3>New Person added. Welcome {0}, You are {1} years old</h3>".format(name,age)
 
-
+"""@app.route("/myself", methods = ["GET", "POST"])
+def welcome():
+    if request.method == "GET":
+        return "greet"
+    else:
+        name = request.args.get('name')
+        return render_template("data.html", name_data = )"""
 if __name__ == '__main__':
     app.run(debug=True)

@@ -120,7 +120,7 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
     # Alternative of above method using looping
     # .pvalues give an array of the P%-values from the summary table
 
-    # loping through column size
+    # looping through column size
     for var in range(0, (features_obj.shape)[-1]):
         features_OLS = sm.OLS(endog=labels, exog=features_obj).fit()
         d = features_OLS.pvalues.max()
@@ -133,6 +133,28 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
             features_obj = np.delete(features_obj, a, 1)
         else:
             break
+        
+        
+    """ Alternative - 
+    # A new way to import api
+    import statsmodels.api as sm
+    
+    features_obj = features[:, [0,1,2]]
+    
+    # To add the constant 
+    features_obj = sm.add_constant(features_obj)
+    
+    while (True):
+        regressor_OLS = sm.OLS(endog = labels,exog =features_obj).fit()
+        p_values = regressor_OLS.pvalues
+        if p_values.max() > 0.05 :
+            # deleting a whole column if required that's why 3rd parameter is 1 means axis=1
+            features_obj = np.delete(features_obj, p_values.argmax(),1)
+        else:
+            break
+            
+    """
+
     
     """# Visualization of the most important feature
     features_train_1, features_test_2, labels_train_1, labels_test_2 = train_test_split(features_obj, labels, test_size=0.2, random_state=15)
