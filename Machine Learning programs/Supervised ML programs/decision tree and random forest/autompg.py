@@ -25,6 +25,7 @@ dataset.columns = ["mpg", "cylinders", "displacement","horsepower","weight","acc
 
 # fetching the car name with maximum mpg
 car_name = dataset["car name"][dataset["mpg"].argmax()]
+dataset["horsepower"] = dataset["horsepower"].
 
 
 features = dataset.drop("mpg", axis=1)
@@ -44,3 +45,30 @@ regressor.fit(feature_train, label_train)
 labels_pred = regressor.predict(feature_test)
 
 print(regressor.score(feature_test, label_test))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from sklearn import datasets
+data = datasets.california_housing()
