@@ -45,7 +45,10 @@ Single Epithelial Cell Size is 2
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
+"""
+import warnings
+warnings.filterwarnings("ignore") 
+"""
 # Loading the data
 dataset = pd.read_csv("breast_cancer.csv")
 
@@ -57,7 +60,8 @@ features = dataset.iloc[:, 1:-1].values
 labels = dataset.iloc[:, -1].values
 
 # Splitting into testing and training sets
-from sklearn.model_selection import train_test_split
+from sklearn.cross_validation import train_test_split
+
 feature_train, feature_test, label_train, label_test = train_test_split(features, labels, test_size=0.2, random_state=0)
 
 # Applying SVM algorithm

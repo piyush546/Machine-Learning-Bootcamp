@@ -33,10 +33,11 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-
+"""
 import requests
 
 url = "http://127.0.0.1:5000/people"
 data = requests.post(url, json={"name":"piyush", "age":19}).text
 with open("text.html","w") as f:
     f.write(data)
+"""
