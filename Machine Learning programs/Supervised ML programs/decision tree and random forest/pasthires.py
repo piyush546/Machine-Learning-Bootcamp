@@ -46,3 +46,20 @@ dataset = pd.read_csv("PastHires.csv")
 dataset.iloc[:,[1,4,5,6]] = dataset.iloc[:,[1,4,5,6]].applymap(lambda x: 1 if x is "Y" else 0)
 mod_dict = {"BS":0, "MS":1, "PhD":2}
 dataset.iloc[:,3] = dataset["Level of Education"].map(mod_dict)
+
+# To build the models
+features = dataset.drop("Hired", axis=1)
+labels = dataset.iloc[:,-1]
+
+from sklearn.tree import DecisionTreeClassifier
+
+tree_classf = DecisionTreeClassifier()
+tree_classf.fit(features, labels)
+print(tree_classf.score(features, labels))
+print(tree_classf.predict(np.array([10, 1, 4, 0,1,0]).reshape(1,-1)))
+
+from sklearn.ensemble import RandomForestClassifier
+for_classf = RandomForestClassifier(n_estimators=10, random_state=0)
+for_classf.fit(features, labels)
+print(for_classf.score(features, labels))
+print(for_classf.predict(np.array([10, 1, 4, 0,1,0]).reshape(1,-1)))
