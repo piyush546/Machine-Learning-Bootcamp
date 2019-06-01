@@ -20,7 +20,7 @@ def sample():
     else:
         name = request.json.get('name')
         age = request.json.get('age')
-        return "<h3>New Person added. Welcome {0}, You are {1} years old</h3>".format(name,age)
+        return "<h3 style = 'background-color:orange'>New Person added. Welcome {0}, You are {1} years old</h3>".format(name,age)
 
 """@app.route("/myself", methods = ["GET", "POST"])
 def welcome():
@@ -31,3 +31,12 @@ def welcome():
         return render_template("data.html", name_data = )"""
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+import requests
+
+url = "http://127.0.0.1:5000/people"
+data = requests.post(url, json={"name":"piyush", "age":19}).text
+with open("text.html","w") as f:
+    f.write(data)
