@@ -57,9 +57,11 @@ tree_classf = DecisionTreeClassifier()
 tree_classf.fit(features, labels)
 print(tree_classf.score(features, labels))
 print(tree_classf.predict(np.array([10, 1, 4, 0,1,0]).reshape(1,-1)))
+print(tree_classf.predict(np.array([10, 0, 4, 1,0,1]).reshape(1,-1)))
 
 from sklearn.ensemble import RandomForestClassifier
 for_classf = RandomForestClassifier(n_estimators=10, random_state=0)
 for_classf.fit(features, labels)
 print(for_classf.score(features, labels))
 print(for_classf.predict(np.array([10, 1, 4, 0,1,0]).reshape(1,-1)))
+print(for_classf.predict(np.array([10, 0, 4, 1,0,1]).reshape(1,-1)))
