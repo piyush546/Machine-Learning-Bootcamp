@@ -25,15 +25,24 @@ dataset.columns = ["mpg", "cylinders", "displacement","horsepower","weight","acc
 
 # fetching the car name with maximum mpg
 car_name = dataset["car name"][dataset["mpg"].argmax()]
+
+
+# dataset.isnull().sum()
+
+# Building the models
 dataset["horsepower"] = dataset["horsepower"].replace("?", 100.0)
 dataset["horsepower"] = dataset["horsepower"].astype("float64")
-features = dataset.drop("mpg", axis=1)
-features = pd.get_dummies(features)
-features = features.iloc[:,:-1]
-labels = dataset["mpg"]
-from sklearn.model_selection import train_test_split
+features = dataset.drop(["mpg","car name"], axis=1)
 
+#features = pd.get_dummies(features)
+
+#features = features.iloc[:,:-1]
+labels = dataset["mpg"]
+
+# Splitting data into training and testing data
+from sklearn.model_selection import train_test_split
 feature_train, feature_test, label_train, label_test = train_test_split(features, labels, test_size = 0.2, random_state=0)
+
 # Creating the decision tree for regression
 from sklearn.tree import DecisionTreeRegressor
 
@@ -44,6 +53,14 @@ labels_pred = regressor.predict(feature_test)
 
 print(regressor.score(feature_test, label_test))
 
+print(regressor.predict(np.array([6,215,100,2630,22.2,80,3]).reshape(1,-1)))
 
+#  Creating a Random Forest for regression
+from sklearn.ensemble import RandomForestRegressor
 
+forest_reg = RandomForestRegressor(n_estimators=21, random_state = 0)
 
+forest_reg.fit(feature_train, label_train)
+print(forest_reg.score(feature_test, label_test))
+
+print(forest_reg.predict(np.array([6,215,100,2630,22.2,80,3]).reshape(1,-1)))
