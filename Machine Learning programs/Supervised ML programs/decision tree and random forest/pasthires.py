@@ -37,12 +37,14 @@ import matplotlib.pyplot as plt
 # Loading the dataset
 dataset = pd.read_csv("PastHires.csv")
 
-"""def mod_fun(value):
+"""
+def mod_fun(value):
     if value is "Y":
         return 1
     else:
         return 0
 """
+
 dataset.iloc[:,[1,4,5,6]] = dataset.iloc[:,[1,4,5,6]].applymap(lambda x: 1 if x is "Y" else 0)
 mod_dict = {"BS":0, "MS":1, "PhD":2}
 dataset.iloc[:,3] = dataset["Level of Education"].map(mod_dict)
