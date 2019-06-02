@@ -36,7 +36,13 @@ print(mean_absolute_error(labels, regressor.predict(features)))
 print(mean_squared_error(labels, regressor.predict(features)))
 print(np.sqrt(mean_squared_error(labels, regressor.predict(features))))
 print((np.mean(labels)*0.1)*100)
-# Regularization
+
+
+""" Regularization
+ridge regression,lasso and elastic net. These alternative linear fitting techniques can 
+improve a model's performance and interpretability.
+"""
+
 from sklearn.linear_model import Ridge, Lasso, ElasticNet
 ridge = Ridge()
 lasso = Lasso()
@@ -53,6 +59,7 @@ print(en.score(features, labels))
 print(mean_absolute_error(labels, ridge.predict(features)))
 print(mean_squared_error(labels, ridge.predict(features))*100)
 print(np.sqrt(mean_squared_error(labels, ridge.predict(features))*100))
+
 
 print(mean_absolute_error(labels, lasso.predict(features)))
 print(mean_squared_error(labels, lasso.predict(features))*100)
