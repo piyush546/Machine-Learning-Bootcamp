@@ -53,3 +53,8 @@ from sklearn.linear_model import ElasticNet
 elnet = ElasticNet()
 elnet.fit(feature_train.iloc[:,1:], feature_train["price"])
 print(elnet.score(feature_test.iloc[:,1:], feature_test["price"]))
+
+from sklearn.ensemble import RandomForestRegressor
+rt_reg = RandomForestRegressor(n_estimators=20, random_state=2)
+rt_reg.fit(feature_train.iloc[:,1:], feature_train["price"])
+print(rt_reg.score(feature_test.iloc[:,1:], feature_test["price"]))
