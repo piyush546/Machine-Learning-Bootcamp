@@ -62,7 +62,7 @@ print(mean_absolute_error(labels, en.predict(features)))
 print(mean_squared_error(labels, en.predict(features))*100)
 print(np.sqrt(mean_squared_error(labels, en.predict(features))*100))
 
-###############################################################3
+###############################################################
 # Converting the regression dataset into classification data
 # Converting lpsa to 0 and 1 based on the mean comparison
 
