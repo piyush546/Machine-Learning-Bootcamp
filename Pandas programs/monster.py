@@ -50,8 +50,10 @@ dataset = dataset[dataset["location"].apply(lambda x: len(x)<20)]
 dataset = dataset[dataset["location"].str.contains('[A-Z/a-z]')]
 
 def hourly_basis(value):
-    value = value.replace(["-",",", "$"], [" "," "," "])
+    if value is not np.nan:
+        value = value.replace("-", " ")
+        if value.find("$ /hour"):
+            value = value.split("$ /hour")
+    return value
     
-    value = value.split("/hour")
-    
-dataset
+dataset["salary"] = dataset.salary.apply(hourly_basis)
