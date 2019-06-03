@@ -23,7 +23,7 @@ Description -
 Urban driver will have to travel less distance as due to good transportation
 facilities but due to traffic it may be possible that speed may be low.
 
-Rural driver will have to travel more distance dule to lack of good 
+Rural driver will have to travel more distance due to lack of good 
 transportation facilities but they can have high spped as they might speed up
 for fast delievery 
 """
