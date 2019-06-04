@@ -42,7 +42,7 @@ regex = re.compile("\,\s\w{2}\W*\d*")
 def  mod_fun(value1, value2):
     if regex.search(value2):
         temp = value2
-        value2  = value1
+        value2 = value1
         value1 = temp
     return pd.Series((value1, value2))
 #dataset[['location', 'organization']] =  dataset[['location', 'organization']].apply(mod_fun)
@@ -51,5 +51,28 @@ dataset[['location', 'organization']] = dataset.apply(lambda x: mod_fun(x["locat
 dataset = dataset[dataset["location"].map(lambda x: len(x) <20 )]
 dataset = dataset[dataset["location"].map(lambda x: x.isdigit() is False)]
 
+regex1 = re.compile("/hour\w*")
+regex2 = re.compile("/year\w*")
+
 def mod_sal(sal):
+    sal = sal.replace("$", "")
+    sal = sal.replace("-", "")
+    sal = sal.replace(",", "")
+    sal1, sal2 = "",""
+    if regex1.search(sal):
+        sal = re.findall("\d+\.*",sal)
+        sal1 = (float(sal[0])+float(sal[1]))/2
+    elif regex2.search(sal):
+        sal = re.findall("\d+\.*",sal)
+        sal2 = (float(sal[0])+float(sal[1]))/2
+    else:
+        sal1, sal2 = np.nan, np.nan
+    return pd.Series((sal1, sal2))
+
+dataset["salary"] = dataset["salary"].fillna("missing")
+dataset[["hour_salary","year_salary"]] = dataset["salary"].apply(mod_sal)
+
+        
     
+    
+
