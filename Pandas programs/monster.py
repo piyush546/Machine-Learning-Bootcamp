@@ -34,26 +34,22 @@ dataset = pd.read_csv("monster.csv")
 dataset = dataset.drop(['country','country_code','job_board',
 'has_expired','page_url','uniq_id'],axis=1)
 
-#
-l = dataset["location"].unique()
-unique_location = {}
-for var in range(len(l)):
-    unique_location[var] = l[var]
-    
-for k in dataset["organization"].keys():
-    if dataset.organization[k] in l:
-            temp=dataset.organization[k]
-            dataset.organization[k]=dataset.location[k]
-            dataset.location[k]=temp
+dataset[['location', 'organization']] = dataset[['location', 'organization']].fillna("missing")
 
-dataset = dataset[dataset["location"].apply(lambda x: len(x)<20)]
-dataset = dataset[dataset["location"].str.contains('[A-Z/a-z]')]
+import re
+regex = re.compile("\,\s\w{2}\W*\d*")
 
-def hourly_basis(value):
-    if value is not np.nan:
-        value = value.replace("-", " ")
-        if value.find("$ /hour"):
-            value = value.split("$ /hour")
-    return value
+def  mod_fun(value1, value2):
+    if regex.search(value2):
+        temp = value2
+        value2  = value1
+        value1 = temp
+    return pd.Series((value1, value2))
+#dataset[['location', 'organization']] =  dataset[['location', 'organization']].apply(mod_fun)
+dataset[['location', 'organization']] = dataset.apply(lambda x: mod_fun(x["location"], x["organization"]), axis=1)
+
+dataset = dataset[dataset["location"].map(lambda x: len(x) <20 )]
+dataset = dataset[dataset["location"].map(lambda x: x.isdigit() is False)]
+
+def mod_sal(sal):
     
-dataset["salary"] = dataset.salary.apply(hourly_basis)

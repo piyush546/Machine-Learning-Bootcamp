@@ -54,6 +54,16 @@ with contextlib.suppress((AttributeError, TypeError)):
     kmeans_1 = KMeans(n_clusters=3, init="k-means++", random_state=0)
     pred_cluster = kmeans_1.fit_predict(features)
     
+    from sklearn.cluster import DBSCAN
+    #from sklearn import metrics
+    #from sklearn.datasets.samples_generator import make_blobs
+    #from sklearn.preprocessing import StandardScaler
+    # Compute DBSCAN
+    db = DBSCAN(eps=2, min_samples=10).fit(features)
+    #core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+    #core_samples_mask[db.core_sample_indices_] = True
+    labels_pred = db.labels_
+    
     # Plotting the Clusters with centroid
     plt.scatter(features[pred_cluster==0,0], features[pred_cluster==0,1],c='b',label='cluster1')
     plt.scatter(features[pred_cluster==1,0], features[pred_cluster==1,1],c='g',label='cluster2')
@@ -64,3 +74,8 @@ with contextlib.suppress((AttributeError, TypeError)):
     plt.ylabel("Weight")
     plt.legend()
     plt.show()
+    
+    plt.scatter(features[labels_pred == 0,0], features[labels_pred == 0,1],c='r', marker='+' )
+    plt.scatter(features[labels_pred == 1,0], features[labels_pred == 1,1],c='g', marker='o' )
+    plt.scatter(features[labels_pred == 2,0], features[labels_pred == 2,1],c='b', marker='s' )
+    plt.scatter(features[labels_pred == -1,0],features[labels_pred == -1,1],c='y', marker='*' )
