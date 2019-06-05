@@ -34,7 +34,7 @@ item X is bought.
 
 # Preprocessing module
 import pandas as pd
-# import numpy as np
+import numpy as np
 
 
 # Association module - Apriori
@@ -43,6 +43,18 @@ from apyori import apriori
 # loading data
 dataset = pd.read_csv('Market_Basket_Optimisation.csv', header = None)
 
+"""
+# Draw the bar chart of top 10 edibles.
+features = dataset.iloc[:,1:].values
+features = features.reshape(-1,1)
+features = pd.DataFrame(features)
+features = features.dropna()
+features = features.iloc[:,0].value_counts()
+import matplotlib.pyplot as plt
+plt.bar(features.index[:10],features[0:10])
+plt.xticks(rotation=90)
+
+"""
 # Fetching the transcations from the loaded data
 # a = dataset.iloc[:,8].dropna().tolist()
 """This will check each element before entering it into the list and drop the nan value"""

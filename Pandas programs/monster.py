@@ -51,28 +51,27 @@ dataset[['location', 'organization']] = dataset.apply(lambda x: mod_fun(x["locat
 dataset = dataset[dataset["location"].map(lambda x: len(x) <20 )]
 dataset = dataset[dataset["location"].map(lambda x: x.isdigit() is False)]
 
-regex1 = re.compile("/hour\w*")
+regex1 = re.compile("(/hour|\week)\w*")
 regex2 = re.compile("/year\w*")
 
 def mod_sal(sal):
     sal = sal.replace("$", "")
     sal = sal.replace("-", "")
     sal = sal.replace(",", "")
-    sal1, sal2 = "",""
+    sal1, sal2 = np.nan, np.nan
     if regex1.search(sal):
-        sal = re.findall("\d+\.*",sal)
-        sal1 = (float(sal[0])+float(sal[1]))/2
+        sal = re.findall("\d+\.*\d*",sal)
+        sal = [float(x) for x in sal if x!='0.0']
+        sal1 = sum(sal)/len(sal)
     elif regex2.search(sal):
-        sal = re.findall("\d+\.*",sal)
-        sal2 = (float(sal[0])+float(sal[1]))/2
-    else:
-        sal1, sal2 = np.nan, np.nan
+        sal = re.findall("\d+\.*\d*",sal)
+        sal = [float(x) for x in sal if x!='0.0']
+        sal2 = sum(sal)/len(sal)
     return pd.Series((sal1, sal2))
 
 dataset["salary"] = dataset["salary"].fillna("missing")
 dataset[["hour_salary","year_salary"]] = dataset["salary"].apply(mod_sal)
 
-        
-    
+max_salar_organization = dataset["organization"][dadadataset["salary"].max()]
     
 
