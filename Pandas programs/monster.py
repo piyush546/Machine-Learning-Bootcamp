@@ -72,6 +72,4 @@ def mod_sal(sal):
 dataset["salary"] = dataset["salary"].fillna("missing")
 dataset[["hour_salary","year_salary"]] = dataset["salary"].apply(mod_sal)
 
-max_salar_organization = dataset["organization"][dadadataset["salary"].max()]
-    
-
+# max_salar_organization = dataset["organization"][dadadataset["salary"].max()]

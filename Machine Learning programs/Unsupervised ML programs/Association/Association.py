@@ -45,7 +45,7 @@ dataset = pd.read_csv('Market_Basket_Optimisation.csv', header = None)
 
 """
 # Draw the bar chart of top 10 edibles.
-features = dataset.iloc[:,1:].values
+features = dataset.iloc[:,:].values
 features = features.reshape(-1,1)
 features = pd.DataFrame(features)
 features = features.dropna()
