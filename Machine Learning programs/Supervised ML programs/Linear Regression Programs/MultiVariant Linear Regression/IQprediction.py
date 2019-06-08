@@ -164,3 +164,6 @@ with contextlib.suppress((FileNotFoundError, ValueError)):
     plt.scatter(features_test_2, labels_test_2)
     plt.plot(features_train_1, obj.predict(features_train_1))
     plt.show()"""
+    
+dataset = pd.read_csv("online_marketing.sql")
+pd.read_sql()
