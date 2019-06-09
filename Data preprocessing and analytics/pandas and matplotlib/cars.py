@@ -45,5 +45,5 @@ print("test_data:", test_df)
 
 # Arranging all the features in one dataframe and all the labels in one dataframe
 features_df = dataset.iloc[:,:11]
-labels_df = dataset['Leather'])
+labels_df = dataset['Leather']
 
