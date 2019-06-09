@@ -41,8 +41,8 @@ with and without feature selection.
 
 # Data Preprocessing modules
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+# import numpy as np
+# import matplotlib.pyplot as plt
 
 # Loading the training and testing data
 train_data, test_data = pd.read_csv("train.csv"), pd.read_csv("test.csv")
@@ -105,14 +105,36 @@ print("RFT test score:->", rft.score(features_test, labels_test))
 print("--------------------------------------------------------------")
 
 from sklearn.svm import SVC
-svc = SVC(kernel="rbf", random_state=0)
+svc = SVC(kernel="poly", random_state=0)
 svc.fit(features_train, labels_train)
-svc_labels_pred = knn.predict(features_test)
+svc_labels_pred = svc.predict(features_test)
 print("----------SVC Result-----------")
-print("KNN train score:->", svc.score(features_train, labels_train))
-print("KNN test score:->", svc.score(features_test, labels_test))
+print("SVC train score:->", svc.score(features_train, labels_train))
+print("SVC test score:->", svc.score(features_test, labels_test))
 print("--------------------------------------------------------------")
 
+import statsmodels.api as sm
+features_obj = features_train[:,:]
+features_obj = sm.add_constant(features_obj)
+# removed_feature = list(range(features_))
+while(True):
+    classifier_OLS = sm.OLS(endog = labels_train, exog = features_train).fit()
+    p_values = classifier_OLS.pvalues
+    if p_values.max() < 0.05:
+        break
+    else:
+        val = list(p_values).index(p_values.max())
+        # removed_features
+    
+from sklearn.svm import SVC
+svc = SVC(kernel="poly", random_state=0)
+svc.fit(features_train, labels_train)
+svc_labels_pred = svc.predict(features_test)
+print("----------SVC Result-----------")
+print("SVC train score:->", svc.score(features_train, labels_train))
+print("SVC test score:->", svc.score(features_test, labels_test))
+print("--------------------------------------------------------------")
+    
 
 
 
