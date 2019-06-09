@@ -20,8 +20,6 @@ import matplotlib.pyplot as plt
 
 
 dataset = pd.read_csv("election.csv")
-
-
 dataset = dataset.loc[:,['Candidate', 'Party','State', 'Constituency', 'Total Votes', '%']]
 
 
@@ -31,7 +29,6 @@ mod_data = mod_data.iloc[:,[2,3,1,5]]
 mod_data["State"] = (mod_data["State"]+","+mod_data["Constituency"]+","+mod_data["Party"])
 mod_data.index = [x for x in range(0,542)]
 mod_data = mod_data.iloc[:,[0,-1]]
-
 
 seaborn.barplot(mod_data.iloc[83:93,1],mod_data.iloc[83:93,0])
 
@@ -56,7 +53,7 @@ plt.figure(figsize=(30,30))
 init_notebook_mode(connected=True)
 trace=go.Pie(labels=list(data["col_2"].value_counts().index),values=list(data["col_2"].value_counts()))
 plot([trace])
-#iplot({trace})
+#iplot([trace])
 """
 north = ['Jammu & Kashmir', 'Himachal Pradesh', 'Punjab', 'Uttarakhand' , 'Uttar Pradesh', 'Haryana']
 east  = [ 'Bihar', 'Orissa', 'Jharkhand', 'West Bengal']
