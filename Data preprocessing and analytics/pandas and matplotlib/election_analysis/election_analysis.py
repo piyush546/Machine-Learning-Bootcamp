@@ -50,10 +50,18 @@ data = mod_data['State'].str.split(",", expand=True).add_prefix("col_")
 
 
 #% matplotlib.inline
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot #, iplot
+from plotly.offline import init_notebook_mode, plot #, iplot, download_plotlyjs
 import plotly.graph_objs as go
 plt.figure(figsize=(30,30))
 init_notebook_mode(connected=True)
 trace=go.Pie(labels=list(data["col_2"].value_counts().index),values=list(data["col_2"].value_counts()))
 plot([trace])
 #iplot({trace})
+"""
+north = ['Jammu & Kashmir', 'Himachal Pradesh', 'Punjab', 'Uttarakhand' , 'Uttar Pradesh', 'Haryana']
+east  = [ 'Bihar', 'Orissa', 'Jharkhand', 'West Bengal']
+west = ['Rajasthan' , 'Gujarat', 'Goa', 'Maharashtra'] 
+south = ['Andhra Pradesh', 'Karnataka', 'Kerala','Tamil Nadu']
+central = ['Madhya Pradesh','Chhattisgarh']
+north east = ['Assam', 'Sikkim', 'Nagaland', 'Meghalaya', 'Manipur', 'Mizoram', 'Tripura', 'Arunachal Pradesh']
+"""
