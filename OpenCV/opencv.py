@@ -68,7 +68,7 @@ import matplotlib.pyplot as plt
 #reading the image 
 image = cv2.imread('index.png') 
 #converting image to size (100,100,3) 
-smaller_image = cv2.resize(image,(100,100),interpolation=cv2.) 
+smaller_image = cv2.resize(image,(100,100),interpolation=cv2.INTER_LINEAR) 
 #plot the resized image
 plt.imshow(smaller_image)
 
@@ -246,7 +246,7 @@ import matplotlib.pyplot as plt
 face_cascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_frontalface_default.xml')
 eye_cascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_eye.xml')
 #read the image and convert to grayscale format
-img = cv.imread('coins.jpg')
+img = cv.imread('baby2.jpg')
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 #calculate coordinates 
 faces = face_cascade.detectMultiScale(gray, 1.1, 4)
@@ -277,7 +277,7 @@ face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fronta
 eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
 
 # Reading the given Image and converting it to Grayscale
-img = cv2.imread('baby.jpg')
+img = cv2.imread('baby2.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # Detecting Faces from image using Face_Samples
@@ -299,7 +299,7 @@ for (x,y,w,h) in faces:
     for (ex,ey,ew,eh) in eyes:
         # Creating Rectangle around Eyes with color Green and of width 2
         cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
-
+        #print("hello")
 cv2.imshow('img',img) # Displays the Image with rectangles on Face and Eyes
 
 k = cv2.waitKey(0)
