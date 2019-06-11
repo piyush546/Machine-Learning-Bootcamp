@@ -30,7 +30,7 @@ mod_data["State"] = (mod_data["State"]+","+mod_data["Constituency"]+","+mod_data
 mod_data.index = [x for x in range(0,542)]
 mod_data = mod_data.iloc[:,[0,-1]]
 
-seaborn.barplot(mod_data.iloc[83:93,1],mod_data.iloc[83:93,0])
+seaborn.barplot(mod_data.iloc[:,1],mod_data.iloc[:,0])
 
 new_mod_data = dataset.sort_values("%").drop_duplicates(["State","Constituency"], keep="last")
 new_mod_data.index = [x for x in range(0,542)]
@@ -49,16 +49,138 @@ data = mod_data['State'].str.split(",", expand=True).add_prefix("col_")
 #% matplotlib.inline
 from plotly.offline import init_notebook_mode, plot #, iplot, download_plotlyjs
 import plotly.graph_objs as go
-plt.figure(figsize=(30,30))
 init_notebook_mode(connected=True)
 trace=go.Pie(labels=list(data["col_2"].value_counts().index),values=list(data["col_2"].value_counts()))
+#bar = go.Bar(y=mod_data.iloc[:,1], x=mod_data.iloc[:,0])
+#layout = go.Layout(title="parties distribution in each constituency",autosize=False, width=1000, height=600)
+#fig = go.Figure(data=[trace], layout=layout)
+#plot(fig)
 plot([trace])
 #iplot([trace])
-"""
-north = ['Jammu & Kashmir', 'Himachal Pradesh', 'Punjab', 'Uttarakhand' , 'Uttar Pradesh', 'Haryana']
-east  = [ 'Bihar', 'Orissa', 'Jharkhand', 'West Bengal']
-west = ['Rajasthan' , 'Gujarat', 'Goa', 'Maharashtra'] 
-south = ['Andhra Pradesh', 'Karnataka', 'Kerala','Tamil Nadu']
+
+north = ['Jammu & Kashmir', 'Himachal Pradesh', 'Punjab', 'Uttarakhand' , 'Uttar Pradesh',
+         'Haryana', 'Chandigarh','NCT OF Delhi']
+east  = [ 'Bihar', 'Odisha', 'Jharkhand', 'West Bengal']
+west = ['Rajasthan' , 'Gujarat', 'Goa', 'Maharashtra', 'Dadra & Nagar Haveli',
+        'Daman & Diu'] 
+south = ['Andhra Pradesh', 'Karnataka','Puducherry','Telangana','Kerala',
+         'Tamil Nadu', 'Andaman & Nicobar Islands', 'Lakshadweep']
 central = ['Madhya Pradesh','Chhattisgarh']
-north east = ['Assam', 'Sikkim', 'Nagaland', 'Meghalaya', 'Manipur', 'Mizoram', 'Tripura', 'Arunachal Pradesh']
-"""
+north_east = ['Assam', 'Sikkim', 'Nagaland', 'Meghalaya', 'Manipur', 'Mizoram', 
+              'Tripura', 'Arunachal Pradesh']
+
+
+
+data = new_mod_data.reset_index()
+seats = data["State"]
+data[["State","Party"]] = data["index"].str.split(",", expand=True)
+data["index"] = seats
+data.columns = ["seats", "state","party"]
+data = data.sort_values("seats").drop_duplicates(["state"], keep="last")
+data.index =  [x for x in range(0, 36)]
+states = data["state"].tolist()
+
+def mod(var):
+    if var in north:
+        return "North"
+    elif var in east:
+        return "East"
+    elif var in south:
+        return "South"
+    elif var in central:
+        return "Central"
+    elif var in west:
+        return "west"
+    elif var in north_east:
+        return "north_east"
+    else:
+        return "missing"
+data['region'] = data['state'].map(mod)
+
+data = data.sort_values("region")
+
+pie = {'data':[{
+        'labels':data["party"][data["region"]=="North"],
+        'values':data["seats"][data["region"]=="North"],
+        "text":["Election"],
+      "textposition":"inside",
+      "domain": {"column": 1},
+      "name": "Party Trend",
+      "hoverinfo":"label+percent+name",
+      "hole": .4,
+      "type": "pie"},
+    {
+        'labels':data["party"][data["region"]=="East"],
+        'values':data["seats"][data["region"]=="East"],
+        "text":["Election"],
+      "textposition":"inside",
+      "domain": {"column": 1},
+      "name": "Party Trend",
+      "hoverinfo":"label+percent+name",
+      "hole": .4,
+      "type": "pie"},
+     {
+        'labels':data["party"][data["region"]=="west"],
+        'values':data["seats"][data["region"]=="west"],
+        "text":["Election"],
+      "textposition":"inside",
+      "domain": {"column": 1},
+      "name": "Party Trend",
+      "hoverinfo":"label+percent+name",
+      "hole": .4,
+      "type": "pie"},
+      {
+        'labels':data["party"][data["region"]=="South"],
+        'values':data["seats"][data["region"]=="South"],
+        "text":["Election"],
+      "textposition":"inside",
+      "domain": {"column": 1},
+      "name": "Party Trend",
+      "hoverinfo":"label+percent+name",
+      "hole": .4,
+      "type": "pie"},
+       {
+        'labels':data["party"][data["region"]=="Central"],
+        'values':data["seats"][data["region"]=="Central"],
+        "text":["Election"],
+      "textposition":"inside",
+      "domain": {"column": 1},
+      "name": "Party Trend",
+      "hoverinfo":"label+percent+name",
+      "hole": .4,
+      "type": "pie"},
+        {
+        'labels':data["party"][data["region"]=="north_east"],
+        'values':data["seats"][data["region"]=="north_east"],
+      "text":["Election"],
+      "textposition":"inside",
+      "domain": {"column": 1},
+      "name": "Party Trend",
+      "hoverinfo":"label+percent+name",
+      "hole": .4,
+      "type": "pie"}],
+        "layout": {
+        "title":"Lok sabaha election 2019",
+        "grid": {"rows": 1, "columns": 2},
+        "annotations": [
+            {
+                "font": {
+                    "size": 20
+                },
+                "showarrow": False,
+                "text": "GHG",
+                "x": 0.20,
+                "y": 0.5
+            },
+            {
+                "font": {
+                    "size": 20
+                },
+                "showarrow": False,
+                "text": "Parties",
+                "x": 0.8,
+                "y": 0.5
+            }
+        ]
+    }}
+plot(pie)
