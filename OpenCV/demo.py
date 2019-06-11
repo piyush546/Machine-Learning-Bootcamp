@@ -68,6 +68,9 @@ with open("train_data.json") as f:
     data = f.read()
 """
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
 import requests
 train_url = "http://openedx.forsk.in/c4x/Forsk_Labs/ST101/asset/Advertisement_training_data.json"
 test_url = "http://openedx.forsk.in/c4x/Forsk_Labs/ST101/asset/Advertisement_test_data.json"
@@ -85,6 +88,101 @@ import re
 import nltk
 nltk.download("stopwords")
 from nltk.corpus import stopwords
+
 def mod_data(var):
-    var = 
-    
+    var = re.sub('[^a-zA-Z]',' ', var)
+    var = var.lower()
+    var = var.split()
+    var = [word for word in var
+              if word not in set(stopwords.words('english'))]
+    from nltk.stem.porter import PorterStemmer
+    ps = PorterStemmer() 
+    var = [ps.stem(words) for words in var]
+    var = " ".join(var)
+    corpus.append(var)
+train_data["heading"].apply(mod_data)
+
+from sklearn.feature_extraction.text import CountVectorizer
+words = CountVectorizer(max_features=1500)
+features = words.fit_transform(corpus).toarray()
+
+features = np.append(features, train_data.iloc[:,[1,-1]].values, axis=1)
+
+
+
+label_encoders = []
+counter = 0
+def encode(index, data):
+    if type(data) != np.ndarray:
+        return None
+    else:
+        global counter
+        global label_encoders
+        counter+=1
+        a = 'encoder'+str(counter)
+        from sklearn.preprocessing import LabelEncoder
+        a = LabelEncoder()
+        data[:, index] = a.fit_transform(data[:, index])
+        label_encoders.append(a)
+        return data[:, index]
+        
+features[:, 1501] = encode(1501, features)
+features[:, 1500] = encode(1500, features)
+features = features.astype('int')
+labels = encode(0, train_data.iloc[:,0].values.reshape(-1,1))
+labels = labels.astype('int')        
+
+from  sklearn.model_selection import train_test_split
+features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.2, random_state=0)
+
+from sklearn.naive_bayes import BernoulliNB
+bnb = BernoulliNB()
+bnb.fit(features_train, labels_train)
+bnb_pred = bnb.predict(features_test)
+print("---------------Bernoulli Naive Bayes--------------------------------")
+print("Training score:->", bnb.score(features_train, labels_train))
+print("Testing score:->", bnb.score(features_test, labels_test))
+print("###################################################################")
+
+from sklearn.tree import DecisionTreeClassifier
+dtc = DecisionTreeClassifier()
+dtc.fit(features_train, labels_train)
+dtc_pred = dtc.predict(features_test)
+print("---------------Decision Tree Classifier--------------------------------")
+print("Training score:->", dtc.score(features_train, labels_train))
+print("Testing score:->", dtc.score(features_test, labels_test))
+print("###################################################################")
+
+from sklearn.linear_model import LogisticRegression
+lr = LogisticRegression()
+lr.fit(features_train, labels_train)
+lr_pred = lr.predict(features_test)
+print("---------------Logistic Regression--------------------------------")
+print("Training score:->", lr.score(features_train, labels_train))
+print("Testing score:->", lr.score(features_test, labels_test))
+print("###################################################################")
+ 
+from sklearn.naive_bayes import GaussianNB
+gnb = GaussianNB()
+gnb.fit(features_train, labels_train)
+gnb_pred = bnb.predict(features_test)
+print("---------------Gaussian Naive Bayes--------------------------------")
+print("Training score:->", gnb.score(features_train, labels_train))
+print("Testing score:->", gnb.score(features_test, labels_test))
+print("###################################################################")
+
+from sklearn.naive_bayes import MultinomialNB
+mnb = MultinomialNB()
+mnb.fit(features_train, labels_train)
+mnb_pred = mnb.predict(features_test)
+print("---------------Multinomial Naive Bayes--------------------------------")
+print("Training score:->", mnb.score(features_train, labels_train))
+print("Testing score:->", mnb.score(features_test, labels_test))
+print("###################################################################")
+      
+#
+test_data["heading"].apply(mod_data)
+red_features = words.transform(corpus).toarray()
+red_features = np.append(red_features,test_data.iloc[:,[0,-1]], axis=1)
+red_features[:, 1500] = label_encoders[1].transform(red_features[:, 1500])
+red_features[:, 1501] = label_encoders[0].transform(red_features[:, 1501])
