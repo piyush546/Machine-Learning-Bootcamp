@@ -6,8 +6,6 @@ Code Challenge -
  (more than 4.7 million job listings) that was created by extracting data 
  from Monster.com, a leading job board.
  
- 
- 
  Remove location from Organization column?
  Remove organization from Location column?
  
@@ -24,18 +22,23 @@ Code Challenge -
  Which Location has how many jobs?
 """
 
-
+# Data Preprocessing modules
 import pandas as pd
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 
+# Loading the data
 dataset = pd.read_csv("monster.csv")
 
+# Dropping unnecessary features
 dataset = dataset.drop(['country','country_code','job_board',
 'has_expired','page_url','uniq_id'],axis=1)
 
+# Filling the nan values with missing string so that string operation can be applied further
 dataset[['location', 'organization']] = dataset[['location', 'organization']].fillna("missing")
 
+# Regex module required to swap the location and organization back to their respective column
 import re
 regex = re.compile("\,\s*\w{2}\s*\d*")
 
@@ -46,9 +49,11 @@ def  mod_fun(value1, value2):
 #dataset[['location', 'organization']] =  dataset[['location', 'organization']].apply(mod_fun)
 dataset[['location', 'organization']] = dataset.apply(lambda x: mod_fun(x["location"], x["organization"]), axis=1)
 
+# Dropping the unnecessary location row
 dataset = dataset[dataset["location"].map(lambda x: len(x) <20 )]
 dataset = dataset[dataset["location"].map(lambda x: x.isdigit() is False)]
 
+# Applying regex to find hourly and yearly salary
 regex1 = re.compile("(/hour|\week)\w*")
 regex2 = re.compile("/year\w*")
 
@@ -74,6 +79,7 @@ def mod_sal(sal):
 dataset["salary"] = dataset["salary"].fillna("missing")
 dataset[["hourly_salary","yearly_salary"]] = dataset["salary"].apply(mod_sal)
 
+# Finding the maximum, average and minimum hourly and yearly salary and also their respective organizations
 max_hourly_salary = dataset["hourly_salary"].max()
 mean_hourly_salary = dataset["hourly_salary"].mean()
 min_hourly_salary = dataset["hourly_salary"].min()
@@ -90,11 +96,40 @@ print("Maximum yearly salary with organisation:",list(dataset["organization"][da
 print("Mean yearly salary with organisation:",list(dataset["organization"][dataset["yearly_salary"]==mean_yearly_salary]),"->",mean_yearly_salary)
 print("Minimum yearly salary with organisation:",list(dataset["organization"][dataset["yearly_salary"]==min_yearly_salary]),"->",min_yearly_salary)
 
+# Finding the jobs regarding sector, organizations and location and also visualizing them
 sector_jobs = dataset["sector"].value_counts().reset_index()
 sector_jobs.columns = ["sector", "number of jobs"]
 
+#plt.figure(figsize=(10,5))
+sns.barplot(sector_jobs["sector"].head(5), sector_jobs["number of jobs"].head(5))
+plt.xticks(rotation=80)
+plt.title("Sector wise number of jobs")
+plt.xlabel("Sectors")
+plt.ylabel("Number of jobs")
+plt.grid(True)
+
+"""
+sns.barplot(sector_jobs["sector"].tail(5), sector_jobs["number of jobs"].tail(5))
+plt.xticks(rotation=80)
+plt.title("Sector wise number of jobs")
+plt.xlabel("Sectors")
+plt.ylabel("Number of jobs")
+plt.grid(True)
+"""
 organization_jobs = dataset["organization"].value_counts().reset_index()
 organization_jobs.columns = ["organization", "number of jobs"]
+sns.barplot(organization_jobs["organization"].head(5), organization_jobs["number of jobs"].head(5))
+plt.xticks(rotation=80)
+plt.title("Organization wise number of jobs")
+plt.xlabel("Organization")
+plt.ylabel("Number of jobs")
+plt.grid(True)
 
 location_jobs = dataset["location"].value_counts().reset_index()
 location_jobs.columns = ["location", "number of jobs"]
+sns.barplot(location_jobs["location"].head(5), location_jobs["number of jobs"].head(5))
+plt.xticks(rotation=80)
+plt.title("Location wise number of jobs")
+plt.xlabel("Location")
+plt.ylabel("Number of jobs")
+plt.grid(True)
