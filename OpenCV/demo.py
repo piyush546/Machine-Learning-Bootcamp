@@ -67,10 +67,15 @@ with open("train_data.json") as f:
 with open("train_data.json") as f:
     data = f.read()
 """
+# Data Preprocessing modules
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
+# Url to fetch data and requests module will be used to fetch data from url
+# Pandas read_json method is used to convert fetched data in DataFrame
+# Some special characters were creating probelm so find method is used
 import requests
 train_url = "http://openedx.forsk.in/c4x/Forsk_Labs/ST101/asset/Advertisement_training_data.json"
 test_url = "http://openedx.forsk.in/c4x/Forsk_Labs/ST101/asset/Advertisement_test_data.json"
@@ -83,6 +88,7 @@ test_data = requests.get(test_url).text
 test_data = test_data[test_data.find("{"):]
 test_data = pd.read_json(test_data, lines=True)
 
+# Applying NLP on heading column
 corpus = []
 import re
 import nltk
@@ -102,6 +108,7 @@ def mod_data(var):
     corpus.append(var)
 train_data["heading"].apply(mod_data)
 
+# Generating the Bag of Words
 from sklearn.feature_extraction.text import CountVectorizer
 words = CountVectorizer(max_features=1500)
 features = words.fit_transform(corpus).toarray()
@@ -109,7 +116,7 @@ features = words.fit_transform(corpus).toarray()
 features = np.append(features, train_data.iloc[:,[1,-1]].values, axis=1)
 
 
-
+# Label Encoding function
 label_encoders = []
 counter = 0
 def encode(index, data):
@@ -132,9 +139,11 @@ features = features.astype('int')
 labels = encode(0, train_data.iloc[:,0].values.reshape(-1,1))
 labels = labels.astype('int')        
 
+# Splitting the train data in train and test data for model testing
 from  sklearn.model_selection import train_test_split
 features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.2, random_state=0)
 
+# Model Testing Phase
 from sklearn.naive_bayes import BernoulliNB
 bnb = BernoulliNB()
 bnb.fit(features_train, labels_train)
@@ -180,9 +189,23 @@ print("Training score:->", mnb.score(features_train, labels_train))
 print("Testing score:->", mnb.score(features_test, labels_test))
 print("###################################################################")
       
-#
+# Real testing data processing
 test_data["heading"].apply(mod_data)
 red_features = words.transform(corpus).toarray()
 red_features = np.append(red_features,test_data.iloc[:,[0,-1]], axis=1)
 red_features[:, 1500] = label_encoders[1].transform(red_features[:, 1500])
 red_features[:, 1501] = label_encoders[0].transform(red_features[:, 1501])
+red_features = red_features.astype("int")
+red_lr_pred = lr.predict(red_features)
+highest_category = pd.Series(red_lr_pred).value_counts().reset_index()
+highest_category.columns = ["category", "count"]
+highest_category["category"]=label_encoders[2].inverse_transform(highest_category["category"])
+
+# Visualizing the most popular category
+sns.barplot(highest_category["category"], highest_category["count"])
+plt.xticks(rotation=85)
+plt.title("Category_share")
+plt.xlabel("Category")
+plt.ylabel("Count")
+plt.grid(True)
+plt.show()
