@@ -37,13 +37,11 @@ dataset = dataset.drop(['country','country_code','job_board',
 dataset[['location', 'organization']] = dataset[['location', 'organization']].fillna("missing")
 
 import re
-regex = re.compile("\,\s\w{2}\W*\d*")
+regex = re.compile("\,\s*\w{2}\s*\d*")
 
 def  mod_fun(value1, value2):
     if regex.search(value2):
-        temp = value2
-        value2 = value1
-        value1 = temp
+        value1, value2 = value2, value1
     return pd.Series((value1, value2))
 #dataset[['location', 'organization']] =  dataset[['location', 'organization']].apply(mod_fun)
 dataset[['location', 'organization']] = dataset.apply(lambda x: mod_fun(x["location"], x["organization"]), axis=1)
@@ -62,14 +60,41 @@ def mod_sal(sal):
     if regex1.search(sal):
         sal = re.findall("\d+\.*\d*",sal)
         sal = [float(x) for x in sal if x!='0.0']
-        sal1 = sum(sal)/len(sal)
+        if 0 in sal:
+            sal.remove(0)
+        sal1 = sum(sal)/2
     elif regex2.search(sal):
         sal = re.findall("\d+\.*\d*",sal)
         sal = [float(x) for x in sal if x!='0.0']
-        sal2 = sum(sal)/len(sal)
+        if 0 in sal:
+            sal.remove(0)
+        sal2 = sum(sal)/2
     return pd.Series((sal1, sal2))
 
 dataset["salary"] = dataset["salary"].fillna("missing")
-dataset[["hour_salary","year_salary"]] = dataset["salary"].apply(mod_sal)
+dataset[["hourly_salary","yearly_salary"]] = dataset["salary"].apply(mod_sal)
 
-# max_salar_organization = dataset["organization"][dadadataset["salary"].max()]
+max_hourly_salary = dataset["hourly_salary"].max()
+mean_hourly_salary = dataset["hourly_salary"].mean()
+min_hourly_salary = dataset["hourly_salary"].min()
+
+print("Maximum hourly salary with organisation:",list(dataset["organization"][dataset["hourly_salary"]==max_hourly_salary]),"->",max_hourly_salary)
+print("Mean hourly salary with organisation:",list(dataset["organization"][dataset["hourly_salary"]==mean_hourly_salary]),"->",mean_hourly_salary)
+print("Minimum hourly salary with organisation:",list(dataset["organization"][dataset["hourly_salary"]==min_hourly_salary]),"->",min_hourly_salary)
+
+max_yearly_salary = dataset["yearly_salary"].max()
+mean_yearly_salary = dataset["yearly_salary"].mean()
+min_yearly_salary = dataset["yearly_salary"].min()
+
+print("Maximum yearly salary with organisation:",list(dataset["organization"][dataset["yearly_salary"]==max_yearly_salary]),"->",max_yearly_salary)
+print("Mean yearly salary with organisation:",list(dataset["organization"][dataset["yearly_salary"]==mean_yearly_salary]),"->",mean_yearly_salary)
+print("Minimum yearly salary with organisation:",list(dataset["organization"][dataset["yearly_salary"]==min_yearly_salary]),"->",min_yearly_salary)
+
+sector_jobs = dataset["sector"].value_counts().reset_index()
+sector_jobs.columns = ["sector", "number of jobs"]
+
+organization_jobs = dataset["organization"].value_counts().reset_index()
+organization_jobs.columns = ["organization", "number of jobs"]
+
+location_jobs = dataset["location"].value_counts().reset_index()
+location_jobs.columns = ["location", "number of jobs"]
