@@ -41,7 +41,7 @@ with and without feature selection.
 
 # Data Preprocessing modules
 import pandas as pd
-# import numpy as np
+import numpy as np
 # import matplotlib.pyplot as plt
 
 # Loading the training and testing data

@@ -7,7 +7,7 @@ import mysql.connector
 from pandas import DataFrame as DF
 
 # Opening the connection to connect to the database
-mysqldb = mysql.connector.connect(user='root', password='piyushkumar', host='localhost')
+mysqldb = mysql.connector.connect(user='paamaa', password='password', host='db4free.net',port=3306)
 
 # creating the cursor
 cursor = mysqldb.cursor()
@@ -19,7 +19,7 @@ cursor = mysqldb.cursor()
 cursor.execute("CREATE DATABASE Student")
 
 # Using the existing database
-cursor.execute("USE Student")
+cursor.execute("USE sampledata_db")
 
 # Creating a Table in the database
 cursor.execute("""CREATE TABLE STUDENT_info2(
