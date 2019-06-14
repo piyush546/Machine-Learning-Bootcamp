@@ -57,7 +57,7 @@ E. USE DIFFERENT CLASSIFICATION TECHNIQUES AND COMPARE ACCURACY SCORE AND ALSO P
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+
 
 # Importing the mysql module to load the sql data
 import mysql.connector
