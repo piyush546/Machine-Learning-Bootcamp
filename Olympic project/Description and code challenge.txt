@@ -1,0 +1,110 @@
+Project Name - Olympics Data mining
+
+
+# OLYMPICS HISTORY
+* According to historical records, the first ancient Olympic Games can be 
+traced back to 776 BC. They were dedicated to the Olympian gods and were staged
+on the ancient plains of Olympia. They continued for nearly 12 centuries, 
+until Emperor Theodosius decreed in 393 A.D. that all such "pagan cults" be banned.
+
+This is a historical dataset on the modern Olympic Games, 
+including all the Games from Athens 1896 to Rio 2016.
+
+This dataset provides an opportunity to ask questions about how the Olympics 
+have evolved over time, including questions about the participation and 
+performance of women, different nations, and different sports and events.
+
+THE FILE athlete_events.csv CONTAINS 271116 ROWS AND 15 COLUMNS. EACH ROW 
+CORRESPONDS TO AN INDIVIDUAL ATHLETE COMPETING IN AN INDIVIDUAL OLYMPIC EVENT 
+(ATHLETE-EVENTS). THE COLUMNS ARE:
+
+ID - Unique number for each athlete
+Name - Athlete's name
+Sex - M or F
+Age - Integer
+Height - In centimeters
+Weight - In kilograms
+Team - Team name
+NOC - National Olympic Committee 3-letter code
+Games - Year and season
+Year - Integer
+Season - Summer or Winter
+City - Host city
+Sport - Sport
+Event - Event
+Medal - Gold, Silver, Bronze, or NA
+
+
+noc_regions.csv-
+NOC (National Olympic Committee 3 letter code)
+Country name 
+Notes
+
+
+Project Tasks-
+
+A---> DATA ANALYSIS AND VISUALIZATION
+
+Data is given for both summer and winter olympics combined. So perform
+following tasks seperately for both unless mentioned to perform in combine 
+form -
+
+1. Fetch the participant who won the most medals with their sports and country
+(Consider as whole no male and female distinguish needed)
+
+2. Visualize Athelete participation count over years.
+
+3. Visualize the Athelete Participation by gender over years.
+
+4. Visualize the Gender Distribution in the games.
+
+5. Visualize the number of countries participated in the games.
+
+6.Visualize the highest number of participation nation wise.
+
+7. Visualize the countries that Hosted the games for the highest number of times.
+
+8. Visualize the cities that hosted the games for the highest number of times.
+
+9. Visualize the average age, height and weight of the atheletes for various 
+   sports categories. (3 seperate representation)
+   
+10. Visualize the total unique sports activities over years in Olympics.
+
+11. Visualize the event ratio by gender.
+
+12. Visualize the events by genders over years.
+
+13. Fetch the discontinued sports in olympics 2016.
+
+14. Revenue Categories - 
+
+Category ---------->   Sports
+A                      Acquatics, Atheletes, Gymnastics
+B                      Cycling, Tennis
+C                      Archery, Badminton, Boxing, Judo, Rowing, Shooting, Table Tennis, Weightlifting
+D                      Canoeing, Equestrianism, Sailing, Fencing, Taekwondo, Triathlon, Wrestling
+E                      Modern Pentathlon, Golf
+
+    Visualize the sports ratio in each revenue category.
+
+15. Visualize the medals won in each revenue category.
+
+16. Fetch the medal tally for each sports categories
+
+17. Visualize the above results.
+
+18. Fetch the top 100 atheletes with the highest total medal first seperate for both seasons and then in combined form.
+
+19. Fetch the countries with their total medals in combined of both seasons.
+
+B-----> MACHINE LEARNING APPLICATIONS
+
+1. Apply Kmeans on the height and weight column of the given data and depict the information clusters provide.
+
+C------> GUI APPLICATION
+
+1. Create a functional GUI that disaplay the medal tally of the year and the season provided by the user.
+
+Note----> season - winter and summer.
+

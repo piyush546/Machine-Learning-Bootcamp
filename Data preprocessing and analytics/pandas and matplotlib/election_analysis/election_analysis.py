@@ -115,8 +115,10 @@ def mod(var):
     else:
         return "missing"
 region_wise_trend['region'] = region_wise_trend['state'].map(mod)
-
+"""
 region_wise_trend = region_wise_trend.sort_values("region")
 sns.barplot(region_wise_trend["party"][region_wise_trend["region"]=="North"], region_wise_trend["seats"])
 sns.barplot(region_wise_trend["party"][region_wise_trend["region"]=="East"], region_wise_trend["seats"])
 plt.xticks(rotation=90)
+"""
+# data = region_wise_trend["party"][region_wise_trend["region"]  == "North"].values.tolist()
