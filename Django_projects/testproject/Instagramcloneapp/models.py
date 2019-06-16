@@ -8,6 +8,6 @@ class UserModel(models.Model):
     username = models.CharField(max_length=80)
     name = models.CharField(max_length=120)
     email = models.EmailField()
-    password = models.CharField(max_length=100)
+    password = models.CharField(max_length=250)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
