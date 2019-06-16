@@ -6,7 +6,7 @@ def signup_view(request):
     if request.method == "GET":
         signup_form  = SignUpForm()
     elif request.method == "POST":
-        signup_form = SignUpForm(request.POST())
+        signup_form = SignUpForm(request.POST)
             
     return render(request, 'index.html',{'signup_form': signup_form})
     
