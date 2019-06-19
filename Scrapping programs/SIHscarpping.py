@@ -35,3 +35,35 @@ total_words = []
 for var2 in range(0, len(li_items)):
     total_words.extend(li_items[var2].split())
 print("Words in the li content:", Counter(total_words))
+
+
+#-----------------------------------------------------------------------------
+"""
+# Modules required for scrapping
+from bs4 import BeautifulSoup as BS
+import requests
+
+# site which is to be scrapped
+url = "https://docs.scipy.org/doc/numpy/reference/generated/numpy.meshgrid.html"
+
+# Fetching the data
+data = requests.get(url).text
+
+# Applying Scrapping from the fetched data
+soup = BS(data)
+
+# Finding the required data
+head = soup.find("h1").text.strip()[:14]
+main_body = soup.find("dd")
+
+abstract = main_body.findAll("p")[:2]
+
+for index, value in enumerate(abstract):
+	value = value.text.strip()
+	abstract[index] = value
+# Printing the fetched data
+print("----------------Abstract-----------------------")
+print(f"---------------{head}-----------------")
+print("\n".join(abstract))
+"""
+#-----------------------------------------------------------------------------
