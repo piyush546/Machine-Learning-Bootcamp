@@ -1,0 +1,45 @@
+<!-- HTML PAGE 
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+	<title>My profile page</title>
+	<meta charset="UTF-8">
+	</head>
+
+	<body>
+		<h1>My Profile</h1>
+
+		<div>
+			<img src="/static/piyush.jpg">
+		</div>
+
+		<div>
+			Name: Piyush Kumar
+		</div>
+	</body>
+</html> -->
+<!-- ##################################################################### -->
+
+<!-- HTML FORM -->
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Name Validator</title>
+	</head>
+
+	<body>
+		<form action="{{url_for('form_data')}}" "method="POST">
+			<div>
+
+				<input type="text" name="name" placeholder="Enter name">
+			</div>
+			<div>
+				<input type="integer" name="age" placeholder="Enter age">
+			</div>
+			<div>
+				<input type="submit" name="submit">
+			</div>
+		</form>
+	</body>
+</html>

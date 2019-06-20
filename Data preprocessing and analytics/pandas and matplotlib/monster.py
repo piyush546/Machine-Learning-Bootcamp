@@ -99,7 +99,6 @@ print("Minimum yearly salary with organisation:",list(dataset["organization"][da
 # Finding the jobs regarding sector, organizations and location and also visualizing them
 sector_jobs = dataset["sector"].value_counts().reset_index()
 sector_jobs.columns = ["sector", "number of jobs"]
-
 #plt.figure(figsize=(10,5))
 sns.barplot(sector_jobs["sector"].head(5), sector_jobs["number of jobs"].head(5))
 plt.xticks(rotation=80)
