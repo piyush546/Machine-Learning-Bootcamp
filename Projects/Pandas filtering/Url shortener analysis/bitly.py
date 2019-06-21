@@ -71,3 +71,14 @@ except AttributeError as e:
 
 except TypeError as e:
     print(e)
+
+"""
+import jsonlines
+data = []
+with jsonlines.open("usagov_bitly_data.json","r") as fileobj:
+    for var in fileobj:
+        data.append(var)
+        
+import pandas as pd
+df = pd.DataFrame(data)
+"""
