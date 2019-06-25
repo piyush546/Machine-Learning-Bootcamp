@@ -52,6 +52,8 @@ print("Total medals ------>", athlete_data["Winter"].max())
 
 # Athlete count over years
 count = olym_data.groupby("Year")["Season"].value_counts().unstack()
+
+plt.figure(figsize=(10,7))
 plt.style.use('seaborn')
 plt.scatter(count.index, count["Summer"])
 plt.plot(count.index, count["Summer"],"r-o")
@@ -62,6 +64,7 @@ plt.xlabel("Year")
 plt.ylabel("Athelte Count")
 plt.savefig("Summer Athelete count.jpg")
 
+plt.figure(figsize=(10,7))
 plt.style.use("seaborn")
 plt.scatter(count.index, count["Winter"])
 plt.plot(count.index, count["Winter"],"r-o")
@@ -74,6 +77,7 @@ plt.savefig("Winter Athelete count.jpg")
 s_male_count = olym_data["Year"][(olym_data["Sex"]=="M")&(olym_data["Season"]=="Summer")].value_counts()
 s_female_count = olym_data["Year"][(olym_data["Sex"]=="F")&(olym_data["Season"]=="Summer")].value_counts()
 
+plt.figure(figsize=(10,7))
 sns.pointplot(s_male_count.index, s_male_count, color="m")
 plt.xticks(rotation=90)
 plt.title("Male Athlete Summer olympic trends over year")
@@ -81,6 +85,7 @@ plt.xlabel("Year")
 plt.ylabel("Male counts")
 plt.savefig("Summer olympic Male Trends.jpg")
 
+plt.figure(figsize=(10,7))
 sns.pointplot(s_female_count.index, s_female_count,color="g")
 plt.xticks(rotation=90)
 plt.title("Female Athlete Summer olympic trends over year")
@@ -92,6 +97,7 @@ plt.savefig("Summer olympic Female Trends.jpg")
 w_male_count = olym_data["Year"][(olym_data["Sex"]=="M")&(olym_data["Season"]=="Winter")].value_counts()
 w_female_count = olym_data["Year"][(olym_data["Sex"]=="F")&(olym_data["Season"]=="Winter")].value_counts()
 
+plt.figure(figsize=(10,7))
 sns.pointplot(w_male_count.index, w_male_count, color="m")
 plt.xticks(rotation=90)
 plt.title("Male Athlete Winter olympic trends over year")
@@ -99,6 +105,7 @@ plt.xlabel("Year")
 plt.ylabel("Male counts")
 plt.savefig("Winter olympic Male Trends.jpg")
 
+plt.figure(figsize=(10,7))
 sns.pointplot(w_female_count.index, w_female_count,color="g")
 plt.xticks(rotation=90)
 plt.title("Female Athlete Winter olympic trends over year")
@@ -110,12 +117,32 @@ plt.savefig("Winter olympic Female Trends.jpg")
 gender_distributions = olym_data.groupby("Sex")["Season"].value_counts().unstack()
 
 plt.style.use("ggplot")
+
+# Summer
+# To change the background color
+#fig = plt.figure()
+#fig.patch.set_facecolor('black')
+
+# To change the text color
+#plt.rcParams['text.color'] = 'white'
+plt.figure(figsize=(8,7))
 plt.pie(gender_distributions["Summer"],labels=list(gender_distributions.index), autopct="%.1f%%")
-plt.title("Summer Olympics gender ratio")
 plt.axis("equal")
+# To plot the circle in the middle of pie chart to make a donut chart
+my_circle=plt.Circle((0,0), 0.7, color='white')
+p=plt.gcf()
+p.gca().add_artist(my_circle)
+plt.title("Summer Olympics gender ratio")
 plt.savefig("Summer olympics gender distribution.jpg")
 
+# Winter
+plt.figure(figsize=(8,7))
 plt.pie(gender_distributions["Winter"],labels=list(gender_distributions.index), autopct="%.1f%%")
-plt.title("Winter Olympics gender ratio")
 plt.axis("equal")
+my_circle=plt.Circle((0,0), radius=0.7, color='white')
+p=plt.gcf()
+p.gca().add_artist(my_circle)
+plt.title("Winter Olympics gender ratio")
 plt.savefig("Winter olympics gender distribution.jpg")
+
+#
