@@ -15,10 +15,10 @@ init_notebook_mode(connected=True)
 olym_data = pd.read_csv("olym_data.csv")
 noc_data = pd.read_csv("noc_regions.csv")
 
-def country(value):
+"""def country(value):
     return noc_data["region"][noc_data["NOC"]==value].tolist()
 olym_data["Country"] = olym_data["NOC"].apply(country)
-
+"""
 # Splitting the data in the summer and winter olympics
 #summer_olympic = olym_data[olym_data["Season"]=="Summer"]
 #winter_olympic = olym_data[olym_data["Season"]=="Winter"]
