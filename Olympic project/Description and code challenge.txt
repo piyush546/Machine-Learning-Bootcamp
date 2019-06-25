@@ -58,9 +58,9 @@ form -
 
 4. Visualize the Gender Distribution in the games.
 
-5. Visualize the number of countries participated in the games.
+5. Visualize the number of countries participated in the games over years.
 
-6.Visualize the highest number of participation nation wise.
+6. Visualize the highest number of participation nation wise.
 
 7. Visualize the countries that Hosted the games for the highest number of times.
 

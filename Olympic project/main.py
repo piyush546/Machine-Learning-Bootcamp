@@ -78,7 +78,13 @@ s_male_count = olym_data["Year"][(olym_data["Sex"]=="M")&(olym_data["Season"]=="
 s_female_count = olym_data["Year"][(olym_data["Sex"]=="F")&(olym_data["Season"]=="Summer")].value_counts()
 
 plt.figure(figsize=(10,7))
+sns.plt.xlim(1886, 2020)
 sns.pointplot(s_male_count.index, s_male_count, color="m")
+sns.pointplot(s_female_count.index, s_female_count,color="g")
+
+
+
+
 plt.xticks(rotation=90)
 plt.title("Male Athlete Summer olympic trends over year")
 plt.xlabel("Year")
@@ -86,7 +92,7 @@ plt.ylabel("Male counts")
 plt.savefig("Summer olympic Male Trends.jpg")
 
 plt.figure(figsize=(10,7))
-sns.pointplot(s_female_count.index, s_female_count,color="g")
+
 plt.xticks(rotation=90)
 plt.title("Female Athlete Summer olympic trends over year")
 plt.xlabel("Year")
@@ -145,4 +151,26 @@ p.gca().add_artist(my_circle)
 plt.title("Winter Olympics gender ratio")
 plt.savefig("Winter olympics gender distribution.jpg")
 
-#
+# Countries distribution over years
+countries_data = olym_data.groupby(["Year","Season"])["NOC"].apply(lambda x: len(x.unique())).unstack()
+
+plt.figure(figsize=(10,7))
+sns.barplot(countries_data.index, countries_data["Summer"])
+plt.xticks(rotation=90)
+plt.title("Countries participation over years in Summer olympics")
+plt.xlabel("Year")
+plt.ylabel("Countries count")
+plt.savefig("Summer Olympics countries distribution.jpg")
+
+plt.figure(figsize=(10,7))
+sns.barplot(countries_data.index, countries_data["Winter"])
+plt.xticks(rotation=90)
+plt.title("Countries participation over years in Winter olympics")
+plt.xlabel("Year")
+plt.ylabel("Countries count")
+plt.savefig("Winter Olympics countries distribution.jpg")
+
+# Nation-wise Highest participation
+nation_wise = olym_data.groupby(["NOC", "Year"])["Season"].value_counts().unstack().reset_index()
+plt.figure(figsize=(10,7))
+sns.barplot(nation_wise.index, nation_wise["Summer"])
