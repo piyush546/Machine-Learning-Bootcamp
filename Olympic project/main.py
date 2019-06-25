@@ -12,4 +12,6 @@ init_notebook_mode(connected=True)
 
 
 # Loading the olympic data
-olym_data = pd.read_csv("olym.csv")
+olym_data = pd.read_csv("olym_data.csv")
+
+
