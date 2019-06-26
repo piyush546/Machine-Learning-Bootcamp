@@ -166,6 +166,21 @@ plt.ylabel("Countries count")
 plt.savefig("Winter Olympics countries distribution.jpg")
 
 # Nation-wise Highest participation
-nation_wise = olym_data.groupby(["NOC", "Year"])["Season"].value_counts().unstack().reset_index()
+nation_data = olym_data.groupby(["Season","NOC"])["Year"].apply(lambda x : len(x.unique())).reset_index()
+nation_data.columns = ["Season", "NOC", "Count"]
+summer_nation = nation_data[nation_data["Season"]=="Summer"]
+summer_nation = summer_nation.sort_values("Count")
+winter_nation = nation_data[nation_data["Season"]=="Winter"]
+winter_nation = winter_nation.sort_values("Count")
+
 plt.figure(figsize=(10,7))
-sns.barplot(nation_wise.index, nation_wise["Summer"])
+sns.barplot(summer_nation.NOC.tail(20), summer_nation.Count.tail(20))
+plt.xticks(rotation=90)
+plt.title("Summer olympics nation wise highest participation")
+plt.savefig("Summer olympics nation_wise.jpg")
+
+plt.figure(figsize=(10,7))
+sns.barplot(winter_nation.NOC.tail(20), winter_nation.Count.tail(20))
+plt.xticks(rotation=90)
+plt.title("Winter olympics nation wise highest participation")
+plt.savefig("Winter olympics nation_wise.jpg")
