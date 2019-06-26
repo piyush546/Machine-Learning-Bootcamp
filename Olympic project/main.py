@@ -14,6 +14,8 @@ init_notebook_mode(connected=True)
 # Loading the olympic data
 olym_data = pd.read_csv("olym_data.csv")
 noc_data = pd.read_csv("noc_regions.csv")
+host_data = pd.read_csv("olym.csv", encoding="Windows 1252")
+host_data = host_data.iloc[:,:-2]
 
 """def country(value):
     return noc_data["region"][noc_data["NOC"]==value].tolist()
@@ -184,3 +186,14 @@ sns.barplot(winter_nation.NOC.tail(20), winter_nation.Count.tail(20))
 plt.xticks(rotation=90)
 plt.title("Winter olympics nation wise highest participation")
 plt.savefig("Winter olympics nation_wise.jpg")
+
+# Highest hosting country
+def mod_data(var):
+    value = list(var)
+    if value[2] is not np.nan:
+        return "Summer"
+    elif value[3] is not np.nan:
+        return "Winter"
+    else:
+        return "Missing"
+host_data["Season"] = host_data.apply(mod_data, axis=1)
