@@ -281,3 +281,62 @@ sns.barplot(w_average_height.index, w_average_height)
 plt.xticks(rotation=90)
 plt.title("Average Height representation of each sport category-Winter Olympics")
 plt.savefig("Winter olympics average height.jpg")
+
+# Unique sports over years in Olympics
+summer_sports = olym_data[olym_data.Season=="Summer"].groupby(["Year"])["Sport"].apply(lambda x : len(x.unique()))
+winter_sports = olym_data[olym_data.Season=="Winter"].groupby(["Year"])["Sport"].apply(lambda x : len(x.unique()))
+
+plt.figure(figsize=(10,7))
+sns.pointplot(summer_sports.index, summer_sports, color="purple")
+plt.xticks(rotation=80)
+plt.ylabel("Sports count")
+plt.savefig("Unique sports in Summer olympics over years")
+
+plt.figure(figsize=(10,7))
+sns.pointplot(winter_sports.index, winter_sports, color="red")
+plt.xticks(rotation=80)
+plt.ylabel("Sports count")
+plt.savefig("Unique sports in Winter olympics over years")
+
+# Gender event ratio
+s_unique_event = pd.DataFrame()
+s_unique_event["Event"] = olym_data.Event[olym_data.Season == "Summer"].unique()
+
+w_unique_event = pd.DataFrame()
+w_unique_event["Event"] = olym_data.Event[olym_data.Season == "Winter"].unique()
+
+import re
+regex_m = re.compile("Men")
+regex_w = re.compile("Women")
+def gender_mod(value):
+    if regex_m.search(value):
+        return "Male"
+    elif regex_w.search(value):
+        return "Female"
+    else:
+        return "Missing"
+
+s_unique_event["Gender"] = s_unique_event["Event"].apply(gender_mod)
+s_gender_ratio = s_unique_event.Gender.value_counts()
+
+w_unique_event["Gender"] = w_unique_event["Event"].apply(gender_mod)
+w_gender_ratio = w_unique_event.Gender.value_counts()
+
+plt.style.use("ggplot")
+plt.figure(figsize=(10,7))
+plt.pie(s_gender_ratio.head(2), labels=list(s_gender_ratio.index[:2]),colors=["Green", "Gold"], autopct="%.1f%%")
+my_circle=plt.Circle((0,0), radius=0.7, color='white')
+p=plt.gcf()
+p.gca().add_artist(my_circle)
+plt.axis("equal")
+plt.title("Event ratio according to gender in Summer Olympics")
+plt.savefig("Summer olympics event-gender ratio.jpg")
+
+plt.figure(figsize=(10,7))
+plt.pie(w_gender_ratio.head(2), labels=list(w_gender_ratio.index[:2]),colors=["Green", "Gold"], autopct="%.1f%%")
+my_circle=plt.Circle((0,0), radius=0.7, color='white')
+p=plt.gcf()
+p.gca().add_artist(my_circle)
+plt.axis("equal")
+plt.title("Event ratio according to gender in Winter Olympics")
+plt.savefig("Winter olympics event-gender ratio.jpg")
