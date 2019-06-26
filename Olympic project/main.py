@@ -80,11 +80,6 @@ s_female_count = olym_data["Year"][(olym_data["Sex"]=="F")&(olym_data["Season"]=
 plt.figure(figsize=(10,7))
 sns.plt.xlim(1886, 2020)
 sns.pointplot(s_male_count.index, s_male_count, color="m")
-sns.pointplot(s_female_count.index, s_female_count,color="g")
-
-
-
-
 plt.xticks(rotation=90)
 plt.title("Male Athlete Summer olympic trends over year")
 plt.xlabel("Year")
@@ -92,7 +87,7 @@ plt.ylabel("Male counts")
 plt.savefig("Summer olympic Male Trends.jpg")
 
 plt.figure(figsize=(10,7))
-
+sns.pointplot(s_female_count.index, s_female_count,color="g")
 plt.xticks(rotation=90)
 plt.title("Female Athlete Summer olympic trends over year")
 plt.xlabel("Year")
