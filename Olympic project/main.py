@@ -197,3 +197,87 @@ def mod_data(var):
     else:
         return "Missing"
 host_data["Season"] = host_data.apply(mod_data, axis=1)
+summer_country = host_data.Country[host_data.Season == "Summer"].value_counts()
+winter_country = host_data.Country[host_data.Season == "Winter"].value_counts()
+
+plt.figure(figsize=(10,7))
+sns.barplot(summer_country.index, summer_country)
+plt.xticks(rotation=90)
+plt.title("Summer olympics hosting countries")
+plt.xlabel("Country")
+plt.ylabel("Number of times hosted")
+plt.savefig("Summer olympics hosting countries.jpg")
+
+plt.figure(figsize=(10,7))
+sns.barplot(winter_country.index, winter_country)
+plt.xticks(rotation=90)
+plt.title("Winter olympics hosting countries")
+plt.xlabel("Country")
+plt.ylabel("Number of times hosted")
+plt.savefig("Winter olympics hosting countries.jpg")
+
+# Highest hosting cities
+summer_city = host_data.City[host_data.Season == "Summer"].value_counts()
+winter_city= host_data.City[host_data.Season == "Winter"].value_counts()
+
+plt.figure(figsize=(10,7))
+sns.barplot(summer_city.index, summer_city)
+plt.xticks(rotation=90)
+plt.title("Summer olympics hosting cities")
+plt.xlabel("City")
+plt.ylabel("Number of times hosted")
+plt.savefig("Summer olympics hosting cities.jpg")
+
+plt.figure(figsize=(10,7))
+sns.barplot(winter_city.index, winter_city)
+plt.xticks(rotation=90)
+plt.title("Winter olympics hosting cities")
+plt.xlabel("City")
+plt.ylabel("Number of times hosted")
+plt.savefig("Winter olympics hosting cities.jpg")
+
+# Average age, height and weight for each sports categories
+s_average_age = olym_data[olym_data.Season == "Summer"].groupby("Sport")["Age"].median().sort_values()
+w_average_age = olym_data[olym_data.Season == "Winter"].groupby("Sport")["Age"].median().sort_values()
+
+s_average_weight = olym_data[olym_data.Season == "Summer"].groupby("Sport")["Weight"].median().sort_values()
+w_average_weight = olym_data[olym_data.Season == "Winter"].groupby("Sport")["Weight"].median().sort_values()
+
+s_average_height = olym_data[olym_data.Season == "Summer"].groupby("Sport")["Height"].median().sort_values()
+w_average_height = olym_data[olym_data.Season == "Winter"].groupby("Sport")["Height"].median().sort_values()
+
+plt.figure(figsize=(15,7))
+sns.barplot(s_average_age.index, s_average_age)
+plt.xticks(rotation=90)
+plt.title("Average age representation of each sport category-Summer Olympics")
+plt.savefig("Summer olympics average age.jpg")
+
+plt.figure(figsize=(15,7))
+sns.barplot(w_average_age.index, w_average_age)
+plt.xticks(rotation=90)
+plt.title("Average age representation of each sport category-Winter Olympics")
+plt.savefig("Winter olympics average age.jpg")
+
+plt.figure(figsize=(15,7))
+sns.barplot(s_average_weight.index, s_average_weight)
+plt.xticks(rotation=90)
+plt.title("Average weight representation of each sport category-Summer Olympics")
+plt.savefig("Summer olympics average weight.jpg")
+
+plt.figure(figsize=(15,7))
+sns.barplot(w_average_weight.index, w_average_weight)
+plt.xticks(rotation=90)
+plt.title("Average weight representation of each sport category-Winter Olympics")
+plt.savefig("Winter olympics average weight.jpg")
+
+plt.figure(figsize=(15,7))
+sns.barplot(s_average_height.index, s_average_height)
+plt.xticks(rotation=90)
+plt.title("Average Height representation of each sport category-Summer Olympics")
+plt.savefig("Summer olympics average height.png")
+
+plt.figure(figsize=(15,7))
+sns.barplot(w_average_height.index, w_average_height)
+plt.xticks(rotation=90)
+plt.title("Average Height representation of each sport category-Winter Olympics")
+plt.savefig("Winter olympics average height.jpg")
