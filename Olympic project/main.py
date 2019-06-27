@@ -340,3 +340,5 @@ p.gca().add_artist(my_circle)
 plt.axis("equal")
 plt.title("Event ratio according to gender in Winter Olympics")
 plt.savefig("Winter olympics event-gender ratio.jpg")
+
+# Events by gender categorisation over year
