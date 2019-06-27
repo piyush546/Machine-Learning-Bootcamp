@@ -341,4 +341,18 @@ plt.axis("equal")
 plt.title("Event ratio according to gender in Winter Olympics")
 plt.savefig("Winter olympics event-gender ratio.jpg")
 
-# Events by gender categorisation over year
+# Events by gender categorisation over years
+olym_data["Event category"] = olym_data.Event.apply(gender_mod)
+gender_data = olym_data.loc[:,["Year", "Season", "Event", "Event category"]].drop_duplicates(["Year", "Season", "Event", "Event category"])
+gender_data.index = [x for x in range(6192)] 
+s_gender_data = gender_data[gender_data.Season == "Summer"].sort_values("Year")
+s_gender_data = s_gender_data.groupby("Year")["Event category"].value_counts().unstack()
+fig=plt.figure(figsize=(10,7))
+sns.pointplot(s_gender_data.index, s_gender_data.Male, color="green")
+sns.pointplot(s_gender_data.index, s_gender_data.Female, color="red")
+fig.legend(labels=["Male", "Female"])
+plt.xticks(rotation=90)
+plt.title("Summer olympics Event-gender categorisation over years")
+plt.xlabel("Year")
+plt.ylabel("Count")
+plt.savefig("Summer olympics Event-gender categorisation over years.jpg")
