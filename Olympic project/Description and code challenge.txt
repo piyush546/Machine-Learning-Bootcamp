@@ -75,7 +75,7 @@ form -
 
 12. Visualize the events by genders over years.
 
-13. Fetch the discontinued sports in olympics 2016.
+13. Fetch the discontinued sports till olympics 2016.
 
 14. Revenue Categories - 
 

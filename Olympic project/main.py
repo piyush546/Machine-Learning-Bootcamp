@@ -347,12 +347,142 @@ gender_data = olym_data.loc[:,["Year", "Season", "Event", "Event category"]].dro
 gender_data.index = [x for x in range(6192)] 
 s_gender_data = gender_data[gender_data.Season == "Summer"].sort_values("Year")
 s_gender_data = s_gender_data.groupby("Year")["Event category"].value_counts().unstack()
+w_gender_data = gender_data[gender_data.Season == "Winter"].sort_values("Year")
+w_gender_data = w_gender_data.groupby("Year")["Event category"].value_counts().unstack()
+
 fig=plt.figure(figsize=(10,7))
-sns.pointplot(s_gender_data.index, s_gender_data.Male, color="green")
-sns.pointplot(s_gender_data.index, s_gender_data.Female, color="red")
+plt.style.use("ggplot")
+plt.scatter(s_gender_data.index, s_gender_data.Male, color="green")
+plt.plot(s_gender_data.index, s_gender_data.Male, color="green")
+plt.scatter(s_gender_data.index, s_gender_data.Female, color="red")
+plt.plot(s_gender_data.index, s_gender_data.Female, color="red")
 fig.legend(labels=["Male", "Female"])
 plt.xticks(rotation=90)
 plt.title("Summer olympics Event-gender categorisation over years")
 plt.xlabel("Year")
 plt.ylabel("Count")
 plt.savefig("Summer olympics Event-gender categorisation over years.jpg")
+
+fig=plt.figure(figsize=(10,7))
+plt.style.use("ggplot")
+plt.scatter(w_gender_data.index, w_gender_data.Male, color="green")
+plt.plot(w_gender_data.index, w_gender_data.Male, color="green")
+plt.scatter(w_gender_data.index, w_gender_data.Female, color="red")
+plt.plot(w_gender_data.index, w_gender_data.Female, color="red")
+fig.legend(labels=["Male", "Female"])
+plt.xticks(rotation=90)
+plt.title("Winter olympics Event-gender categorisation over years")
+plt.xlabel("Year")
+plt.ylabel("Count")
+plt.savefig("Winter olympics Event-gender categorisation over years.jpg")
+
+# Discontinued sports till 2016
+sports_2016 = olym_data.Sport[(olym_data.Year==2016) & (olym_data.Season == "Summer")].unique()
+sports_n2016 = olym_data.Sport[(olym_data.Year!=2016) & (olym_data.Season == "Summer")].unique()
+discontinued_sports = np.setdiff1d(sports_n2016, sports_2016)
+new_sport = np.setdiff1d(sports_2016, sports_n2016)
+print("Discontinued sports till 2016:")
+for index, var in enumerate(discontinued_sports):
+    print(index,"--->",var)
+# print("New sport in 2016 Olympics--->", new_sport[0])
+
+# Revenue distribution
+# Revenue Categories
+A = ["Acquatics", "Atheletes", "Gymnastics"]
+B = ["Cycling", "Tennis"]
+C = ["Archery", "Badminton", "Boxing", "Judo", "Rowing", "Shooting", "Table Tennis", "Weightlifting"]
+D = ["Canoeing", "Equestrianism", "Sailing", "Fencing", "Taekwondo", "Triathlon", "Wrestling"]
+E = ["Modern Pentathlon", "Golf"]
+# NRC-No Revenue Category
+def rev_cat(value):
+    if value in A:
+        return "A"
+    elif value in B:
+        return "B"
+    elif value in C:
+        return "C"
+    elif value in D:
+        return "D"
+    elif value in E:
+        return "E"
+    else:
+        return "NRC"
+olym_data["Revenue_catg"] = olym_data.Sport.apply(rev_cat)
+revenue_count = olym_data.Revenue_catg.value_counts()
+
+plt.figure(figsize=(10,7))
+plt.style.use("ggplot")
+plt.pie(revenue_count[1:], labels=list(revenue_count.index[1:]), autopct="%.1f%%")
+plt.axis("equal")
+plt.title("Sports revenue categories distribution")
+plt.savefig("Sports-revenue-categories-distribution.jpg")
+
+# Medal won in each revenue category
+revenue_medal = olym_data.groupby(["Revenue_catg", "Season"])["Medal"].apply(lambda x: len(x)).unstack()
+
+plt.figure(figsize=(10,7))
+plt.style.use("ggplot")
+plt.pie(revenue_medal.Summer[:-1], labels=list(revenue_medal.index[:-1]), autopct="%.1f%%")
+plt.axis("equal")
+plt.title("Sports-medal revenue categories distribution")
+plt.savefig("Sports-medal-revenue-categories-distribution.jpg")
+
+# Medal tally for each sport category
+s_sport_medal = olym_data[olym_data.Season == "Summer"].groupby("Sport")["Medal"].value_counts().unstack()
+s_sport_medal = s_sport_medal.iloc[:, [1,2,0]].sort_values("Gold")
+s_sport_medal = s_sport_medal.fillna(0)
+s_sport_medal["Total"] = s_sport_medal.apply(lambda x: sum(x), axis=1)
+
+plt.figure(figsize=(14,7))
+sns.barplot(s_sport_medal.index, s_sport_medal["Total"])
+plt.xticks(rotation=90)
+plt.title("Medal-tally-summer-sports")
+plt.savefig("Medal-tally-summer-sports.jpg")
+
+w_sport_medal = olym_data[olym_data.Season == "Winter"].groupby("Sport")["Medal"].value_counts().unstack()
+w_sport_medal = w_sport_medal.iloc[:, [1,2,0]].sort_values("Gold")
+w_sport_medal = w_sport_medal.fillna(0)
+w_sport_medal["Total"] = w_sport_medal.apply(lambda x: sum(x), axis=1)
+
+plt.figure(figsize=(14,7))
+sns.barplot(w_sport_medal.index, w_sport_medal["Total"])
+plt.xticks(rotation=90)
+plt.title("Medal-tally-winter-sports")
+plt.savefig("Medal-tally-winter-sports.jpg")
+
+# Top 100 atheletes information 
+s_top_athlete = olym_data[olym_data.Season == "Summer"].groupby("Name")["Medal"].value_counts().unstack()
+s_top_athlete = s_top_athlete.iloc[:,[1,2,0]]
+s_top_athlete = s_top_athlete.fillna(0)
+s_top_athlete["Total"] = s_top_athlete.apply(lambda x: sum(x), axis=1)
+s_top_athlete = s_top_athlete.sort_values("Total", ascending=False)
+
+plt.figure(figsize=(22,7))
+sns.barplot(s_top_athlete.index[:100], s_top_athlete["Total"][:100])
+plt.xticks(rotation=90)
+plt.title("Summer olympics top 100 athletes")
+plt.savefig("Summer olympics top 100 athletes.jpg")
+
+w_top_athlete = olym_data[olym_data.Season == "Winter"].groupby("Name")["Medal"].value_counts().unstack()
+w_top_athlete = w_top_athlete.iloc[:,[1,2,0]]
+w_top_athlete = w_top_athlete.fillna(0)
+w_top_athlete["Total"] = w_top_athlete.apply(lambda x: sum(x), axis=1)
+w_top_athlete = w_top_athlete.sort_values("Total", ascending=False)
+
+plt.figure(figsize=(22,7))
+sns.barplot(w_top_athlete.index[:100], w_top_athlete["Total"][:100])
+plt.xticks(rotation=90)
+plt.title("Winter olympics top 100 athletes")
+plt.savefig("Winter olympics top 100 athletes.jpg")
+
+top_athlete = olym_data.groupby("Name")["Medal"].value_counts().unstack()
+top_athlete = top_athlete.iloc[:,[1,2,0]]
+top_athlete = top_athlete.fillna(0)
+top_athlete["Total"] = top_athlete.apply(lambda x: sum(x), axis=1)
+top_athlete = top_athlete.sort_values("Total", ascending=False)
+
+plt.figure(figsize=(22,7))
+sns.barplot(top_athlete.index[:100], top_athlete["Total"][:100])
+plt.xticks(rotation=90)
+plt.title("olympics top 100 athletes")
+plt.savefig("olympics top 100 athletes.jpg")
