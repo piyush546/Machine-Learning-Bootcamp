@@ -486,3 +486,16 @@ sns.barplot(top_athlete.index[:100], top_athlete["Total"][:100])
 plt.xticks(rotation=90)
 plt.title("olympics top 100 athletes")
 plt.savefig("olympics top 100 athletes.jpg")
+
+# Countries with their medal tally
+country_tally = olym_data.groupby("NOC")["Medal"].value_counts().unstack()
+country_tally = country_tally.iloc[:,[1,2,0]]
+country_tally = country_tally.fillna(0)
+country_tally["Total"] = country_tally.apply(lambda x: sum(x), axis=1)
+country_tally = country_tally.sort_values("Total", ascending=False)
+
+plt.figure(figsize=(30,6))
+sns.barplot(country_tally.index, country_tally["Total"])
+plt.xticks(rotation=90)
+plt.title("Country Medal tally")
+plt.savefig("Country-Medal-Tally.jpg")
