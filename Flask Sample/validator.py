@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 def name_validator(name,age):
     
-    if type(age)==float:
+    if type(age)==int:
         return "Valid name and age"
     else:
-        return "Invalid data"
+        return "how Invalid data"
