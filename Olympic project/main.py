@@ -13,6 +13,7 @@ init_notebook_mode(connected=True)
 
 # Loading the olympic data
 olym_data = pd.read_csv("olym_data.csv")
+olym_data = olym_data.fillna(olym_data.median())
 noc_data = pd.read_csv("noc_regions.csv")
 host_data = pd.read_csv("olym.csv", encoding="Windows 1252")
 host_data = host_data.iloc[:,:-2]
@@ -503,10 +504,7 @@ plt.savefig("Country-Medal-Tally.jpg")
 # Stage 2 --> Machine Learning part
 # Applying K-Means clustering on Height and weight column of olympic data
 
-features = olym_data.loc[:, ["Height", "Weight"]]
-
-features = features.fillna(features.median())
-features = features.values
+features = olym_data.loc[:, ["Height", "Weight"]].values
 plt.scatter(features[:,0], features[:,1])
 from sklearn.cluster import KMeans
 wcss = []
@@ -527,7 +525,7 @@ plt.show()
 kmeans = KMeans(n_clusters=5,init='k-means++',random_state=0)
 pred_cluster = kmeans.fit_predict(features)
 
-    
+plt.style.use("seaborn")
 plt.scatter(features[pred_cluster == 0, 0], features[pred_cluster == 0, 1], c = 'blue', label = 'Cluster 1')
 plt.scatter(features[pred_cluster == 1, 0], features[pred_cluster == 1, 1], c = 'red', label = 'Cluster 2')
 plt.scatter(features[pred_cluster == 2, 0], features[pred_cluster == 2, 1], c = 'green', label = 'Cluster 3')
@@ -535,17 +533,14 @@ plt.scatter(features[pred_cluster == 3, 0], features[pred_cluster == 3, 1], c = 
 plt.scatter(features[pred_cluster == 4, 0], features[pred_cluster == 4, 1], c = 'violet', label = 'Cluster 3')
 plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c = 'yellow', label = 'Centroids')
 
-plt.title('Clusters of drivers')
-plt.xlabel('Distance_feature')
-plt.ylabel('Speeding_feature')
+plt.title('Height and weight classification of athletes')
+plt.xlabel('Height_feature')
+plt.ylabel('Weight_feature')
 plt.legend()
 
-from sklearn.cluster import MeanShift, estimate_bandwidth
-bandwidth = estimate_bandwidth(features, quantile=0.2)
-
-ms = MeanShift(bandwidth=2).fit(features)
-labels = ms.labels_
-cluster_centers = ms.cluster_centers_
-labels_unique = np.unique(labels)
-n_clusters_ = len(labels_unique)
-print("number of estimated clusters : %d" % n_clusters_)
+centroids_data = kmeans.cluster_centers_
+labels = olym_data["Event"]
+athlete_cluster = pd.DataFrame({"Height":features[:,0], "Weight":features[:,1], "Sport_Event":labels})
+athlete_cluster = athlete_cluster.iloc[:, [0,2,1]]
+athlete_cluster["Cluster"] = pred_cluster
+athlete_cluster[["Mean_Height", "Mean_Weight"]] = athlete_cluster.Cluster.apply(lambda x:pd.Series([centroids_data[x][0], centroids_data[x][1]]))
