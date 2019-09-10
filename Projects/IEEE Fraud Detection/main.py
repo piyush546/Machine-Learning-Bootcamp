@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# Data can be fetched from Kaggle IEEE competition.
 # Importing Data analysis and visualization modules
 import pandas as pd
 import numpy as np
